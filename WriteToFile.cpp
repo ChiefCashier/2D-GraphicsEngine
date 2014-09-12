@@ -16,7 +16,7 @@ int main()
 	{
 		for (int i = 0; i < 5; i++)
 		{
-			WriteToFile(outputFile, "This is a test message 3.4");
+			WriteToFile(outputFile, "This is a test message 3.5");
 		}
 		outputFile.close();
 	}
