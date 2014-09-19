@@ -27,9 +27,18 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
+    <ClCompile Include="WriteToFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugMsg.h">
+      <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
