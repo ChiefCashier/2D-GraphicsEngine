@@ -1,7 +1,6 @@
 #pragma once
 
-//#include "test.h"
-
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <string.h>
@@ -13,6 +12,17 @@ public:
 	DebugMsg() {};
 	~DebugMsg() {};
 
+	static void WriteToFile(std::string msg)
+	{
+		std::ofstream outputFile;
+		outputFile.open("ErrorLog.txt");
+		if (outputFile.is_open())
+		{
+			outputFile << msg << std::endl;
+		}
+		outputFile.close();
+	}
+	sdsafafsdf
 	static void Print(char *format, ...)
 	{
 		va_list marker;
@@ -32,6 +42,8 @@ public:
 
 		std::basic_string<TCHAR> strName = szBuf;
 
+		WriteToFile("lol");
+		
 		//test t;
 		//t.asd(strName);
 	}
