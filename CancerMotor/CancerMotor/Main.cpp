@@ -1,11 +1,11 @@
 #include "ResourceManager.h"
 #include <string>
 #include <iostream>
-#include <Windows.h>
-
+#include "WindowManager.h"
 
 int main()
 {
+	/*
 	char *a = CML::ResourceManager::LoadFile("testi.txt");
 	std::string b = a;
 	for (unsigned int i = 0; i < b.size(); i++)
@@ -14,7 +14,14 @@ int main()
 	}
 	WindowManager a;
 	a.create();
+	*/
+
+	CML::WindowManager window;
+	HWND asd = window.WindowMaker();
+	window.ShowCMWindow(asd);
+	while (true)
+		window.WindowMessageCheck();
 	//poista kun debugger luokka valmis
-	system("PAUSE");
+	//system("PAUSE");
 	return 0;
 }
