@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+#include "glm\glm.hpp"
 #include <string>
 #include <iostream>
 #include "WindowManager.h"
