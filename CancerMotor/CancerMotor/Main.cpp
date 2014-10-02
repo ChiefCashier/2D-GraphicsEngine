@@ -1,8 +1,9 @@
+#include "CMWindow.h"
 #include "ResourceManager.h"
 #include "glm\glm.hpp"
 #include <string>
 #include <iostream>
-#include "WindowManager.h"
+
 
 int main()
 {
@@ -17,11 +18,14 @@ int main()
 	a.create();
 	*/
 
-	CML::WindowManager window;
-	HWND asd = window.WindowMaker();
-	window.ShowCMWindow(asd);
+	CML::CMWindow window;
+	HWND asd = window.CMWindowHandle();
+	window.ShowCMWindow();
 	while (true)
+	{
 		window.WindowMessageCheck();
+	}
+		
 	//poista kun debugger luokka valmis
 	//system("PAUSE");
 	return 0;

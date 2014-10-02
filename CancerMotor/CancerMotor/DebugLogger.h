@@ -13,13 +13,13 @@ namespace CML
 	class DebugLogger
 	{
 	public:
-		static void Print(char *format, ...)
+		static void Print(char* format, ...)
 		{
 			va_list marker;
 			TCHAR szBuf[256];
 
 			va_start(marker, format);
-			vsprintf_s(szBuf, format, marker);
+			vsprintf(szBuf, format, marker);
 			va_end(marker);
 
 			OutputDebugString(szBuf);
