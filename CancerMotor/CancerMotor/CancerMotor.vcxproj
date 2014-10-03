@@ -80,12 +80,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CMImage.cpp" />
     <ClCompile Include="CMWindow.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="WriteToFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CMImage.h" />
     <ClInclude Include="DebugMsg.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CMWindow.h" />

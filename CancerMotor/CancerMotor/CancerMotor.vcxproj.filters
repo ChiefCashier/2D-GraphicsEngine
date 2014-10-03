@@ -33,6 +33,9 @@
     <ClCompile Include="CMWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CMImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="CMWindow.h">
       <Filter>Header Files\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CMImage.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
