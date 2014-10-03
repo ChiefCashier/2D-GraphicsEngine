@@ -119,6 +119,8 @@ namespace CML
 
 			//laittakaa debugloggerointia!
 
+			CML::WriteLog("asda");
+
 			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
 
 		}

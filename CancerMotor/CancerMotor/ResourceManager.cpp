@@ -57,6 +57,7 @@ namespace CML{
 
 			buffer[length] = 0;
 
+			buffer[length] = 0;
 			if (is)
 				std::cout << "all characters read successfully.";
 			else
