@@ -23,6 +23,7 @@ int main()
 	window.ShowCMWindow();
 	while (true)
 	{
+		window.Render();
 		window.WindowMessageCheck();
 	}
 		

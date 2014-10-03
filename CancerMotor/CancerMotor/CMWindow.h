@@ -5,6 +5,7 @@
 #endif
 
 #include "glew.h"
+#include "ResourceManager.h"
 //debuglogger is away until fixed
 //#include "DebugLogger.h" 
 #include <Windows.h>

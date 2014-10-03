@@ -49,11 +49,13 @@ namespace CML{
 			int length = is.tellg();
 			is.seekg(0, is.beg);
 
-			char * buffer = new char[length];
+			char * buffer = new char[length + 1];
 
 			std::cout << "Reading " << length << " characters... ";
 			// lukee tiedoston datan
 			is.read(buffer, length);
+
+			buffer[length] = 0;
 
 			if (is)
 				std::cout << "all characters read successfully.";
