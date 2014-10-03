@@ -68,6 +68,17 @@ namespace CML
 
 		RegisterClass(&wc);
 
+		_windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, _CLASS_NAME, L"CMWindow", WS_OVERLAPPEDWINDOW, 100, 100, _windowWidht, _windowHeight, //Windowhandle pointter creation
+			NULL, NULL, GetModuleHandle(nullptr), NULL);
+
+		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
+		{
+
+			//laittakaa debugloggerointia!
+
+			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
+
+		}
 	}
 
 	CMWindow::CMWindow()//default constructor for window
@@ -85,6 +96,17 @@ namespace CML
 
 		RegisterClass(&wc);
 
+		_windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, _CLASS_NAME, L"CMWindow", WS_OVERLAPPEDWINDOW, 100, 100, _windowWidht, _windowHeight, //Windowhandle pointter creation
+			NULL, NULL, GetModuleHandle(nullptr), NULL);
+
+		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
+		{
+
+			//laittakaa debugloggerointia!
+
+			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
+
+		}
 	}
 
 
@@ -96,21 +118,7 @@ namespace CML
 
 	HWND CMWindow::CMWindowHandle()// Return handle to the window
 	{
-
-		_windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, _CLASS_NAME, L"CMWindow", WS_OVERLAPPEDWINDOW, 100, 100, _windowWidht, _windowHeight, //Windowhandle pointter creation
-			NULL, NULL, GetModuleHandle(nullptr), NULL);
-
-		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
-		{
-
-			//laittakaa debugloggerointia!
-
-			std::cout << "Window handle creation failed" << std::endl; //Window creation failed so message is sent
-			return nullptr;
-		}
 		return _windowHandle;
-
-
 	}
 
 
