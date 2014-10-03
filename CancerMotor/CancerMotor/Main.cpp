@@ -19,7 +19,6 @@ int main()
 	*/
 
 	CML::CMWindow window;
-	HWND asd = window.CMWindowHandle();
 	window.ShowCMWindow();
 	while (true)
 	{

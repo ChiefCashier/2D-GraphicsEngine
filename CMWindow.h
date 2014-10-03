@@ -12,14 +12,14 @@ namespace CML
 	
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	class WindowManager
+	class CMWindow
 	{
 	public:
 
 		
-		 WindowManager();
-		HWND WindowMaker();
-		~WindowManager();
+		CMWindow();
+		HWND CMWindowMaker();
+		~CMWindow();
 		void ShowCMWindow(HWND);
 		void WindowMessageCheck();
 	private:
@@ -27,12 +27,12 @@ namespace CML
 
 	};
 
-	WindowManager::WindowManager()
+	CMWindow::CMWindow()
 	{
 		
 	}
 
-	WindowManager::~WindowManager()
+	CMWindow::~CMWindow()
 	{
 
 	}
@@ -52,7 +52,7 @@ namespace CML
 		}
 	}
 
-	HWND WindowManager::WindowMaker()
+	HWND CMWindow::CMWindowMaker()
 	{
 		const wchar_t CLASS_NAME[] = L"asd";
 
@@ -75,11 +75,11 @@ namespace CML
 
 
 	}
-	void WindowManager::ShowCMWindow(HWND asd)
+	void CMWindow::ShowCMWindow(HWND asd)
 	{
 		ShowWindow(asd, SW_SHOWNORMAL);
 	}
-	void WindowManager::WindowMessageCheck(){
+	void CMWindow::WindowMessageCheck(){
 		MSG msg;
 	
 		while (PeekMessage(&msg, _windowHandle, NULL, NULL, PM_REMOVE))
