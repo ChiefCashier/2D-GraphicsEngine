@@ -1,5 +1,10 @@
 #pragma once
 
+// For mbstowcs()
+#define _CRT_SECURE_NO_WARNINGS
+
+#include <cstdlib>
+#include <stdlib.h>
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -13,30 +18,36 @@ namespace CML
 	class DebugLogger
 	{
 	public:
-		static void Print(char* format, ...)
+		static void Print(char *format, ...)
 		{
 			va_list marker;
 			TCHAR szBuf[256];
+			char tempChar[256] = {};
 
 			va_start(marker, format);
-			vsprintf(szBuf, format, marker);
+			vsprintf(tempChar, format, marker);
 			va_end(marker);
 
-			OutputDebugString(szBuf);
-			OutputDebugString(TEXT("\n"));
-
+			// Print to console
 			va_list arg;
 			va_start(arg, format);
 			vfprintf(stdout, format, arg);
+			std::cout << std::endl;
 			va_end(arg);
 
-			std::basic_string<TCHAR> strName = szBuf;
+			// char conversion to wchar_t
+			wchar_t temp[256];
+			std::mbstowcs(temp, tempChar, 256);
+
+			// Output to debug console
+			// Unicode characters that cannot be represented in the system code page will be replaced with ?.
+			OutputDebugString(temp);
+			OutputDebugString(TEXT("\n"));
 
 			// If WriteLog is set true, write message to file
 			if (CML::WriteLog)
-				WriteToFile(strName);
+				WriteToFile(tempChar);
 		}
-
 		// Write message to file
 		static void WriteToFile(std::string msg)
 		{
