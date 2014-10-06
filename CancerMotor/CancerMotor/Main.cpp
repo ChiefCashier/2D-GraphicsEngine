@@ -20,6 +20,7 @@ int main()
 
 	CML::CMWindow window;
 	window.ShowCMWindow();
+
 	while (true)
 	{
 		window.Render();

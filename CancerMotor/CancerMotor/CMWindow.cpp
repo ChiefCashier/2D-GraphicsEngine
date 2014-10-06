@@ -7,41 +7,60 @@ namespace CML
 	static const GLchar* VERTEX_SOURCE =
 		"attribute vec2 attrPosition; \n"
 		"attribute vec3 attrColor; \n"
+		"attribute vec2 attrTexCoord; \n"
 
 		"varying vec3 varyColor; \n"
+		"varying vec2 vTexCoord; \n"
 
 		"void main()\n"
 		"{\n"
 		"	varyColor = attrColor; \n"
-		"	gl_Position = vec4(attrPosition, 0.0, 1.0);\n"
+		"	vTexCoord = attrTexCoord; \n"
+		"	gl_Position = vec4(attrPosition, 0.0f, 1.0f); \n"
 		"}\n";
 
 	static const GLchar* FRAGMENT_SOURCE =
-		"varying vec3 varyColor; \n"
+		"uniform sampler2D myTexture; \n"
 
+		"varying vec3 varyColor; \n"
+		"varying vec2 vTexCoord; \n"
+		
 		"void main()\n"
 		"{\n"
-		"	gl_FragColor = vec4(varyColor, 1.0);\n"
+
+		"	gl_FragColor = vec4(varyColor, 0.0f); \n"
+		"	gl_FragColor += texture2D(myTexture, vTexCoord).bgra; \n"
+
 		"}\n";
 	
 
 	static const GLfloat VERTEX_DATA[] =
 	{
 		//1st vertex
-		0.0f, 0.75f,
+		0.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
+		0.0f, 0.0f,
+
 		//2nd vertex
-		-0.75f, -0.75f,
+		1.0f, -0.0f,
 		0.0f, 1.0f, 0.0f,
+		1.0f, 0.0f,
+
 		//3rd vertex
-		0.75f, -0.75f,
+		1.0f, 1.0f,
 		0.0f, 0.0f, 1.0f,
+		1.0f, 1.0f,
+		
+		//4th vertex
+		0.0f, 1.0f,
+		1.0f, 0.0f, 1.0f,
+		0.0f, 1.0f
 	};
 
 	static const GLuint INDEX_DATA[] =
 	{
 		//add index data
-		0, 1, 2
+		0u, 1u, 2u, 3u
 	};
 
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam);
@@ -119,7 +138,6 @@ namespace CML
 
 			//laittakaa debugloggerointia!
 
-			CML::WriteLog("asda");
 
 			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
 
@@ -152,6 +170,79 @@ namespace CML
 			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
 
 		}
+		_program = glCreateProgram();
+		
+
+		//Here lies componets for rendering
+
+
+		//read VERTEX_SOURCE from file
+		//GLchar* vertexBuffer = CML::ResourceManager::LoadFile("VertexSource.txt");
+
+		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertexShader, 1, &VERTEX_SOURCE, nullptr);
+		glCompileShader(vertexShader);
+
+		GLint compileResult;
+		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &compileResult);
+		assert(compileResult == GL_TRUE);
+
+		//read FRAGMENT_SOURCE from file
+		//GLchar* fragmentBuffer = CML::ResourceManager::LoadFile("FragmentSource.txt");
+
+		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragmentShader, 1, &FRAGMENT_SOURCE, nullptr);
+		glCompileShader(fragmentShader);
+
+		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &compileResult);
+		assert(compileResult == GL_TRUE);
+
+		glAttachShader(_program, vertexShader);
+		glAttachShader(_program, fragmentShader);
+		glLinkProgram(_program);
+
+		glGetProgramiv(_program, GL_LINK_STATUS, &compileResult);
+		assert(compileResult == GL_TRUE);
+
+		//activate attribute arrays
+		_positionIndex = glGetAttribLocation(_program, "attrPosition");
+		assert(_positionIndex >= 0);
+		glEnableVertexAttribArray(_positionIndex);
+
+		_colorIndex = glGetAttribLocation(_program, "attrColor");
+		assert(_colorIndex >= 0);
+		glEnableVertexAttribArray(_colorIndex);
+
+		_textureIndex = glGetAttribLocation(_program, "attrTexCoord");
+		assert(_textureIndex >= 0);
+		glEnableVertexAttribArray(_textureIndex);
+
+		CML::CMImage image = CML::CMImage::CMImage("sample.png");
+		
+		glTexImage2D(_texture, 1, 0, image.getWidth(), image.getHeight(), 0, image.getImageFormat(), GL_UNSIGNED_BYTE, image.getPixelData());
+		glBindTexture(_program, _texture);
+
+	
+		//Buffers
+		glGenBuffers(2, buffers);
+
+		//change multiplier for sizeof(GLfloat) according to VERTEX_DATA
+		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+		glBufferData(GL_ARRAY_BUFFER, 28 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		//change multiplier for sizeof(GLint) according to INDEX_DATA
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLint), INDEX_DATA, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+
+
+
+
+
+
 	}
 
 
@@ -176,59 +267,8 @@ namespace CML
 		glEnable(GL_DEPTH_TEST);
 
 		/*
-		Heres our rendering. Hopefully soon(tm)...
+		Here's our rendering. Hopefully soon(tm)...
 		*/
-
-		GLuint program = glCreateProgram();
-		
-		//read VERTEX_SOURCE from file
-		//GLchar* vertexBuffer = CML::ResourceManager::LoadFile("VertexSource.txt");
-
-		GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-		glShaderSource(vertexShader, 1, &VERTEX_SOURCE, nullptr);
-		glCompileShader(vertexShader);
-
-		GLint compileResult;
-		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &compileResult);
-		assert(compileResult == GL_TRUE);
-
-		//read FRAGMENT_SOURCE from file
-		//GLchar* fragmentBuffer = CML::ResourceManager::LoadFile("FragmentSource.txt");
-
-		GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-		glShaderSource(fragmentShader, 1, &FRAGMENT_SOURCE, nullptr);
-		glCompileShader(fragmentShader);
-
-		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &compileResult);
-		assert(compileResult == GL_TRUE);
-
-		glAttachShader(program, vertexShader);
-		glAttachShader(program, fragmentShader);
-		glLinkProgram(program);
-
-		glGetProgramiv(program, GL_LINK_STATUS, &compileResult);
-		assert(compileResult == GL_TRUE);
-		//activate attribute arrays
-		const GLint positionIndex = glGetAttribLocation(program, "attrPosition");
-		assert(positionIndex >= 0);
-		glEnableVertexAttribArray(positionIndex);
-
-		const GLint colorIndex = glGetAttribLocation(program, "attrColor");
-		assert(colorIndex >= 0);
-		glEnableVertexAttribArray(colorIndex);
-
-		//Buffers
-		glGenBuffers(2, buffers);
-
-		//change multiplier for sizeof(GLfloat) according to VERTEX_DATA
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-		glBufferData(GL_ARRAY_BUFFER, 15 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		//change multiplier for sizeof(GLint) according to INDEX_DATA
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 3 * sizeof(GLint), INDEX_DATA, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 		glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -237,15 +277,19 @@ namespace CML
 
 		glFlush();
 
-		glUseProgram(program);
+		glUseProgram(_program);
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-		glVertexAttribPointer(positionIndex, 2, GL_FLOAT, GL_FALSE, 20, reinterpret_cast<GLvoid*>(0));
+		glVertexAttribPointer(_positionIndex, 2, GL_FLOAT, GL_FALSE, 28, reinterpret_cast<GLvoid*>(0));
 
-		glVertexAttribPointer(colorIndex, 3, GL_FLOAT, GL_FALSE, 20, reinterpret_cast<GLvoid*>(8));
+		glVertexAttribPointer(_colorIndex, 3, GL_FLOAT, GL_FALSE, 28, reinterpret_cast<GLvoid*>(8));
+
+		glVertexAttribPointer(_textureIndex, 2, GL_FLOAT, GL_FALSE, 28, reinterpret_cast<GLvoid*>(20));
+
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
+		glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
+
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -266,7 +310,6 @@ namespace CML
 
 		while (PeekMessage(&msg, _windowHandle, NULL, NULL, PM_REMOVE))
 		{
-			//Render();//this render is at a wrong place move it somewhere else preferably to main()
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
