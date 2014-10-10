@@ -41,14 +41,14 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="DebugMsg.h">
-      <Filter>Header Files\ResourceManager</Filter>
-    </ClInclude>
     <ClInclude Include="CMWindow.h">
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="CMImage.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugLogger.h">
+      <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMImage.h" />
-    <ClInclude Include="DebugMsg.h" />
+    <ClInclude Include="DebugLogger.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CMWindow.h" />
   </ItemGroup>
