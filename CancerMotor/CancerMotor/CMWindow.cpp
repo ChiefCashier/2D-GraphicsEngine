@@ -28,16 +28,16 @@ namespace CML
 		"void main()\n"
 		"{\n"
 
-		"	gl_FragColor = vec4(varyColor, 0.0f); \n"
-		"	gl_FragColor += texture2D(myTexture, vTexCoord).bgra; \n"
+		"	gl_FragColor = vec4(varyColor, 0.0f) + texture2D(myTexture, vTexCoord); \n"
+		//"	gl_FragColor ; \n"
 
 		"}\n";
 	
-
+	
 	static const GLfloat VERTEX_DATA[] =
 	{
 		//1st vertex
-		0.0f, 0.0f,
+		-0.0f, 0.0f,
 		1.0f, 0.0f, 0.0f,
 		0.0f, 0.0f,
 
@@ -52,16 +52,17 @@ namespace CML
 		1.0f, 1.0f,
 		
 		//4th vertex
-		0.0f, 1.0f,
+		-0.0f, 1.0f,
 		1.0f, 0.0f, 1.0f,
 		0.0f, 1.0f
 	};
-
+	
 	static const GLuint INDEX_DATA[] =
 	{
 		//add index data
 		0u, 1u, 2u, 3u
 	};
+	
 
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	HGLRC ourOpenGLRenderingContext;
@@ -217,31 +218,89 @@ namespace CML
 		assert(_textureIndex >= 0);
 		glEnableVertexAttribArray(_textureIndex);
 
+
+		//texture stuff
+
+		glGenTextures(1, &_texture);//generates texture
+
+		//_texture = glGetUniformLocation(_program, "myTexture"); 
+		//assert(_texture >= 0);
+
+		
 		CML::CMImage image = CML::CMImage::CMImage("sample.png");
 		
-		glTexImage2D(_texture, 1, 0, image.getWidth(), image.getHeight(), 0, image.getImageFormat(), GL_UNSIGNED_BYTE, image.getPixelData());
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, image.getWidth(), image.getHeight(), 0, image.getImageFormat(), GL_UNSIGNED_BYTE, FreeImage_GetBits(image.getBITMAP()) );
+
 		glBindTexture(_program, _texture);
 
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glBindTexture(GL_TEXTURE_2D, 0u);
+
+		glActiveTexture(GL_TEXTURE0);
+
+		
 	
 		//Buffers
 		glGenBuffers(2, buffers);
+		//if(puffer)assert puffer
+		//puffer.koko / 7 = vertexM‰‰r‰
+		//		glBufferData(GL_ARRAY_BUFFER, 7 * vertexM‰‰r‰ * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
+		//else 
 
-		//change multiplier for sizeof(GLfloat) according to VERTEX_DATA
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-		glBufferData(GL_ARRAY_BUFFER, 28 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		//Data, in order: 2x position, 3x colour, 2x texture coordinates
+		GLfloat _vertexBufferInput[28] = { -0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 
+			1.0f, -0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 
+			1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+			//-0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f
+		};
 
-		//change multiplier for sizeof(GLint) according to INDEX_DATA
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLint), INDEX_DATA, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		if (_vertexBufferInput) //this is the data given to vertex buffer, rename as needed
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(_vertexBufferInput), _vertexBufferInput, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			std::cout << "vertexBufferInput works, yay" << std::endl;
+		}
+
+		else
+		{
+			//change multiplier for sizeof(GLfloat) according to VERTEX_DATA
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+			glBufferData(GL_ARRAY_BUFFER, 28 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			std::cout << "VERTEX_DATA used" << std::endl;
+		}
+		GLint _fragmentBufferInput[4] = { 0u, 1u, 2u, 3u };
+		
+		if (_fragmentBufferInput) //this is the data given to fragment buffer, rename as needed
+		{
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_fragmentBufferInput), _fragmentBufferInput, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			std::cout << "FragmentBufferInput works too, another yay" << std::endl;
+		}
+
+		else
+		{
+			//change multiplier for sizeof(GLint) according to INDEX_DATA
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLint), INDEX_DATA, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			std::cout << "INDEX_DATA used" << std::endl;
+		}
+
+
+		
 
 
 
+		
+		glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
 
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-
-
+		
 
 	}
 
@@ -260,24 +319,25 @@ namespace CML
 
 	void CMWindow::Render()
 	{
-		/*
-		Enable depth testing
-		*/
-
-		glEnable(GL_DEPTH_TEST);
-
+		
+		//glEnable(GL_DEPTH_TEST);
+		
 		/*
 		Here's our rendering. Hopefully soon(tm)...
 		*/
-
-		glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		
 
 		glFlush();
 
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 		glUseProgram(_program);
+		
+
+		//glActiveTexture(GL_TEXTURE0);
+
+	
 
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 		glVertexAttribPointer(_positionIndex, 2, GL_FLOAT, GL_FALSE, 28, reinterpret_cast<GLvoid*>(0));
@@ -288,15 +348,21 @@ namespace CML
 
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+		glBindTexture(_program, _texture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
-
+		glBindTexture(_program, 0u);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glUseProgram(0);
 
 		SwapBuffers(g_HDC);//Bring back buffer to foreground
+
 	}
+
+
+
 
 
 	void CMWindow::ShowCMWindow()//Showing the window since 2014

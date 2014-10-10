@@ -31,7 +31,7 @@ namespace CML
 		else
 		_ImageFOrmat = GL_RGBA;
 		*/
-		_imageFormat = bitDepth == 24 ? GL_RGB : GL_RGBA;
+		_imageFormat = bitDepth == 24 ? GL_RGB : GL_BGRA;
 		unsigned int aa = GL_RGBA;
 		FreeImage_Unload(imagen);
 	}
