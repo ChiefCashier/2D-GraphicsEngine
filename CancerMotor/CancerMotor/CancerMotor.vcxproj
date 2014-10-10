@@ -92,6 +92,10 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CMWindow.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="FragmentSource.txt" />
+    <Text Include="VertexSource.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

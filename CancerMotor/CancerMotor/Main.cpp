@@ -18,7 +18,7 @@ int main()
 	a.create();
 	*/
 
-	CML::CMWindow window;
+	CML::CMWindow window(0, L"asd", 800, 600);
 	window.ShowCMWindow();
 
 	while (true)

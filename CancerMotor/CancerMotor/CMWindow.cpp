@@ -65,46 +65,19 @@ namespace CML
 	
 
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-	HGLRC ourOpenGLRenderingContext;
-	HDC g_HDC;
-	GLuint buffers[2];
+
 
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam) //without this nothing works, so I say we keep it
 	{
 		switch (uMsg){
 		case WM_CREATE:
 		{
-						  PIXELFORMATDESCRIPTOR pfd =
-						  {
-							  sizeof(PIXELFORMATDESCRIPTOR),
-							  1,
-							  PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
-							  PFD_TYPE_RGBA,            //The kind of framebuffer. RGBA or palette.
-							  24,                        //Colordepth of the framebuffer.		
-							  24,                        //Number of bits for the depthbuffer
-							  8,                        //Number of bits for the stencilbuffer
-							  0,                        //Number of Aux buffers in the framebuffer.
-							  PFD_MAIN_PLANE
-						  };
-
-						  HDC ourWindowHandleToDeviceContext = GetDC(asd);// 
-						  g_HDC = ourWindowHandleToDeviceContext;
-						  int  letWindowsChooseThisPixelFormat;
-						  letWindowsChooseThisPixelFormat = ChoosePixelFormat(ourWindowHandleToDeviceContext, &pfd);
-						  SetPixelFormat(ourWindowHandleToDeviceContext, letWindowsChooseThisPixelFormat, &pfd);
-
-						  ourOpenGLRenderingContext = wglCreateContext(ourWindowHandleToDeviceContext);
-						  wglMakeCurrent(ourWindowHandleToDeviceContext, ourOpenGLRenderingContext);
-
-
-						  glewInit();
-
 						  return 0;
 		}
 		case WM_DESTROY:
 		{
-						   wglDeleteContext(ourOpenGLRenderingContext);
-						   glDeleteBuffers(2, buffers);
+						   //wglDeleteContext(ourOpenGLRenderingContext);
+						   //glDeleteBuffers(2, buffers);
 						   PostQuitMessage(0);
 						   return 0;
 		}
@@ -113,11 +86,13 @@ namespace CML
 			return DefWindowProc(asd, uMsg, wParam, lParam);
 
 		}
+		
 
 	}
 
 	CMWindow::CMWindow(int windowType, const wchar_t* CLASS_NAME, int windowWidht, int windowHeight)//constructor for window with "parameters"
 	{
+		
 
 		WNDCLASS wc = {};
 
@@ -134,6 +109,32 @@ namespace CML
 		_windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, _CLASS_NAME, L"CMWindow", WS_OVERLAPPEDWINDOW, 100, 100, _windowWidht, _windowHeight, //Windowhandle pointter creation
 			NULL, NULL, GetModuleHandle(nullptr), NULL);
 
+		PIXELFORMATDESCRIPTOR pfd =
+		{
+			sizeof(PIXELFORMATDESCRIPTOR),
+			1,
+			PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,    //Flags
+			PFD_TYPE_RGBA,            //The kind of framebuffer. RGBA or palette.
+			24,                        //Colordepth of the framebuffer.		
+			24,                        //Number of bits for the depthbuffer
+			8,                        //Number of bits for the stencilbuffer
+			0,                        //Number of Aux buffers in the framebuffer.
+			PFD_MAIN_PLANE
+		};
+
+		HDC ourWindowHandleToDeviceContext = GetDC(_windowHandle);// 
+		g_HDC = ourWindowHandleToDeviceContext;
+		int  letWindowsChooseThisPixelFormat;
+		letWindowsChooseThisPixelFormat = ChoosePixelFormat(ourWindowHandleToDeviceContext, &pfd);
+		SetPixelFormat(ourWindowHandleToDeviceContext, letWindowsChooseThisPixelFormat, &pfd);
+
+		ourOpenGLRenderingContext = wglCreateContext(ourWindowHandleToDeviceContext);
+		wglMakeCurrent(ourWindowHandleToDeviceContext, ourOpenGLRenderingContext);
+
+
+		glewInit();
+
+
 		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
 		{
 
@@ -143,36 +144,9 @@ namespace CML
 			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
 
 		}
-	}
 
-	CMWindow::CMWindow()//default constructor for window
-	{
-
-		WNDCLASS wc = {};
-
-		_CLASS_NAME = L"asd";
-		_windowWidht = 800;
-		_windowHeight = 600;
-
-		wc.lpfnWndProc = WindowProc;
-		wc.hInstance = GetModuleHandle(nullptr);
-		wc.lpszClassName = _CLASS_NAME;
-
-		RegisterClass(&wc);
-
-		_windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, _CLASS_NAME, L"CMWindow", WS_OVERLAPPEDWINDOW, 100, 100, _windowWidht, _windowHeight, //Windowhandle pointter creation
-			NULL, NULL, GetModuleHandle(nullptr), NULL);
-
-		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
-		{
-
-			//laittakaa debugloggerointia!
-
-			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
-
-		}
 		_program = glCreateProgram();
-		
+
 
 		//Here lies componets for rendering
 
@@ -226,10 +200,10 @@ namespace CML
 		//_texture = glGetUniformLocation(_program, "myTexture"); 
 		//assert(_texture >= 0);
 
-		
+
 		CML::CMImage image = CML::CMImage::CMImage("sample.png");
-		
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, image.getWidth(), image.getHeight(), 0, image.getImageFormat(), GL_UNSIGNED_BYTE, FreeImage_GetBits(image.getBITMAP()) );
+
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, image.getWidth(), image.getHeight(), 0, image.getImageFormat(), GL_UNSIGNED_BYTE, FreeImage_GetBits(image.getBITMAP()));
 
 		glBindTexture(_program, _texture);
 
@@ -238,19 +212,25 @@ namespace CML
 
 		glActiveTexture(GL_TEXTURE0);
 
-		
-	
+
+
 		//Buffers
 		glGenBuffers(2, buffers);
-		//if(puffer)assert puffer
-		//puffer.koko / 7 = vertexM‰‰r‰
-		//		glBufferData(GL_ARRAY_BUFFER, 7 * vertexM‰‰r‰ * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
-		//else 
+		/*
+		if(puffer)assert puffer
 
+		puffer.koko / 7 = vertexM‰‰r‰
+
+		glBufferData(GL_ARRAY_BUFFER, 7 * vertexM‰‰r‰ * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
+
+		else 
+
+		teejotainj‰rkev‰‰()
+		*/
 		//Data, in order: 2x position, 3x colour, 2x texture coordinates
-		GLfloat _vertexBufferInput[28] = { -0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 
-			1.0f, -0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 
-			1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		GLfloat _vertexBufferInput[28] = { -0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+			1.0f, -0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+			1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f
 			//-0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f
 		};
 
@@ -271,7 +251,7 @@ namespace CML
 			std::cout << "VERTEX_DATA used" << std::endl;
 		}
 		GLint _fragmentBufferInput[4] = { 0u, 1u, 2u, 3u };
-		
+
 		if (_fragmentBufferInput) //this is the data given to fragment buffer, rename as needed
 		{
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
@@ -290,18 +270,23 @@ namespace CML
 		}
 
 
-		
 
 
 
-		
+
+
 		glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		
 
+	}
+	
+
+	CMWindow::CMWindow()//default constructor for window
+	{
+		CMWindow(0, L"asd", 800, 600);
 	}
 
 
@@ -319,7 +304,7 @@ namespace CML
 
 	void CMWindow::Render()
 	{
-		
+		wglMakeCurrent(GetDC(_windowHandle), ourOpenGLRenderingContext);
 		//glEnable(GL_DEPTH_TEST);
 		
 		/*
