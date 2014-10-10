@@ -33,7 +33,7 @@ namespace CML
 
 		"}\n";
 	
-
+	
 	static const GLfloat VERTEX_DATA[] =
 	{
 		//1st vertex
@@ -56,12 +56,13 @@ namespace CML
 		1.0f, 0.0f, 1.0f,
 		0.0f, 1.0f
 	};
-
+	
 	static const GLuint INDEX_DATA[] =
 	{
 		//add index data
 		0u, 1u, 2u, 3u
 	};
+	
 
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	HGLRC ourOpenGLRenderingContext;
@@ -241,16 +242,55 @@ namespace CML
 	
 		//Buffers
 		glGenBuffers(2, buffers);
+		//if(puffer)assert puffer
+		//puffer.koko / 7 = vertexM‰‰r‰
+		//		glBufferData(GL_ARRAY_BUFFER, 7 * vertexM‰‰r‰ * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
+		//else 
 
-		//change multiplier for sizeof(GLfloat) according to VERTEX_DATA
-		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-		glBufferData(GL_ARRAY_BUFFER, 28 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		//Data, in order: 2x position, 3x colour, 2x texture coordinates
+		GLfloat _vertexBufferInput[28] = { -0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 
+			1.0f, -0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 
+			1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+			//-0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f
+		};
 
-		//change multiplier for sizeof(GLint) according to INDEX_DATA
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLint), INDEX_DATA, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		if (_vertexBufferInput) //this is the data given to vertex buffer, rename as needed
+		{
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(_vertexBufferInput), _vertexBufferInput, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			std::cout << "vertexBufferInput works, yay" << std::endl;
+		}
+
+		else
+		{
+			//change multiplier for sizeof(GLfloat) according to VERTEX_DATA
+			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
+			glBufferData(GL_ARRAY_BUFFER, 28 * sizeof(GLfloat), VERTEX_DATA, GL_STATIC_DRAW);
+			glBindBuffer(GL_ARRAY_BUFFER, 0);
+			std::cout << "VERTEX_DATA used" << std::endl;
+		}
+		GLint _fragmentBufferInput[4] = { 0u, 1u, 2u, 3u };
+		
+		if (_fragmentBufferInput) //this is the data given to fragment buffer, rename as needed
+		{
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_fragmentBufferInput), _fragmentBufferInput, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			std::cout << "FragmentBufferInput works too, another yay" << std::endl;
+		}
+
+		else
+		{
+			//change multiplier for sizeof(GLint) according to INDEX_DATA
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLint), INDEX_DATA, GL_STATIC_DRAW);
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+			std::cout << "INDEX_DATA used" << std::endl;
+		}
+
+
+		
 
 
 
