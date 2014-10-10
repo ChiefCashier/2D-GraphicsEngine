@@ -13,6 +13,7 @@
 #include "ResourceManager.h"
 #include "CMImage.h"
 
+
 namespace CML
 {
 	class CMWindow
@@ -46,6 +47,7 @@ namespace CML
 		GLint _positionIndex;
 		GLint _colorIndex;
 		GLint _textureIndex;
+		
 
 		//thingamabob(s)
 		HWND _windowHandle;
