@@ -19,11 +19,11 @@ namespace CML
 	class CMWindow
 	{
 	public:
-		
+
 		//constructors
 		CMWindow();
 		CMWindow(int windowType, const wchar_t* CLASS_NAME,
-				 int windowWidht, int windowHeight);
+			int windowWidht, int windowHeight);
 		//destructors
 		~CMWindow();
 
@@ -42,14 +42,16 @@ namespace CML
 		int _windowWidht, _windowHeight;
 		int _windowType;
 		const wchar_t* _CLASS_NAME;
+
+		//thingamabob(s)
 		GLuint _program;
 		GLuint _texture;
 		GLint _positionIndex;
 		GLint _colorIndex;
 		GLint _textureIndex;
-		
-
-		//thingamabob(s)
+		HGLRC ourOpenGLRenderingContext;
+		HDC g_HDC;
 		HWND _windowHandle;
+		GLuint buffers[2];
 	};
 }

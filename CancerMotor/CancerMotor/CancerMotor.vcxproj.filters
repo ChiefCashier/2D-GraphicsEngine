@@ -51,4 +51,12 @@
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="FragmentSource.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="VertexSource.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
