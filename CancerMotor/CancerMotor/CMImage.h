@@ -6,6 +6,7 @@ namespace CML
 	class CMImage
 	{
 	public:
+		CMImage(){};
 		CMImage(char* name);
 		~CMImage();
 		size_t getWidth();

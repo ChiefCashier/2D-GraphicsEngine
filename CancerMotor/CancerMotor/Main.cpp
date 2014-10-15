@@ -20,11 +20,15 @@ int main()
 
 	CML::CMWindow window(0, L"asd", 800, 600);
 	window.ShowCMWindow();
+	CML::CMWindow window2(0, L"asd", 400, 300);
+	window2.ShowCMWindow();
 
 	while (true)
 	{
 		window.Render();
 		window.WindowMessageCheck();
+		window2.Render();
+		window2.WindowMessageCheck();
 	}
 		
 	//poista kun debugger luokka valmis

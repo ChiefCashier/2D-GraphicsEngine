@@ -12,6 +12,7 @@
 #include "glew.h"
 #include "ResourceManager.h"
 #include "CMImage.h"
+#include "CMSprite.h"
 
 
 namespace CML
@@ -33,6 +34,7 @@ namespace CML
 		//and the rest
 		void ShowCMWindow();
 		void WindowMessageCheck();
+
 		void Render();//renaming under consideration. "Our top men are on the case!"
 
 	private:
