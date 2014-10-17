@@ -34,13 +34,13 @@ namespace CML
 		//and the rest
 		void ShowCMWindow();
 		void WindowMessageCheck();
-
+		int _windowWidht, _windowHeight;
 
 	private:
 
 		//things and stuff
 		wchar_t _windowName;
-		int _windowWidht, _windowHeight;
+
 		int _windowType;
 		const wchar_t* _CLASS_NAME;
 

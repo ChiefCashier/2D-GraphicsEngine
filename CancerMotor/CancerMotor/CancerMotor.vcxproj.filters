@@ -39,6 +39,12 @@
     <ClCompile Include="CMSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="RenderingContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -54,6 +60,12 @@
       <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="CMSprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderingContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
