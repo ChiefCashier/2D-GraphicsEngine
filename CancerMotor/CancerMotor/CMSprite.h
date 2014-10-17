@@ -9,50 +9,49 @@ namespace CML
 	public:
 
 		CMSprite();
+		CMSprite(float, float, float, float);
 		CMSprite(float, float, float, float, char*);
+		CMSprite(float, float, float, float, CMImage);
 		~CMSprite();
 
 		float GetX();
-		void SetX();
+		void SetX(float);
 
 		float GetY();
-		void SetY();
+		void SetY(float);
 
 		float GetWidht();
-		void SetWidht();
+		void SetWidht(float);
 
 		float GetHeight();
-		void SetHeight();
+		void SetHeight(float);
 
+		float* GetColor();
 		float GetColorRed();
-		void SetColorRed();
-
-		float GetColorGreen();
-		void SetColorGreen();
-
+		float GetColorGreen(); 
 		float GetColorBlue();
-		void SetColorBlue();
+		void SetColor(float, float, float, float);
 
 		CMImage GetImage();
-		void SetImage();
+		void SetImage(char*);
 
 		float GetTexturePositionX();
-		void SetTexturePositionX();
+		void SetTexturePositionX(float);
 
 		float GetTexturePositionY();
-		void SetTexturePositionY();
+		void SetTexturePositionY(float);
 
 		float GetTextureWidht();
-		void SetTextureWidht();
+		void SetTextureWidht(float);
 
 		float GetTextureHeight();
-		void SetTextureHeight();
+		void SetTextureHeight(float);
 
 
 	private:
 
 		float _xPosition, _yPosition, _widht, _height;// rect would be better
-		float _colorRed, _colorGreen, _colorBlue;
+		float _colorRed, _colorGreen, _colorBlue, _alphaChannel;
 		float _texturePositionX, _texturePositionY;
 		float _textureWidht, _textureHeight;
 		CMImage _image;
