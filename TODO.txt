@@ -1,0 +1,1 @@
+- Freeimage tukemaan lisää formaatteja

@@ -35,7 +35,6 @@ namespace CML
 		void ShowCMWindow();
 		void WindowMessageCheck();
 
-		void Render();//renaming under consideration. "Our top men are on the case!"
 
 	private:
 
@@ -46,14 +45,7 @@ namespace CML
 		const wchar_t* _CLASS_NAME;
 
 		//thingamabob(s)
-		GLuint _program;
-		GLuint _texture;
-		GLint _positionIndex;
-		GLint _colorIndex;
-		GLint _textureIndex;
-		HGLRC ourOpenGLRenderingContext;
-		HDC g_HDC;
 		HWND _windowHandle;
-		GLuint buffers[2];
+
 	};
 }
