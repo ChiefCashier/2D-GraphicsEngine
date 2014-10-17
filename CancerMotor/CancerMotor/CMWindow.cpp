@@ -1,4 +1,6 @@
 #include "CMWindow.h"
+#include "glm\glm.hpp"
+#include "glm\gtc\matrix_transform.hpp"
 #include <cassert>
 
 namespace CML
@@ -11,6 +13,8 @@ namespace CML
 
 		"varying vec3 varyColor; \n"
 		"varying vec2 vTexCoord; \n"
+
+		"uniform mat4 unifProjection; \n"
 
 		"void main()\n"
 		"{\n"
@@ -193,6 +197,10 @@ namespace CML
 		assert(_textureIndex >= 0);
 		glEnableVertexAttribArray(_textureIndex);
 
+		const GLint _samplerLocation = glGetUniformLocation(_program, "myTexture");
+		assert(_samplerLocation >= 0);
+
+		const GLint _projectionLocation = glGetUniformLocation(_program, "unifProjection");
 
 		//texture stuff
 
@@ -206,7 +214,8 @@ namespace CML
 		CMSprite sprite = CMSprite::CMSprite(0.0f, 0.0f, 200.0f, 150.0f,"Sample.png");
 		CMSprite sprite2 = CMSprite::CMSprite(200.0f, 150.0f, 400.0f, 300.0f, "Sample.png");
 		
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, sprite2.GetImage().getWidth(), sprite2.GetImage().getHeight(), 0, sprite2.GetImage().getImageFormat(), GL_UNSIGNED_BYTE, FreeImage_GetBits(sprite2.GetImage().getBITMAP()));
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, sprite2.GetImage().getWidth(), sprite2.GetImage().getHeight(), 0, sprite2.GetImage().getImageFormat(), 
+			GL_UNSIGNED_BYTE, FreeImage_GetBits(sprite2.GetImage().getBITMAP()));
 
 		glBindTexture(_program, _texture);
 
@@ -331,7 +340,14 @@ namespace CML
 			std::cout << "INDEX_DATA used" << std::endl;
 		}
 
+		//Create projection
 
+		const glm::mat4 _projection = glm::ortho(0.0f, static_cast<float>(windowWidht), 0.0f, static_cast<float>(windowHeight), -1.0f, 1.0f);
+
+		glUseProgram(_program);
+		glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
+
+		glUseProgram(0u);
 
 
 
