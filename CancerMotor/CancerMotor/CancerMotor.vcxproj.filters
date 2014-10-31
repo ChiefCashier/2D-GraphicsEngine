@@ -60,6 +60,9 @@
     <ClCompile Include="CMRectangle.cpp">
       <Filter>Header Files\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="CMVector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="CMRectangle.h">
       <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CMVector2.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

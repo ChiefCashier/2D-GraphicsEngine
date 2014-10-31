@@ -84,6 +84,7 @@
     <ClCompile Include="CMConvex.cpp" />
     <ClCompile Include="CMImage.cpp" />
     <ClCompile Include="CMShape.cpp" />
+    <ClCompile Include="CMVector2.cpp" />
     <ClCompile Include="CMWindow.cpp" />
     <ClCompile Include="GraphicContext.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="CMDraw.h" />
     <ClInclude Include="CMImage.h" />
     <ClInclude Include="CMShape.h" />
+    <ClInclude Include="CMVector2.h" />
     <ClInclude Include="DebugLogger.h" />
     <ClInclude Include="CMSprite.h" />
     <ClInclude Include="GraphicContext.h" />
