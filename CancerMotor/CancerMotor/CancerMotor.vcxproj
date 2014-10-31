@@ -80,25 +80,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CMCircle.cpp" />
+    <ClCompile Include="CMConvex.cpp" />
     <ClCompile Include="CMImage.cpp" />
     <ClCompile Include="CMShape.cpp" />
     <ClCompile Include="CMWindow.cpp" />
     <ClCompile Include="GraphicContext.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="CMSprite.cpp" />
-    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="CMRectangle.cpp" />
     <ClCompile Include="RenderingContext.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="WriteToFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CMCircle.h" />
+    <ClInclude Include="CMConvex.h" />
     <ClInclude Include="CMDraw.h" />
     <ClInclude Include="CMImage.h" />
     <ClInclude Include="CMShape.h" />
     <ClInclude Include="DebugLogger.h" />
     <ClInclude Include="CMSprite.h" />
     <ClInclude Include="GraphicContext.h" />
-    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="CMRectangle.h" />
     <ClInclude Include="RenderingContext.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CMWindow.h" />
