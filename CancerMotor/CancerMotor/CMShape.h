@@ -2,6 +2,9 @@
 class CMShape
 {
 public:
+	typedef float vec4[4];
+
+	CMShape(float x, float y);
 	CMShape();
 	~CMShape();
 
@@ -11,19 +14,26 @@ public:
 	void SetY(float y);
 	float GetY();
 
-	void SetRotation(float a);
-	float GetRotation();
+	void SetRotation(int a);
+	int GetRotation();
 
-	void SetColor(float color);
-	float GetColor();
+	void SetColor(vec4 color);
+	void SetColor(float r, float b, float g, float a);
 
-	void SetSize(int s);
-	int GetSize();
+	float GetColorR();
+	float GetColorG();
+	float GetColorB();
+	float GetColorA();
+
+	void SetSize(float s);
+	float GetSize();
 
 	void SetOrigon(float x, float y);
 	float GetOrigon();
 
-private:
-	float _x, _y, _rotation, _origon, _color;
-	int _size;
+protected:
+	float _x, _y, _origon, 
+	_size;
+	int _rotation;
+	vec4 _colorRGBA;
 };

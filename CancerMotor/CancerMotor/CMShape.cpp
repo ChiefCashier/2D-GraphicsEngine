@@ -1,11 +1,22 @@
 #include "CMShape.h"
 
-
+CMShape::CMShape(float x, float y)
+{
+	_x = x;
+	_y = y;
+}
 CMShape::CMShape()
 {
+	_x = 0;
+	_y = 0;
+	_rotation = 0;
+	_origon = 0;
+	_colorRGBA[0] = 0;
+	_colorRGBA[1] = 0;
+	_colorRGBA[2] = 0;
+	_colorRGBA[3] = 255;
+	_size = 1;
 }
-
-
 CMShape::~CMShape()
 {
 }
@@ -28,29 +39,49 @@ float CMShape::GetY()
 	return _y;
 }
 
-void CMShape::SetRotation(float a)
+void CMShape::SetRotation(int a)
 {
 	_rotation = a;
 }
-float CMShape::GetY()
+int CMShape::GetRotation()
 {
 	return _rotation;
 }
-
-void CMShape::SetColor(float color)
+void CMShape::SetColor(vec4 color)
 {
-	_color = color;
+	for (int i = 0; i < 4; i++)
+	{
+		_colorRGBA[i] = color[i];
+	}
 }
-float CMShape::GetColor()
+void CMShape::SetColor(float r, float b, float g, float a)
 {
-	return _color;
+	_colorRGBA[0] = r;
+	_colorRGBA[1] = b;
+	_colorRGBA[2] = g;
+	_colorRGBA[3] = a;
 }
-
-void CMShape::SetSize(int s)
+float CMShape::GetColorR()
+{
+	return _colorRGBA[0];
+}
+float CMShape::GetColorG()
+{
+	return _colorRGBA[1];
+}
+float CMShape::GetColorB()
+{
+	return _colorRGBA[2];
+}
+float CMShape::GetColorA()
+{
+	return _colorRGBA[3];
+}
+void CMShape::SetSize(float s)
 {
 	_size = s;
 }
-int CMShape::GetSize()
+float CMShape::GetSize()
 {
 	return _size;
 }
@@ -58,6 +89,7 @@ int CMShape::GetSize()
 void CMShape::SetOrigon(float x, float y)
 {
 	//_origon = x & y; 
+	// todo
 }
 float CMShape::GetOrigon()
 {
