@@ -1,10 +1,11 @@
 #pragma once
 #include "CMImage.h"
+#include "CMShape.h"
 #include <string>
 
 namespace CML
 {
-	class CMSprite
+	class CMSprite : CMShape
 	{
 	public:
 
@@ -14,23 +15,11 @@ namespace CML
 		CMSprite(float, float, float, float, CMImage);
 		~CMSprite();
 
-		float GetX();
-		void SetX(float);
-
-		float GetY();
-		void SetY(float);
-
 		float GetWidht();
 		void SetWidht(float);
 
 		float GetHeight();
 		void SetHeight(float);
-
-		float* GetColor();
-		float GetColorRed();
-		float GetColorGreen(); 
-		float GetColorBlue();
-		void SetColor(float, float, float, float);
 
 		CMImage GetImage();
 		void SetImage(char*);
@@ -49,9 +38,7 @@ namespace CML
 
 
 	private:
-
-		float _xPosition, _yPosition, _widht, _height;// rect would be better
-		float _colorRed, _colorGreen, _colorBlue, _alphaChannel;
+		float _height, _widht;
 		float _texturePositionX, _texturePositionY;
 		float _textureWidht, _textureHeight;
 		CMImage _image;
