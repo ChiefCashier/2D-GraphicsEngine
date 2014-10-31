@@ -19,6 +19,9 @@
     <Filter Include="Header Files\ResourceManager">
       <UniqueIdentifier>{1ee149af-918a-4c46-947f-0889440911c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Shapes">
+      <UniqueIdentifier>{abb8d656-7e0c-4333-bf72-801a3450def0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -45,6 +48,12 @@
     <ClCompile Include="GraphicContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Header Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMShape.cpp">
+      <Filter>Header Files\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -67,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="GraphicContext.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMDraw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CMShape.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
