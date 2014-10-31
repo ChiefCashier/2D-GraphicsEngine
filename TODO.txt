@@ -1,1 +1,13 @@
 - Freeimage tukemaan lisää formaatteja
+
+
+- Shaderissä laskut jos mahdollista
+- Käännöslasku shaderissä
+- BeginDraw poisto
+
+Resourcemanager lataa Resursseja
+- Image perii Resourcen
+- Resourcemanagerissa on resurssimap
+- jos ladattava resurssi ei löydy mapistä luo uusi ja anna
+
+Fixaa Freeimage latauksen muistivuoto (FIBITMAP)

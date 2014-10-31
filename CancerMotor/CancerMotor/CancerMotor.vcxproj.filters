@@ -48,11 +48,20 @@
     <ClCompile Include="GraphicContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rectangle.cpp">
-      <Filter>Header Files\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="CMShape.cpp">
       <Filter>Header Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMCircle.cpp">
+      <Filter>Header Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMConvex.cpp">
+      <Filter>Header Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMRectangle.cpp">
+      <Filter>Header Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMVector2.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -83,8 +92,17 @@
     <ClInclude Include="CMShape.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="Rectangle.h">
+    <ClInclude Include="CMCircle.h">
       <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CMConvex.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CMRectangle.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="CMVector2.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
