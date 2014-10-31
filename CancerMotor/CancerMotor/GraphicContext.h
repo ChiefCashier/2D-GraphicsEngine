@@ -1,21 +1,36 @@
 #pragma once
 #include "glew.h"
 #include <list>
-class GraphicContext
+#include "RenderingContext.h"
+#include "Rectangle.h"
+#include <vector>
+namespace CML
 {
-public:
-	struct drawable{
-		GLfloat vertices;
-		GLuint indices;
-		GLuint textureIndex;
-	};
-	
-	GraphicContext();
-	~GraphicContext();
-	void BeginDraw();
-	void EndDraw();
-	void Draw();
-private:
-	std::list<drawable> drawables;
-};
+	class GraphicContext
+	{
+	public:
+		struct drawable{
+			std::vector<GLfloat> vertices;
+			std::vector<GLuint> indices;
+		};
 
+		GraphicContext();
+		~GraphicContext();
+		void setShit();
+		void BeginDraw(CML::CMWindow *window);
+		void BeginDraw(RenderingContext *rcontext);
+		void EndDraw();
+		void Draw(Rectangle rec);
+	private:
+		std::list<drawable> _drawables;
+		RenderingContext *_rcontext;
+		GLuint _texture;
+		GLint _positionIndex;
+		GLint _colorIndex;
+		GLint _textureIndex;
+		GLint _samplerLocation;
+		GLint _projectionLocation;
+		GLuint buffers[2];
+	};
+
+}
