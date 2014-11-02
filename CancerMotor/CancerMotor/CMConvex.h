@@ -1,19 +1,22 @@
 #pragma once
 #include "CMShape.h"
-class CMConvex :
-	public CMShape
+namespace CML
 {
-	typedef float vec2[2];
-public:
-	CMConvex(int a);
-	CMConvex();
-	~CMConvex();
+	class CMConvex :
+		public CMShape
+	{
+		typedef float vec2[2];
+	public:
+		CMConvex(int a);
+		CMConvex();
+		~CMConvex();
 
-	void SetVertexAmount(int a);
-	int GetVertexAmount();
+		void SetVertexAmount(int a);
+		int GetVertexAmount();
 
-	void AddVertex(float x, float y);
-	
-private:
-	int _vertexAmount;
-};
+		void AddVertex(float x, float y);
+
+	private:
+		int _vertexAmount;
+	};
+}

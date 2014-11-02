@@ -34,12 +34,13 @@ namespace CML
 		_imageFormat = bitDepth == 24 ? GL_RGB : GL_BGRA;
 		unsigned int aa = GL_RGBA;
 		FreeImage_Unload(imagen);
+
 	}
 
 	FIBITMAP* CMImage::getBITMAP()
 	{
 		FREE_IMAGE_FORMAT formato = FreeImage_GetFIFFromFilename(_name);
-			return FreeImage_Load(formato, _name);
+		return FreeImage_Load(formato, _name);
 	}
 	CMImage::~CMImage()
 	{

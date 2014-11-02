@@ -1,26 +1,28 @@
 #include "CMConvex.h"
+namespace CML
+{
+	CMConvex::CMConvex(int a)
+	{
+	}
+	CMConvex::CMConvex()
+	{
+	}
+	CMConvex::~CMConvex()
+	{
+	}
 
-CMConvex::CMConvex(int a)
-{
-}
-CMConvex::CMConvex()
-{
-}
-CMConvex::~CMConvex()
-{
-}
+	void CMConvex::SetVertexAmount(int a)
+	{
+		_vertexAmount = a;
+	}
 
-void CMConvex::SetVertexAmount(int a)
-{
-	_vertexAmount = a;
-}
+	int CMConvex::GetVertexAmount()
+	{
+		return _vertexAmount;
+	}
 
-int CMConvex::GetVertexAmount()
-{
-	return _vertexAmount;
-}
+	void CMConvex::AddVertex(float x, float y)
+	{
 
-void CMConvex::AddVertex(float x, float y)
-{
-
+	}
 }

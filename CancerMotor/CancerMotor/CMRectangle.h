@@ -1,19 +1,28 @@
 #pragma once
 #include "CMShape.h"
-class CMRectangle :
-	public CMShape
+namespace CML
 {
-public:
-	CMRectangle(float _x, float _y, float width, float height);
-	CMRectangle();
-	~CMRectangle();
+	class CMRectangle : public CMShape
+	{
+	public:
 
-	void SetWidth(float w);
-	float GetWidth();
+		CMRectangle(float _x, float _y, float width, float height);
+		CMRectangle();
+		~CMRectangle();
 
-	void SetHeight(float h);
-	float GetHeight();
+		void SetX(float x);
+		void SetY(float y);
 
-private:
-	float _width, _height;
-};
+		void SetWidth(float w);
+		float GetWidth();
+
+		void SetHeight(float h);
+		float GetHeight();
+		void SetColor(vec4 color);
+		void SetColor(float r, float b, float g, float a);
+
+	private:
+
+		float _width, _height;
+	};
+}
