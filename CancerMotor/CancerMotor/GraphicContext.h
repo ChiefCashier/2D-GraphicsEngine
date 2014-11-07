@@ -2,7 +2,7 @@
 #include "glew.h"
 #include <list>
 #include "RenderingContext.h"
-#include "Rectangle.h"
+#include "CMRectangle.h"
 #include <vector>
 namespace CML
 {
@@ -20,7 +20,7 @@ namespace CML
 		void BeginDraw(CML::CMWindow *window);
 		void BeginDraw(RenderingContext *rcontext);
 		void EndDraw();
-		void Draw(Rectangle rec);
+		void Draw(CMRectangle rec);
 	private:
 		std::list<drawable> _drawables;
 		RenderingContext *_rcontext;

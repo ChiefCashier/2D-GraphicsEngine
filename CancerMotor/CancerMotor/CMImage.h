@@ -21,6 +21,7 @@ namespace CML
 		size_t _height;
 		void* _pixelData;
 		GLuint _imageFormat;
+
 	};
 
 }

@@ -1,16 +1,26 @@
 #pragma once
 #include "CMShape.h"
-class CMCircle :
-	public CMShape
+namespace CML
 {
-public:
-	CMCircle(float _x, float _y, int sides);
-	CMCircle();
-	~CMCircle();
+	class CMCircle :
+		public CMShape
+	{
+	public:
 
-	void SetSides(int s);
-	int GetSides();
+		CMCircle(float _x, float _y, float _radius, int sides);
+		CMCircle();
+		~CMCircle();
 
-private:
-	int _sides;
-};
+		void SetSides(int s);
+		int GetSides();
+
+		void SetRadius(int r);
+		int GetRadius();
+
+	private:
+
+		float _radius;
+		int _sides;
+
+	};
+}
