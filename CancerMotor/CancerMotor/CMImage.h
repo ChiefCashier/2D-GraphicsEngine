@@ -1,12 +1,14 @@
 #pragma once
 #include "FreeImage.h"
 #include "glew.h"
+#include "Resource.h"
 namespace CML
 {
 	class CMImage
+		:public Resource
 	{
 	public:
-		CMImage(){};
+		CMImage():Resource(""){};
 		CMImage(char* name);
 		~CMImage();
 		size_t getWidth();
@@ -15,7 +17,9 @@ namespace CML
 		void* getPixelData();
 		GLuint getImageFormat();
 		FIBITMAP* getBITMAP();
+		GLuint getTextureId();
 	private:
+		GLuint _textureId;
 		char* _name;
 		size_t _width;
 		size_t _height;

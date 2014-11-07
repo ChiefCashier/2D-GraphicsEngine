@@ -39,7 +39,7 @@ namespace CML{
 	Myöhemmin pitää suojata erroreilta kuten tiedostoa ei ole
 
 	*/
-	char* CML::ResourceManager::LoadFile(char* filename)
+	char* ResourceManager::LoadFile(char* filename)
 	{
 		std::ifstream is(filename, std::ifstream::binary);
 		assert(is);
@@ -68,6 +68,18 @@ namespace CML{
 			return buffer;
 		}
 		
+		return NULL;
+	}
+	CMImage ResourceManager::createImage(char* filename)
+	{
+		/*
+		if (_resources.find(filename) != _resources.end())
+		{
+			 std::map<std::string, Resource*>::iterator it = _resources.find(filename);
+
+			 //return (*it)->second;
+			 return NULL;
+		}*/
 		return NULL;
 	}
 }

@@ -91,6 +91,7 @@
     <ClCompile Include="CMSprite.cpp" />
     <ClCompile Include="CMRectangle.cpp" />
     <ClCompile Include="RenderingContext.cpp" />
+    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="WriteToFile.cpp" />
   </ItemGroup>
@@ -106,6 +107,7 @@
     <ClInclude Include="GraphicContext.h" />
     <ClInclude Include="CMRectangle.h" />
     <ClInclude Include="RenderingContext.h" />
+    <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="CMWindow.h" />
   </ItemGroup>

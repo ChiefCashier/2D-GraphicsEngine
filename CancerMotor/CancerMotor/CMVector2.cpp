@@ -1,8 +1,11 @@
 #include "CMVector2.h"
 #include <iostream>
-
+/*
 namespace CML
 {
+	template <typename T>
+
+	/*
 	//template<typename T>
 	CMVector2::CMVector2()
 	{
@@ -31,7 +34,7 @@ namespace CML
 		result.yi = vec1.yi + vec2.yi;
 		return result;
 	}
-
+	*/
 	/*
 	//template<typename T>
 	CML::CMVector2 operator -(const CML::CMVector2& vec1, const CML::CMVector2& vec2)
@@ -40,6 +43,9 @@ namespace CML
 	result.xi = vec1.xi - vec2.xi;
 	result.yi = vec1.yi - vec2.yi;
 	return result;
-	}*/
+	}
+	*/
+/*
 };
 
+*/

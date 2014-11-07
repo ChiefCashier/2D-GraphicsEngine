@@ -4,14 +4,14 @@
 #include <iostream>
 namespace CML
 {
-	CMImage::CMImage(char* name)
+	CMImage::CMImage(char* name) :Resource(name)
 	{
 		FREE_IMAGE_FORMAT formato = FreeImage_GetFIFFromFilename(name);
 		FIBITMAP* imagen = FreeImage_Load(formato, name);
 		_name = name;
 		_width = FreeImage_GetWidth(imagen);
 		_height = FreeImage_GetHeight(imagen);
-		void* pixeles = (void*)FreeImage_GetBits(imagen);
+		void* pixeles = static_cast<void*>(FreeImage_GetBits(imagen));
 		//rename a
 		FREE_IMAGE_TYPE a = FreeImage_GetImageType(imagen);
 		assert(a == FIT_BITMAP);
@@ -33,7 +33,16 @@ namespace CML
 		*/
 		_imageFormat = bitDepth == 24 ? GL_RGB : GL_BGRA;
 		unsigned int aa = GL_RGBA;
+
+		glGenTextures(1, &_textureId);//generates texture
+		glTexImage2D(
+			GL_TEXTURE_2D, 0, 4, _width,
+			_height, 0, _imageFormat,
+			GL_UNSIGNED_BYTE, FreeImage_GetBits(imagen)
+			);
+
 		FreeImage_Unload(imagen);
+
 
 	}
 
@@ -44,6 +53,7 @@ namespace CML
 	}
 	CMImage::~CMImage()
 	{
+		glDeleteTextures(1, &_textureId);
 	}
 	size_t CMImage::getWidth()
 	{
@@ -64,5 +74,9 @@ namespace CML
 	GLuint CMImage::getImageFormat()
 	{
 		return _imageFormat;
+	}
+	GLuint CMImage::getTextureId()
+	{
+		return _textureId;
 	}
 }

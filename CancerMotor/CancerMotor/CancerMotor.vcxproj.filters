@@ -63,6 +63,9 @@
     <ClCompile Include="CMVector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>Source Files\ResourceManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -103,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="CMVector2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files\ResourceManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

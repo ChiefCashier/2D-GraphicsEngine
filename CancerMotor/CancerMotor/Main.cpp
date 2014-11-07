@@ -11,13 +11,19 @@
 #include "CMRectangle.h"
 #include <stdlib.h> 
 #include <time.h>
-
+#include "CMVector2.h"
 CML::GraphicContext gcontext;
 CML::RenderingContext rendContext;
 
 int main()
 {
-
+	CML::CMVector2<int> vec = CML::CMVector2<int>(5, 2);
+	CML::CMVector2<int> vec2 = CML::CMVector2<int>(5, 2);
+	//vec = vec + vec2;
+	vec -= vec2;
+	//if (vec == vec2)
+	std::cout << vec << std::endl;
+	system("PAUSE");
 	CML::CMWindow window(0, L"asd", 800, 800);
 	window.ShowCMWindow();
 	rendContext = CML::RenderingContext(&window);
@@ -33,26 +39,36 @@ int main()
 
 	HWND asd = window.CMWindowHandle();
 	gcontext.BeginDraw(&rendContext);
-
-	CML::CMRectangle r(0, 0, 400, 400);
-	r.SetColor(0.0f, 1.0f, 0.0f, 1.0f);
-	r.SetImage("sample.png");
+	std::vector<CML::CMRectangle*> lista;
+	for (int i = 0; i < 80; i++)
+	{
+		CML::CMRectangle *a = new CML::CMRectangle(0, 0, 400, 400);
+		
+		a->SetColor(0.0f, 1.0f, 0.0f, 1.0f);
+		a->SetImage("sample.png");
+		lista.push_back(a);
+	}
 	//CML::CMRectangle r2(200, 200, 400, 400);
 	//r2.SetColor(0.0f, 1.0f, 0.0f, 1.0f);
 	srand(time(NULL));
+	
 	while (true)
-	{
-		CML::CMSprite sprite = CML::CMSprite(0.0f, 0.0f, 0.0f, 0.0f, "sample.png");
+	{		
 		window.WindowMessageCheck();
-		gcontext.Draw(r);
+		for (int j = 0; j < lista.size(); j++)
+		{
+			gcontext.Draw(*lista.at(j));
+			int x = (rand() % 10 * 50);
+			int y = (rand() % 10 * 50);
+			int z = (rand() % 10 + 1);
+			lista.at(j)->SetWidth(z * 50);
+			lista.at(j)->SetHeight(z * 50);
+			lista.at(j)->SetX(x);
+			lista.at(j)->SetY(y);
+		}
 		gcontext.EndDraw();
-		int x = (rand() % 10 * 50);
-		int y = (rand() % 10 * 50);
-		int z = (rand() % 10 + 1);
-		r.SetWidth(z * 50);
-		r.SetHeight(z * 50);
-		r.SetX(x);
-		r.SetY(y);
+	
+
 	}
 
 	return 0;
