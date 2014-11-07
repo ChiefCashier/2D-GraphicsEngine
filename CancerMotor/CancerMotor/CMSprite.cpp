@@ -4,12 +4,10 @@ namespace CML
 {
 	CMSprite::CMSprite()
 	{
-		_xPosition = 0.0f;
-		_yPosition = 0.0f;
+		_x = 0.0f;
+		_y = 0.0f;
 		_widht = 200.0f;
 		_height = 300.0f;
-
-		_colorRed = { 0.0f }, _colorGreen = { 0.0f }, _colorBlue = { 0.0f }, _alphaChannel = { 1.0f };
 
 		_texturePositionX = { 0.0f }, _texturePositionY = { 0.0f };
 		_image = nullptr;
@@ -17,12 +15,10 @@ namespace CML
 
 	CMSprite::CMSprite(float xPosition, float yPosition, float widht, float height)
 	{
-		_xPosition = xPosition;
-		_yPosition = yPosition;
+		_x = xPosition;
+		_y = yPosition;
 		_widht = widht;
 		_height = height;
-
-		_colorRed = { 0.0f }, _colorGreen = { 0.0f }, _colorBlue = { 0.0f }, _alphaChannel = { 1.0f };
 
 		_texturePositionX = { 0.0f }, _texturePositionY = { 0.0f };
 		_image = nullptr;
@@ -32,12 +28,10 @@ namespace CML
 
 	CMSprite::CMSprite(float xPosition, float yPosition, float widht, float height, char* imageLocation)
 	{
-		_xPosition = xPosition;
-		_yPosition = yPosition;
+		_x = xPosition;
+		_y = yPosition;
 		_widht = widht;
 		_height = height;
-
-		_colorRed = { 0.0f }, _colorGreen = { 0.0f }, _colorBlue = { 0.0f }, _alphaChannel = { 1.0f };
 
 		_image = CML::CMImage::CMImage(imageLocation);
 
@@ -48,12 +42,10 @@ namespace CML
 	}
 	CMSprite::CMSprite(float xPosition, float yPosition, float widht, float height, CMImage image)
 	{
-		_xPosition = xPosition;
-		_yPosition = yPosition;
+		_x = xPosition;
+		_y = yPosition;
 		_widht = widht;
 		_height = height;
-
-		_colorRed = { 0.0f }, _colorGreen = { 0.0f }, _colorBlue = { 0.0f }, _alphaChannel = { 1.0f };
 
 		_image = image;
 
@@ -68,25 +60,6 @@ namespace CML
 
 	}
 
-	float CMSprite::GetX()
-	{
-		return _xPosition;
-	}
-
-	void CMSprite::SetX(float x)
-	{
-		_xPosition = x;
-	}
-
-	float CMSprite::GetY()
-	{
-		return _yPosition;
-	}
-
-	void CMSprite::SetY(float y)
-	{
-		_yPosition = y;
-	}
 
 	float CMSprite::GetWidht()
 	{
@@ -106,33 +79,6 @@ namespace CML
 	void CMSprite::SetHeight(float height)
 	{
 		_height = height;
-	}
-
-	float* CMSprite::GetColor()
-	{
-		float colors[4] = { _colorRed, _colorGreen, _colorBlue, _alphaChannel };
-
-		return colors;
-	}
-
-	float CMSprite::GetColorRed()
-	{
-		return _colorRed;
-	}
-
-	float CMSprite::GetColorGreen()
-	{
-		return _colorGreen;
-	}
-
-	float CMSprite::GetColorBlue()
-	{
-		return _colorBlue;
-	}
-
-	void CMSprite::SetColor(float red, float green, float blue, float alpha)
-	{
-		_colorRed = red / 255, _colorGreen = green / 255, _colorBlue = blue / 255, _alphaChannel = alpha / 255;
 	}
 
 	CMImage CMSprite::GetImage()
