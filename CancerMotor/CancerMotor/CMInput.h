@@ -127,8 +127,8 @@ namespace CML
 		void Update(WPARAM p);
 		static bool isKeyPressed(Key key);
 		static bool isMouseKeyPressed(MouseKey key);
-		static int getMouseX(CML::CMWindow *window);
-		static int getMouseY(CML::CMWindow *window);
+		static int getMouseX(HWND);
+		static int getMouseY(HWND);
 
 
 

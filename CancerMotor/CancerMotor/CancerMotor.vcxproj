@@ -83,6 +83,7 @@
     <ClCompile Include="CMCircle.cpp" />
     <ClCompile Include="CMConvex.cpp" />
     <ClCompile Include="CMImage.cpp" />
+    <ClCompile Include="CMInput.cpp" />
     <ClCompile Include="CMShape.cpp" />
     <ClCompile Include="CMVector2.cpp" />
     <ClCompile Include="CMWindow.cpp" />
@@ -100,6 +101,7 @@
     <ClInclude Include="CMConvex.h" />
     <ClInclude Include="CMDraw.h" />
     <ClInclude Include="CMImage.h" />
+    <ClInclude Include="CMInput.h" />
     <ClInclude Include="CMShape.h" />
     <ClInclude Include="CMVector2.h" />
     <ClInclude Include="DebugLogger.h" />
