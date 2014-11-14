@@ -8,23 +8,24 @@ namespace CML
 
 	LRESULT CALLBACK WindowProc(HWND asd, UINT uMsg, WPARAM wParam, LPARAM lParam) //without this nothing works, so I say we keep it
 	{
-		switch (uMsg){
-		case WM_CREATE:
+		switch (uMsg)
 		{
-						  return 0;
-		}
-		case WM_DESTROY:
-		{
-						   //wglDeleteContext(ourOpenGLRenderingContext);
-						   //glDeleteBuffers(2, buffers);
-						   PostQuitMessage(0);
-						   DestroyWindow(asd);
-						   return 0;
-		}
-		default:
+			case WM_CREATE:
+			{
+				return 0;
+			}
 
-			return DefWindowProc(asd, uMsg, wParam, lParam);
+			case WM_DESTROY:
+			{
+				PostQuitMessage(0);
+				DestroyWindow(asd);
+				return 0;
+			}
 
+			default:
+			{
+				return DefWindowProc(asd, uMsg, wParam, lParam);
+			}
 		}
 		
 
@@ -46,13 +47,16 @@ namespace CML
 
 		RegisterClass(&wc);
 
-		_windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, _CLASS_NAME, L"CMWindow", WS_OVERLAPPEDWINDOW, 100, 100, _windowWidht, _windowHeight, //Windowhandle pointter creation
-			NULL, NULL, GetModuleHandle(nullptr), NULL);
+		_windowHandle = CreateWindowEx(
+										WS_EX_OVERLAPPEDWINDOW,		_CLASS_NAME,				L"CMWindow",		
+										WS_OVERLAPPEDWINDOW,		0,							0,
+										_windowWidht,				_windowHeight,				NULL, 
+										NULL,						GetModuleHandle(nullptr),	NULL
+										);
+
+
 		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
 		{
-
-			//laittakaa debugloggerointia!
-
 
 			std::cout << "Window handle creation failed" << std::endl; //Window handle creation failed so message is sent
 
