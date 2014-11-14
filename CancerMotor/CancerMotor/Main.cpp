@@ -19,6 +19,8 @@ int main()
 {
 	CML::CMVector2<int> vec = CML::CMVector2<int>(5, 2);
 	CML::CMVector2<int> vec2 = CML::CMVector2<int>(5, 2);
+	CML::CMImage *a = CML::ResourceManager::createResource<CML::CMImage>("mario.png");
+	std::cout << a->getHeight() << std::endl;
 	//vec = vec + vec2;
 	vec -= vec2;
 	//if (vec == vec2)
