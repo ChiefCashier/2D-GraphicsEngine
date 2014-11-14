@@ -106,13 +106,17 @@ namespace CML
 	{
 		return _indices;
 	}
-	CMImage CMShape::GetImage()
+	CMImage* CMShape::GetImage()
 	{
 		return _image;
 	}
 	void CMShape::SetImage(char* path)
 	{
-		_image = CMImage::CMImage(path);
+		_image = new CMImage(path);
+	}
+	void CMShape::SetImage(CMImage *image)
+	{
+		_image = image;
 	}
 
 }

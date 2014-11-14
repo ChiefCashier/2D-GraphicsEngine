@@ -40,9 +40,9 @@ namespace CML
 		std::vector<GLfloat> GetVertices();
 		std::vector<GLuint> GetIndices();
 
-		CMImage GetImage();
+		CMImage* GetImage();
 		void SetImage(char* path);
-
+		void SetImage(CMImage *image);
 
 	protected:
 
@@ -51,7 +51,7 @@ namespace CML
 		int _rotation;
 		vec4 _colorRGBA;
 
-		CMImage _image;
+		CMImage *_image;
 
 		std::vector<GLfloat> _vertices;
 		std::vector<GLuint> _indices;
