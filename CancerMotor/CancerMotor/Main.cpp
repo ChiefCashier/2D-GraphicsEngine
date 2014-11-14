@@ -20,8 +20,8 @@ int main()
 {
 	//CML::CMVector2<int> vec = CML::CMVector2<int>(5, 2);
 	//CML::CMVector2<int> vec2 = CML::CMVector2<int>(5, 2);
-	////vec = vec + vec2;
-	//vec -= vec2;
+	CML::CMImage *a = CML::ResourceManager::createResource<CML::CMImage>("mario.png");
+	std::cout << a->getHeight() << std::endl;
 	////if (vec == vec2)
 	//std::cout << vec << std::endl;
 	//system("PAUSE");
