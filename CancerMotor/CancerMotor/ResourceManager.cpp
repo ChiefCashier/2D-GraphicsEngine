@@ -12,7 +12,9 @@ K‰ytt‰‰ FreeImagea kuvien lataamiseen suoraan merkkijonoon.
 
 */
 
-namespace CML{
+namespace CML
+{
+
 	char* CML::ResourceManager::LoadImage(char* filename)
 	{
 
@@ -68,18 +70,6 @@ namespace CML{
 			return buffer;
 		}
 		
-		return NULL;
-	}
-	CMImage ResourceManager::createImage(char* filename)
-	{
-		/*
-		if (_resources.find(filename) != _resources.end())
-		{
-			 std::map<std::string, Resource*>::iterator it = _resources.find(filename);
-
-			 //return (*it)->second;
-			 return NULL;
-		}*/
 		return NULL;
 	}
 }

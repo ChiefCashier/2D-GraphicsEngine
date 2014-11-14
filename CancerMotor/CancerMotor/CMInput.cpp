@@ -154,16 +154,16 @@ namespace CML
 	merge getMouseX and getMouseY
 	*/
 
-	int CMInput::getMouseX(CML::CMWindow *window)
+	int CMInput::getMouseX(HWND asd)
 	{
 		GetCursorPos(&pt);
-		ScreenToClient(window->CMWindowHandle(), &pt);
+		ScreenToClient(asd, &pt);
 		return pt.x;
 	}
-	int CMInput::getMouseY(CML::CMWindow *window)
+	int CMInput::getMouseY(HWND asd)
 	{
 		GetCursorPos(&pt);
-		ScreenToClient(window->CMWindowHandle(), &pt);
+		ScreenToClient(asd, &pt);
 		return pt.y;
 	}
 }

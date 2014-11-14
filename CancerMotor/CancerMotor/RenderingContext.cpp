@@ -17,6 +17,34 @@ namespace CML
 			0,                        //Number of Aux buffers in the framebuffer.
 			PFD_MAIN_PLANE
 		};
+		WORD  nSize = sizeof(PIXELFORMATDESCRIPTOR);
+		WORD  nVersion  = 1;
+		DWORD dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+		pfd.iPixelType = PFD_TYPE_RGBA;
+		pfd.cColorBits  = 24;
+		pfd.cRedBits  = 0;
+		pfd.cRedShift  = 0;
+		pfd.cGreenBits  = 0;
+		pfd.cGreenShift  = 0;
+		pfd.cBlueBits  = 0;
+		pfd.cBlueShift  = 0;
+		pfd.cAlphaBits  = 0;
+		pfd.cAlphaShift  = 0;
+		pfd.cAccumBits  = 0;
+		pfd.cAccumRedBits  = 0;
+		pfd.cAccumGreenBits  = 0;
+		pfd.cAccumBlueBits  = 0;
+		pfd.cAccumAlphaBits  = 0;
+		pfd.cDepthBits  = 24;
+		pfd.cStencilBits  = 8;
+		pfd.cAuxBuffers  = 0;
+		pfd.iLayerType  = 0;
+		pfd.bReserved  = 0;
+		DWORD dwLayerMask  = NULL;
+		DWORD dwVisibleMask  = NULL;
+		DWORD dwDamageMask  = NULL;
+
+
 		_window = window;
 		HDC ourWindowHandleToDeviceContext = GetDC(window->CMWindowHandle());// 
 		g_HDC = ourWindowHandleToDeviceContext;
