@@ -52,12 +52,16 @@ namespace CML
 		glUseProgram(_rcontext->getProgramIndex());
 
 
-		const glm::mat4 _projection = glm::ortho(0.0f, static_cast<float>(_rcontext->getWindow()->_windowWidht), 0.0f, static_cast<float>(_rcontext->getWindow()->_windowHeight), -1.0f, 1.0f);
+		const glm::mat4 _projection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
+												 0.0f,	static_cast<float>(_rcontext->getWindow()->_windowHeight),
+												 -1.0f, 1.0f);
 
 
 		glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
 
 		glUseProgram(0u);
+
+
 	}
 	void GraphicContext::EndDraw()
 	{

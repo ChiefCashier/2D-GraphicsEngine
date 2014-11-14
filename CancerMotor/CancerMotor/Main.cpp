@@ -44,7 +44,7 @@ int main()
 	gcontext.BeginDraw(&rendContext);
 
 	std::vector<CML::CMRectangle*> lista;
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		CML::CMRectangle *a = new CML::CMRectangle(0, 0, 400, 400);
 		
@@ -61,13 +61,13 @@ int main()
 		for (int j = 0; j < lista.size(); j++)
 		{
 			gcontext.Draw(*lista.at(j));
-			//int x = (rand() % 10 * 50);
-			//int y = (rand() % 10 * 50);
-			//int z = (rand() % 10 + 1);
-			//lista.at(j)->SetWidth(z * 50);
-			//lista.at(j)->SetHeight(z * 50);
-			//lista.at(j)->SetX(x);
-			//lista.at(j)->SetY(y);
+			int x = (rand() % 10 * 50);
+			int y = (rand() % 10 * 50);
+			int z = (rand() % 10 + 1);
+			lista.at(j)->SetWidth(z * 50);
+			lista.at(j)->SetHeight(z * 50);
+			lista.at(j)->SetX(x);
+			lista.at(j)->SetY(y);
 		}
 		std::cout << CML::CMInput::getMouseX(asd);
 		std::cout << "   ";
