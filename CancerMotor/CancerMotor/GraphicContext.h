@@ -3,6 +3,9 @@
 #include <list>
 #include "RenderingContext.h"
 #include "CMRectangle.h"
+#include "glm\glm.hpp"
+#include "glm\gtc\matrix_transform.hpp"
+#include "glm\gtx\transform.hpp"
 #include <vector>
 namespace CML
 {
@@ -18,6 +21,7 @@ namespace CML
 		void Initialize(RenderingContext *rcontext);
 		void EndDraw();
 		void Draw(CMRectangle rec);
+
 	private:
 		std::list<CMShape> _drawables;
 		RenderingContext *_rcontext;
@@ -28,6 +32,8 @@ namespace CML
 		GLint _textureIndex;
 		GLint _samplerLocation;
 		GLint _projectionLocation;
+		GLint _objectLocation;
+		glm::mat4 _projection;
 		GLuint buffers[2];
 	};
 

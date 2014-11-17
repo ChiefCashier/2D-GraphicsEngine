@@ -1,7 +1,4 @@
-#include "GraphicContext.h"
-#include "glm\glm.hpp"
-#include "glm\gtc\matrix_transform.hpp"
-
+﻿#include "GraphicContext.h"
 #include <assert.h>
 namespace CML
 {
@@ -52,7 +49,7 @@ namespace CML
 		glUseProgram(_rcontext->getProgramIndex());
 
 
-		const glm::mat4 _projection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
+		_projection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
 												 0.0f,	static_cast<float>(_rcontext->getWindow()->_windowHeight),
 												 -1.0f, 1.0f);
 
@@ -76,13 +73,8 @@ namespace CML
 		glFlush();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		//remove
 
-		//remove
-
-
-
-
+		
 		//actual draw
 
 		CMShape a = *_drawables.begin();
@@ -90,23 +82,41 @@ namespace CML
 		glActiveTexture(a.GetImage()->getTextureId());
 		glUseProgram(_rcontext->getProgramIndex());
 
-		int helevetin�diootti = _drawables.size();
-		for (int i = 0; i < helevetin�diootti; i++)
+		int helevetin冝iootti = _drawables.size();
+		for (int i = 0; i < helevetin冝iootti; i++)
 		{
 			a = *_drawables.begin();
-			
+
+			//elegant way of transforming primitives
+			//first projection, as it should be
+			_projection = glm::ortho(0.0f, static_cast<float>(_rcontext->getWindow()->_windowWidht),
+				0.0f, static_cast<float>(_rcontext->getWindow()->_windowHeight),
+				-1.0f, 1.0f);
+			//then translate the primitive where it should be 
+			_projection = glm::translate(_projection, glm::vec3(a.GetX(), a.GetY(), 0.0f));
+			//then scale the primitive as it should be 
+			//_projection = glm::scale(_projection, glm::vec3(a.GetSize(), a.GetSize(), 0.0f));
+			//then rotate the primitive as it should be 
+			_projection = glm::rotate(_projection, (float)a.GetRotation() , glm::vec3(0.0f, 0.0f, 1.0f));
+			//finish with a touch of mint and glUniformMatrix4fv, and voilá!
+			glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
+			//you got yourself a handy way of dumping your workload to the GPU!
+
+
 			//set vertex data
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)* a.GetVertices().size(), &a.GetVertices()[0], GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			//set fragment data
+
+
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
 			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat)*a.GetIndices().size(), &a.GetIndices()[0], GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-
+			
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
 
@@ -132,12 +142,6 @@ namespace CML
 	}
 void GraphicContext::Draw(CMRectangle rec)
 	{	
-
-
-
-	
 		_drawables.push_back(rec);
-
-
 	}
 }

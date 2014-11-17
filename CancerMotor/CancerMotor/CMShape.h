@@ -46,8 +46,7 @@ namespace CML
 
 	protected:
 
-		float _x, _y, _origon,
-			_size;
+		float _x, _y, _origon, _size;
 		int _rotation;
 		vec4 _colorRGBA;
 

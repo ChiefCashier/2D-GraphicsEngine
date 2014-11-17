@@ -25,7 +25,6 @@ namespace CML
 	void CMShape::SetX(float x)
 	{
 		_x = x;
-		_vertices.at(0) = x;
 	}
 	float CMShape::GetX()
 	{
@@ -35,7 +34,6 @@ namespace CML
 	void CMShape::SetY(float y)
 	{
 		_y = y;
-		_vertices.at(1) = y;
 	}
 	float CMShape::GetY()
 	{

@@ -75,7 +75,7 @@ namespace CML
 	CMWindow::~CMWindow() //window destructor MARK 1 "The Eliminator"
 	{
 		/* I'm useful! */
-		delete(_windowHandle);
+		//delete(_windowHandle);
 	}
 
 

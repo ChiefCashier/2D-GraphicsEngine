@@ -18,6 +18,7 @@ namespace CML
 
 		void SetHeight(float h);
 		float GetHeight();
+
 		void SetColor(vec4 color);
 		void SetColor(float r, float b, float g, float a);
 

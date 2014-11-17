@@ -6,6 +6,9 @@ namespace CML
 	{
 		_width = width;
 		_height = height;
+		SetX(_x);
+		SetY(_y);
+
 		_vertices.push_back((GLfloat)_x);
 		_vertices.push_back((GLfloat)_y);
 		_vertices.push_back((GLfloat)0);
@@ -27,7 +30,7 @@ namespace CML
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
-		_vertices.push_back((GLfloat)1.0f);//rec.GetX()+rec.GetWidth());
+		_vertices.push_back((GLfloat)-1.0f);//rec.GetX()+rec.GetWidth());
 		_vertices.push_back((GLfloat)1.0f);//rec.GetY());
 		//bottom left
 		_vertices.push_back((GLfloat)_x + width);
@@ -35,7 +38,7 @@ namespace CML
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
-		_vertices.push_back((GLfloat)1.0f);//rec.GetX()+ rec.GetWidth());
+		_vertices.push_back((GLfloat)-1.0f);//rec.GetX()+ rec.GetWidth());
 		_vertices.push_back((GLfloat)0.0f);//rec.GetY() - rec.GetHeight());
 
 		_indices.push_back(0u);
@@ -56,20 +59,11 @@ namespace CML
 	void CMRectangle::SetX(float x)
 	{
 		_x = x;
-		_vertices.at(0) = x;
-		_vertices.at(7) = x;
-		_vertices.at(14) = x + _width;
-		_vertices.at(21) = x + _width;
 	}
 
 	void CMRectangle::SetY(float y)
 	{
 		_y = y;
-		_vertices.at(1) = y;
-		_vertices.at(8) = y + _height;
-		_vertices.at(15) = y + _height;
-		_vertices.at(22) = y;
-
 	}
 
 	void CMRectangle::SetColor(vec4 color)
