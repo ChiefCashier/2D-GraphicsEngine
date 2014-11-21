@@ -79,7 +79,6 @@ namespace CML
 
 		CMShape a = *_drawables.begin();
 			
-		glActiveTexture(a.GetImage()->getTextureId());
 		glUseProgram(_rcontext->getProgramIndex());
 
 		int helevetin冝iootti = _drawables.size();
@@ -120,8 +119,8 @@ namespace CML
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
 
-			glBindTexture(1, _texture);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glBindTexture(GL_TEXTURE_2D, a.GetImage()->getTextureId());
+
 			glDrawElements(GL_TRIANGLES, a.GetIndices().size(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 
 		

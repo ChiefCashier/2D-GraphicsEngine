@@ -25,7 +25,6 @@ namespace CML
 	private:
 		std::list<CMShape> _drawables;
 		RenderingContext *_rcontext;
-		GLuint _texture;
 
 		GLint _positionIndex;
 		GLint _colorIndex;
