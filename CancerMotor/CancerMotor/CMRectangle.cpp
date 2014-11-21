@@ -9,32 +9,32 @@ namespace CML
 		SetX(_x);
 		SetY(_y);
 
-		_vertices.push_back((GLfloat)_x);
-		_vertices.push_back((GLfloat)_y);
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0.0f);//rec.GetX());
 		_vertices.push_back((GLfloat)0.0f);//rec.GetY() - rec.GetHeight());
 		//top right
-		_vertices.push_back((GLfloat)_x);
-		_vertices.push_back((GLfloat)_y + height);
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)0 + height);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0.0f);//rec.GetX());
 		_vertices.push_back((GLfloat)1.0f);//rec.GetY());
 		//bottom right
-		_vertices.push_back((GLfloat)_x + width);
-		_vertices.push_back((GLfloat)_y + height);
+		_vertices.push_back((GLfloat)0 + width);
+		_vertices.push_back((GLfloat)0 + height);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)-1.0f);//rec.GetX()+rec.GetWidth());
 		_vertices.push_back((GLfloat)1.0f);//rec.GetY());
 		//bottom left
-		_vertices.push_back((GLfloat)_x + width);
-		_vertices.push_back((GLfloat)_y);
+		_vertices.push_back((GLfloat)0 + width);
+		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);

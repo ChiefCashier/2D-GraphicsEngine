@@ -21,15 +21,8 @@ CML::RenderingContext rendContext;
 
 int main()
 {
-	//CML::CMVector2<int> vec = CML::CMVector2<int>(5, 2);
-	//CML::CMVector2<int> vec2 = CML::CMVector2<int>(5, 2);
-	//CML::CMImage *a = CML::ResourceManager::createResource<CML::CMImage>("mario.png");
-	//std::cout << a->getHeight() << std::endl;
-	////if (vec == vec2)
-	//std::cout << vec << std::endl;
+
 	//system("PAUSE");
-
-
 	CML::CMWindow window(0, L"asd", 800, 800);
 	window.ShowCMWindow();
 	rendContext = CML::RenderingContext(&window);
@@ -47,16 +40,17 @@ int main()
 	gcontext.Initialize(&rendContext);
 	srand(time(NULL));
 	std::vector<CML::CMRectangle*> lista;
-	for (int i = 0; i < 10; i++)
+	
+	for (int i = 0; i < 700; i++)
 	{
-		CML::CMRectangle *a = new CML::CMRectangle(400 + 50 * (rand() % 2 + 1), 0 + 50 * (rand() % 10 + 1), 50, 50);
+		CML::CMRectangle *a = new CML::CMRectangle((rand() % 825 ), (rand() % 750 ), 50, 50);
 		a->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
 		a->SetRotation(0.0f);
-		a->SetImage("sample.png");
+		a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 		lista.push_back(a);
 	}
 
-	
+
 	float i = 0;
 	int x = 2;
 	int y;
@@ -65,6 +59,7 @@ int main()
 	{	
 		
 		window.WindowMessageCheck();
+		
 		for (int j = 0; j < lista.size(); j++)
 		{
 			gcontext.Draw(*lista.at(j));
@@ -78,8 +73,8 @@ int main()
 			i += 0.01;
 			if (i > 360)
 				i = 0;
-			if (lista.at(j)->GetX() <= -500)
-				lista.at(j)->SetX(400);
+			if (lista.at(j)->GetX() <= -40)
+				lista.at(j)->SetX(800);
 		}
 		//std::cout << CML::CMInput::getMouseX(asd);
 		//std::cout << "   ";

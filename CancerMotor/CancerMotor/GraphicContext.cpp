@@ -70,6 +70,7 @@ namespace CML
 	}
 	void GraphicContext::EndDraw()
 	{
+		wglMakeCurrent(GetDC(_rcontext->getWindow()->CMWindowHandle()), _rcontext->getRenderingContext());
 		glFlush();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -135,7 +136,7 @@ namespace CML
 
 			SwapBuffers(_rcontext->getHDC());//Bring back buffer to foreground
 
-			wglMakeCurrent(GetDC(_rcontext->getWindow()->CMWindowHandle()), _rcontext->getRenderingContext());
+			
 
 			_drawables.clear();
 	}
