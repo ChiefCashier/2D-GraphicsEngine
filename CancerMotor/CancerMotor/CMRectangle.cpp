@@ -8,38 +8,43 @@ namespace CML
 		_height = height;
 		SetX(_x);
 		SetY(_y);
+		
+		_rotation = 0.0f;
+		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
 
-		_vertices.push_back((GLfloat)_x);
-		_vertices.push_back((GLfloat)_y);
+		SetSize(1);
+
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
-		_vertices.push_back((GLfloat)0.0f);//rec.GetX());
-		_vertices.push_back((GLfloat)0.0f);//rec.GetY() - rec.GetHeight());
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)0.0f);
+		_vertices.push_back((GLfloat)0.0f);
 		//top right
-		_vertices.push_back((GLfloat)_x);
-		_vertices.push_back((GLfloat)_y + height);
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)height);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
-		_vertices.push_back((GLfloat)0.0f);//rec.GetX());
-		_vertices.push_back((GLfloat)1.0f);//rec.GetY());
+		_vertices.push_back((GLfloat)0.0f);
+		_vertices.push_back((GLfloat)1.0f);
 		//bottom right
-		_vertices.push_back((GLfloat)_x + width);
-		_vertices.push_back((GLfloat)_y + height);
+		_vertices.push_back((GLfloat)width);
+		_vertices.push_back((GLfloat)height);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
-		_vertices.push_back((GLfloat)-1.0f);//rec.GetX()+rec.GetWidth());
-		_vertices.push_back((GLfloat)1.0f);//rec.GetY());
+		_vertices.push_back((GLfloat)-1.0f);
+		_vertices.push_back((GLfloat)1.0f);
 		//bottom left
-		_vertices.push_back((GLfloat)_x + width);
-		_vertices.push_back((GLfloat)_y);
+		_vertices.push_back((GLfloat)width);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
-		_vertices.push_back((GLfloat)-1.0f);//rec.GetX()+ rec.GetWidth());
-		_vertices.push_back((GLfloat)0.0f);//rec.GetY() - rec.GetHeight());
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)-1.0f);
+		_vertices.push_back((GLfloat)0.0f);
 
 		_indices.push_back(0u);
 		_indices.push_back(1u);
@@ -96,19 +101,20 @@ namespace CML
 	}
 	void CMRectangle::SetWidth(float w)
 	{
+		float temp_width = _size.getX() * (w / _width);
 		_width = w;
-		_vertices.at(14) = _x + w;
-		_vertices.at(21) = _x + w;
+		_size.setX(temp_width);
 	}
 	float CMRectangle::GetWidth()
 	{
+
 		return _width;
 	}
 	void CMRectangle::SetHeight(float h)
 	{
+		float temp_height = _size.getX() * (h / _width);
 		_height = h;
-		_vertices.at(8) = _y + h;
-		_vertices.at(15) = _y + h;
+		_size.setY(temp_height);
 	}
 	float CMRectangle::GetHeight()
 	{

@@ -38,10 +38,10 @@ namespace CML
 		glBindTexture(GL_TEXTURE_2D,_textureId);
 
 		glTexImage2D(
-			GL_TEXTURE_2D, 0, 4, _width,
-			_height, 0, _imageFormat,
-			GL_UNSIGNED_BYTE, FreeImage_GetBits(imagen)
-			);
+						GL_TEXTURE_2D, 0, 4, _width,
+						_height, 0, _imageFormat,
+						GL_UNSIGNED_BYTE, FreeImage_GetBits(imagen)
+						);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glBindTexture(GL_TEXTURE_2D,0u);
 		FreeImage_Unload(imagen);

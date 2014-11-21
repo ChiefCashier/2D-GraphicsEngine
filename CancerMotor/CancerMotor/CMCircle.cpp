@@ -9,9 +9,15 @@ namespace CML
 		_radius = radius;
 		_sides = sides;
 
+		SetX(_x);
+		SetY(_y);
+
+		_rotation = 0;
+		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
+
 		// First center vertex of triangle fan
-		_vertices.push_back((GLfloat)_x);
-		_vertices.push_back((GLfloat)_y);
+		_vertices.push_back((GLfloat)0);
+		_vertices.push_back((GLfloat)0);
 
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
@@ -20,25 +26,18 @@ namespace CML
 		_vertices.push_back((GLfloat)0.5f);
 		_vertices.push_back((GLfloat)0.5f);
 
-			for (int j = 0; j < 360; j += _sides)
-			{
-				_vertices.push_back(_x + radius * cos((j * PI / 180)));
-				_vertices.push_back(_y + radius * sin((j * PI / 180)));
+		for (int j = 0; j < 360; j += _sides)
+		{
+			_vertices.push_back(radius * cos((j * PI / 180)));
+			_vertices.push_back(radius * sin((j * PI / 180)));
 
-				_vertices.push_back((GLfloat)1);
-				_vertices.push_back((GLfloat)0);
-				_vertices.push_back((GLfloat)0);
+			_vertices.push_back((GLfloat)0);
+			_vertices.push_back((GLfloat)0);
+			_vertices.push_back((GLfloat)0);
 
-				_vertices.push_back(cos((j * PI / 180)));
-				_vertices.push_back(sin((j * PI / 180)));
-				if (j == 180)
-				std::cout << cos((j * PI / 180)) << "," << sin((j * PI / 180)) << std::endl;
-			}
-			
-		
-		// Indices
-
-		//012 023 034 045 056 067 078
+			_vertices.push_back(cos((j * PI / 180)));
+			_vertices.push_back(sin((j * PI / 180)));
+		}
 
 		for (int k = 0; k < 360 / sides - 1; k++)
 		{
@@ -82,7 +81,7 @@ namespace CML
 		_colorRGBA[2] = b;
 		_colorRGBA[3] = a;
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < _sides + 1; i++)
 		{
 	 		_vertices.at(2 + i * 7) = r;
 			_vertices.at(3 + i * 7) = g;

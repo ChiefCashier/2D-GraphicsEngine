@@ -2,6 +2,7 @@
 #include <vector>
 #include "glew.h"
 #include "CMImage.h"
+#include "CMVector2.h"
 
 namespace CML
 {
@@ -32,10 +33,10 @@ namespace CML
 		float GetColorA();
 
 		void SetSize(float s);
-		float GetSize();
+		CMVector2<float> GetSize();
 
 		void SetOrigon(float x, float y);
-		float GetOrigon();
+		CMVector2<float> GetOrigon();
 
 		std::vector<GLfloat> GetVertices();
 		std::vector<GLuint> GetIndices();
@@ -46,7 +47,11 @@ namespace CML
 
 	protected:
 
-		float _x, _y, _origon, _size;
+		float _x, _y;
+
+		CMVector2<float> _size;
+		CMVector2<float> _origon;
+
 		int _rotation;
 		vec4 _colorRGBA;
 

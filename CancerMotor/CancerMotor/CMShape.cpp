@@ -5,18 +5,17 @@ namespace CML
 	{
 		_x = x;
 		_y = y;
+		_rotation = 0;
+		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
+		_size.setShitBooleanPaskafixJustForJPCozHeLovesThis(1.0f, 1.0f);
 	}
 	CMShape::CMShape()
 	{
 		_x = 0;
 		_y = 0;
 		_rotation = 0;
-		_origon = 0;
-		_colorRGBA[0] = 0;
-		_colorRGBA[1] = 0;
-		_colorRGBA[2] = 0;
-		_colorRGBA[3] = 255;
-		_size = 1;
+		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
+		_size.setShitBooleanPaskafixJustForJPCozHeLovesThis(1.0f, 1.0f);
 	}
 	CMShape::~CMShape()
 	{
@@ -80,19 +79,21 @@ namespace CML
 	}
 	void CMShape::SetSize(float s)
 	{
-		_size = s;
+		_size.setX(s);
+		_size.setY(s);
 	}
-	float CMShape::GetSize()
+
+	CMVector2<float> CMShape::GetSize()
 	{
 		return _size;
 	}
 
 	void CMShape::SetOrigon(float x, float y)
 	{
-		//_origon = x & y; 
-		// todo
+		_origon.setX(x);
+		_origon.setY(y);
 	}
-	float CMShape::GetOrigon()
+	CMVector2<float> CMShape::GetOrigon()
 	{
 		return _origon;
 	}
