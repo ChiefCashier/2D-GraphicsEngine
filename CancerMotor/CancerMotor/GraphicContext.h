@@ -20,10 +20,10 @@ namespace CML
 		void Initialize(CML::CMWindow *window);
 		void Initialize(RenderingContext *rcontext);
 		void EndDraw();
-		void Draw(CMRectangle rec);
+		void Draw(CMRectangle *rec);
 
 	private:
-		std::list<CMShape> _drawables;
+		std::vector<CMShape*> _drawables;
 		RenderingContext *_rcontext;
 
 		GLint _positionIndex;

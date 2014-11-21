@@ -46,6 +46,7 @@ int main()
 		CML::CMRectangle *a = new CML::CMRectangle((rand() % 825 ), (rand() % 750 ), 50, 50);
 		a->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
 		a->SetRotation(0.0f);
+		a->SetSize(1.0f);
 		a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 		lista.push_back(a);
 	}
@@ -62,7 +63,7 @@ int main()
 		
 		for (int j = 0; j < lista.size(); j++)
 		{
-			gcontext.Draw(*lista.at(j));
+			gcontext.Draw(lista.at(j));
 				
 			//x += 0.1;
 			y = glm::cos(i) * 5;
