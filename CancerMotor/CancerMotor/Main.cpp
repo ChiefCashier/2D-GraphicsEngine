@@ -66,12 +66,12 @@ int main()
 			gcontext.Draw(lista.at(j));
 				
 			//x += 0.1;
-			y = glm::cos(i) * 5;
+			y = glm::cos(i) * 7;
 			//int z = (rand() % 2 + 1);
 			//lista.at(j)->SetSize(z * 0.5f);
 			lista.at(j)->SetY(y + lista.at(j)->GetY());
 			lista.at(j)->SetX(lista.at(j)->GetX() - x);
-			i += 0.01;
+			i += 0.1;
 			if (i > 360)
 				i = 0;
 			if (lista.at(j)->GetX() <= -40)

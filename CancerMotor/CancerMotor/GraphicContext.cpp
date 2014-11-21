@@ -49,7 +49,7 @@ namespace CML
 		glUseProgram(_rcontext->getProgramIndex());
 
 
-		_projection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
+		_defaultProjection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
 												 0.0f,	static_cast<float>(_rcontext->getWindow()->_windowHeight),
 												 -1.0f, 1.0f);
 
@@ -70,7 +70,7 @@ namespace CML
 	}
 	void GraphicContext::EndDraw()
 	{
-		wglMakeCurrent(GetDC(_rcontext->getWindow()->CMWindowHandle()), _rcontext->getRenderingContext());
+		//wglMakeCurrent(GetDC(_rcontext->getWindow()->CMWindowHandle()), _rcontext->getRenderingContext());
 		glFlush();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -89,15 +89,15 @@ namespace CML
 
 			//elegant way of transforming primitives
 			//first projection, as it should be
-			_projection = glm::ortho(0.0f, static_cast<float>(_rcontext->getWindow()->_windowWidht),
-				0.0f, static_cast<float>(_rcontext->getWindow()->_windowHeight),
-				-1.0f, 1.0f);
+			_projection = _defaultProjection;
 			//then translate the primitive where it should be 
 			_projection = glm::translate(_projection, glm::vec3(a->GetX(), a->GetY(), 0.0f));
 			//then scale the primitive as it should be 
+			if (a->GetSize() != 1.0f)
 			_projection = glm::scale(_projection, glm::vec3(a->GetSize(), a->GetSize(), 0.0f));
-			//then rotate the primitive as it should be 
-			_projection = glm::rotate(_projection, (float)a->GetRotation() , glm::vec3(0.0f, 0.0f, 1.0f));
+			//then rotate the primitive as it should be
+			if(a->GetRotation() != 0)
+				_projection = glm::rotate(_projection, (float)a->GetRotation() , glm::vec3(0.0f, 0.0f, 1.0f));
 			//finish with a touch of mint and glUniformMatrix4fv, and voilá!
 			glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
 			//you got yourself a handy way of dumping your workload to the GPU!

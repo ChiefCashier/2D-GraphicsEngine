@@ -96,11 +96,11 @@ namespace CML
 	{
 		return _origon;
 	}
-	std::vector<GLfloat> CMShape::GetVertices()
+	std::vector<GLfloat> &CMShape::GetVertices()
 	{
 		return _vertices;
 	}
-	std::vector<GLuint> CMShape::GetIndices()
+	std::vector<GLuint> &CMShape::GetIndices()
 	{
 		return _indices;
 	}

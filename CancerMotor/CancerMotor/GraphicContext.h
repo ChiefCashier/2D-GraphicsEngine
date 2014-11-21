@@ -33,6 +33,7 @@ namespace CML
 		GLint _projectionLocation;
 		GLint _objectLocation;
 		glm::mat4 _projection;
+		glm::mat4 _defaultProjection;
 		GLuint buffers[2];
 	};
 

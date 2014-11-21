@@ -37,8 +37,8 @@ namespace CML
 		void SetOrigon(float x, float y);
 		float GetOrigon();
 
-		std::vector<GLfloat> GetVertices();
-		std::vector<GLuint> GetIndices();
+		std::vector<GLfloat> &GetVertices();
+		std::vector<GLuint> &GetIndices();
 
 		CMImage* GetImage();
 		void SetImage(char* path);
