@@ -1,4 +1,5 @@
 #include "ResourceManager.h"
+
 #include "FreeImage.h"
 #include <iostream>
 #include <fstream>
@@ -14,7 +15,7 @@ K‰ytt‰‰ FreeImagea kuvien lataamiseen suoraan merkkijonoon.
 
 namespace CML
 {
-
+	std::map<std::string, Resource*> ResourceManager::_resources;
 	char* CML::ResourceManager::LoadImage(char* filename)
 	{
 

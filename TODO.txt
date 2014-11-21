@@ -1,13 +1,11 @@
-- Freeimage tukemaan lisää formaatteja
+createVertexShader piiloon rendering contextiin
+createFragmentShader -
 
+Blendi piiloon
+blendifunktio piiloon
 
-- Shaderissä laskut jos mahdollista
-- Käännöslasku shaderissä
-- BeginDraw poisto
+Graphical context Initialize graphicalcontext constructoriin
 
-Resourcemanager lataa Resursseja
-- Image perii Resourcen
-- Resourcemanagerissa on resurssimap
-- jos ladattava resurssi ei löydy mapistä luo uusi ja anna
+Graphicalcontext CmShape a nimeäminen
 
-Fixaa Freeimage latauksen muistivuoto (FIBITMAP)
+helevetidiootti uudelleen nimeäminen

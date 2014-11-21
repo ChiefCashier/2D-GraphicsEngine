@@ -22,6 +22,7 @@ namespace CML
 		_vertices.push_back((GLfloat)0.0f);
 		_vertices.push_back((GLfloat)0.0f);
 		//top right
+
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)height);
 		_vertices.push_back((GLfloat)0);
@@ -37,6 +38,7 @@ namespace CML
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)-1.0f);
 		_vertices.push_back((GLfloat)1.0f);
+		
 		//bottom left
 		_vertices.push_back((GLfloat)width);
 		_vertices.push_back((GLfloat)0);

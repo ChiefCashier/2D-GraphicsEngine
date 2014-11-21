@@ -21,42 +21,34 @@ CML::RenderingContext rendContext;
 
 int main()
 {
-	//CML::CMVector2<int> vec = CML::CMVector2<int>(5, 2);
-	//CML::CMVector2<int> vec2 = CML::CMVector2<int>(5, 2);
-	//CML::CMImage *a = CML::ResourceManager::createResource<CML::CMImage>("mario.png");
-	//std::cout << a->getHeight() << std::endl;
-	////if (vec == vec2)
-	//std::cout << vec << std::endl;
+
 	//system("PAUSE");
-
-
 	CML::CMWindow window(0, L"asd", 800, 800);
 	window.ShowCMWindow();
 	rendContext = CML::RenderingContext(&window);
-	rendContext.createVertexShader();
-	rendContext.createFragmentShader();
+	//rendContext.createVertexShader();
+	//rendContext.createFragmentShader();
 	gcontext = CML::GraphicContext();
 
 
 	glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	HWND asd = window.CMWindowHandle();
 	gcontext.Initialize(&rendContext);
 	srand(time(NULL));
 	std::vector<CML::CMRectangle*> lista;
-	for (int i = 0; i < 10; i++)
+	
+	for (int i = 0; i < 700; i++)
 	{
-		CML::CMRectangle *a = new CML::CMRectangle(400 + 50 * (rand() % 2 + 1), 0 + 50 * (rand() % 10 + 1), 50, 50);
+		CML::CMRectangle *a = new CML::CMRectangle((rand() % 825 ), (rand() % 750 ), 50, 50);
 		a->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
 		a->SetRotation(0.0f);
-		a->SetImage("sample.png");
+		a->SetSize(1.0f);
+		a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 		lista.push_back(a);
 	}
 
-	
+
 	float i = 0;
 	int x = 2;
 	int y;
@@ -65,21 +57,22 @@ int main()
 	{	
 		
 		window.WindowMessageCheck();
+		
 		for (int j = 0; j < lista.size(); j++)
 		{
-			gcontext.Draw(*lista.at(j));
+			gcontext.Draw(lista.at(j));
 				
 			//x += 0.1;
-			y = glm::cos(i) * 5;
+			y = glm::cos(i) * 7;
 			//int z = (rand() % 2 + 1);
 			//lista.at(j)->SetSize(z * 0.5f);
 			lista.at(j)->SetY(y + lista.at(j)->GetY());
 			lista.at(j)->SetX(lista.at(j)->GetX() - x);
-			i += 0.01;
+			i += 0.1;
 			if (i > 360)
 				i = 0;
-			if (lista.at(j)->GetX() <= -500)
-				lista.at(j)->SetX(400);
+			if (lista.at(j)->GetX() <= -40)
+				lista.at(j)->SetX(800);
 		}
 		//std::cout << CML::CMInput::getMouseX(asd);
 		//std::cout << "   ";

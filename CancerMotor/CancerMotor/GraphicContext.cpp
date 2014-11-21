@@ -49,7 +49,7 @@ namespace CML
 		glUseProgram(_rcontext->getProgramIndex());
 
 
-		_projection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
+		_defaultProjection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
 												 0.0f,	static_cast<float>(_rcontext->getWindow()->_windowHeight),
 												 -1.0f, 1.0f);
 
@@ -70,6 +70,7 @@ namespace CML
 	}
 	void GraphicContext::EndDraw()
 	{
+		//wglMakeCurrent(GetDC(_rcontext->getWindow()->CMWindowHandle()), _rcontext->getRenderingContext());
 		glFlush();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -77,26 +78,29 @@ namespace CML
 		
 		//actual draw
 
-		CMShape a = *_drawables.begin();
+		CMShape *_drawableShape = *_drawables.begin();
 			
 		glUseProgram(_rcontext->getProgramIndex());
 
-		int helevetin冝iootti = _drawables.size();
-		for (int i = 0; i < helevetin冝iootti; i++)
+		int _drawableCount = _drawables.size();
+		for (int i = 0; i < _drawableCount; i++)
 		{
-			a = *_drawables.begin();
+			_drawableShape = *_drawables.begin();
 
 			//elegant way of transforming primitives
 			//first projection, as it should be
+			_projection = _defaultProjection;
 			_projection = glm::ortho(0.0f, static_cast<float>(_rcontext->getWindow()->_windowWidht),
 				0.0f, static_cast<float>(_rcontext->getWindow()->_windowHeight),
 				-1.0f, 1.0f);
 			//then translate the primitive where it should be 
-			_projection = glm::translate(_projection, glm::vec3(a.GetX(), a.GetY(), 0.0f));
+			_projection = glm::translate(_projection, glm::vec3(_drawableShape->GetX(), _drawableShape->GetY(), 0.0f));
 			//then scale the primitive as it should be 
-			//_projection = glm::scale(_projection, glm::vec3(a.GetSize(), a.GetSize(), 0.0f));
-			//then rotate the primitive as it should be 
-			_projection = glm::rotate(_projection, (float)a.GetRotation() , glm::vec3(0.0f, 0.0f, 1.0f));
+			//_projection = glm::scale(_projection, glm::vec3(_drawableShape.GetSize(), _drawableShape.GetSize(), 0.0f));
+			_projection = glm::scale(_projection, glm::vec3(a->GetSize(), a->GetSize(), 0.0f));
+			//then rotate the primitive as it should be
+			if(a->GetRotation() != 0)
+				_projection = glm::rotate(_projection, (float)a->GetRotation() , glm::vec3(0.0f, 0.0f, 1.0f));
 			//finish with a touch of mint and glUniformMatrix4fv, and voilá!
 			glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
 			//you got yourself a handy way of dumping your workload to the GPU!
@@ -104,14 +108,14 @@ namespace CML
 
 			//set vertex data
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
-			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)* a.GetVertices().size(), &a.GetVertices()[0], GL_STATIC_DRAW);
+			glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)* _drawableShape->GetVertices().size(), &_drawableShape->GetVertices()[0], GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ARRAY_BUFFER, 0);
 			//set fragment data
 
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat)*a.GetIndices().size(), &a.GetIndices()[0], GL_STATIC_DRAW);
+			glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLfloat)*_drawableShape->GetIndices().size(), &_drawableShape->GetIndices()[0], GL_STATIC_DRAW);
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
@@ -119,13 +123,16 @@ namespace CML
 
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
 
-			glBindTexture(GL_TEXTURE_2D, a.GetImage()->getTextureId());
+			glBindTexture(GL_TEXTURE_2D, _drawableShape->GetImage()->getTextureId());
 
-			glDrawElements(GL_TRIANGLES, a.GetIndices().size(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
+			glDrawElements(GL_TRIANGLES, _drawableShape->GetIndices().size(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 
 		
 			
 			_drawables.erase(_drawables.begin());
+
+		
+			
 		}
 			glBindTexture(GL_TEXTURE_2D, 0u);
 
@@ -135,12 +142,15 @@ namespace CML
 
 			SwapBuffers(_rcontext->getHDC());//Bring back buffer to foreground
 
-			wglMakeCurrent(GetDC(_rcontext->getWindow()->CMWindowHandle()), _rcontext->getRenderingContext());
+			
 
-			_drawables.clear();
 	}
-void GraphicContext::Draw(CMRectangle rec)
-	{	
-		_drawables.push_back(rec);
+	void GraphicContext::Draw(CMRectangle *rec)
+	{
+		if (std::find(_drawables.begin(), _drawables.end(), rec) == _drawables.end()) {
+			/* v contains x */
+
+			_drawables.push_back(rec);
+		}
 	}
 }
