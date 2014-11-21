@@ -26,15 +26,12 @@ int main()
 	CML::CMWindow window(0, L"asd", 800, 800);
 	window.ShowCMWindow();
 	rendContext = CML::RenderingContext(&window);
-	rendContext.createVertexShader();
-	rendContext.createFragmentShader();
+	//rendContext.createVertexShader();
+	//rendContext.createFragmentShader();
 	gcontext = CML::GraphicContext();
 
 
 	glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	HWND asd = window.CMWindowHandle();
 	gcontext.Initialize(&rendContext);
