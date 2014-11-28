@@ -39,7 +39,7 @@ namespace CML
 		return _y;
 	}
 
-	void CMShape::SetRotation(int a)
+	void CMShape::SetRotation(float a)
 	{
 		_rotation = a;
 	}

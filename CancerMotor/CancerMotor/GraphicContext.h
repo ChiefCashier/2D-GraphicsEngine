@@ -33,6 +33,7 @@ namespace CML
 		GLint _samplerLocation;
 		GLint _projectionLocation;
 		GLint _objectLocation;
+		GLint _alphaChannel;
 		glm::mat4 _projection;
 		glm::mat4 _defaultProjection;
 		GLuint buffers[2];

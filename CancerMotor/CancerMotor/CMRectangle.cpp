@@ -84,7 +84,7 @@ namespace CML
 	}
 	void CMRectangle::SetHeight(float h)
 	{
-		float temp_height = _size.getX() * (h / _width);
+		float temp_height = _size.getY() * (h / _width);
 		_height = h;
 		_size.setY(temp_height);
 	}

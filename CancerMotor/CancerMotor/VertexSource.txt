@@ -1,5 +1,5 @@
 
-attribute vec3 attrColor;
+uniform vec3 attrColor;
 attribute vec2 attrPosition;
 attribute vec2 attrTexCoord;
 

@@ -34,8 +34,8 @@ namespace CML
 		assert(_positionIndex >= 0);
 		glEnableVertexAttribArray(_positionIndex);
 
-		//_colorIndex = glGetAttribLocation(_rcontext->getProgramIndex(), "attrColor");
-		//assert(_colorIndex >= 0);
+		_colorIndex = glGetUniformLocation(_rcontext->getProgramIndex(), "attrColor");
+		assert(_colorIndex >= 0);
 		glEnableVertexAttribArray(_colorIndex);
 
 		_textureIndex = glGetAttribLocation(_rcontext->getProgramIndex(), "attrTexCoord");
@@ -48,6 +48,9 @@ namespace CML
 
 		_projectionLocation = glGetUniformLocation(_rcontext->getProgramIndex(), "unifProjection");
 		assert(_projectionLocation >= 0);
+
+		_alphaChannel = glGetUniformLocation(_rcontext->getProgramIndex(), "alphaChannel");
+		assert(_alphaChannel >= 0);
 
 		glUseProgram(_rcontext->getProgramIndex());
 
@@ -69,7 +72,8 @@ namespace CML
 
 		glUseProgram(0u);
 
-
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 	void GraphicContext::EndDraw()
 	{
@@ -91,24 +95,34 @@ namespace CML
 			_drawableShape = _drawables.at(i);
 
 			//elegant way of transforming primitives
+
+
 			//first projection, as it should be
 			_projection = _defaultProjection;
-			_projection = glm::ortho(0.0f, static_cast<float>(_rcontext->getWindow()->_windowWidht),
-				0.0f, static_cast<float>(_rcontext->getWindow()->_windowHeight),
-				-1.0f, 1.0f);
+
+
 			//then translate the primitive where it should be 
 			_projection = glm::translate(_projection, glm::vec3(_drawableShape->GetX(), _drawableShape->GetY(), 0.0f));
-			//then scale the primitive as it should be 
 
+
+			//then scale the primitive as it should be 
 			if (_drawableShape->GetSize().getX() != 1 || _drawableShape->GetSize().getY() !=1)
-				_projection = glm::scale(_projection, glm::vec3(_drawableShape->GetSize().getX(), _drawableShape->GetSize().getX(), 0.0f));
+				_projection = glm::scale(_projection, glm::vec3(_drawableShape->GetSize().getX(), _drawableShape->GetSize().getY(), 0.0f));
+
+
 			//then rotate the primitive as it should be
 			if (_drawableShape->GetRotation() != 0)
-				_projection = glm::rotate(_projection, (float)_drawableShape->GetRotation(), glm::vec3(0.0f, 0.0f, 1.0f));
+			{
+				_projection	= glm::rotate(_projection, (float)_drawableShape->GetRotation(), glm::vec3(0.0f, 0.0f, 1.0f))* glm::translate(glm::vec3(_drawableShape->GetOrigon().getX(), _drawableShape->GetOrigon().getY(), 0.0f));
+			}
+
 			//finish with a touch of mint and glUniformMatrix4fv, and voilá!
 			glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
 			//you got yourself a handy way of dumping your workload to the GPU!
+
 			glUniform3f(_colorIndex, _drawableShape->GetColorR(), _drawableShape->GetColorG(), _drawableShape->GetColorB());
+			glUniform1f(_alphaChannel, _drawableShape->GetColorA());
+			
 
 			//set vertex data
 			glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);

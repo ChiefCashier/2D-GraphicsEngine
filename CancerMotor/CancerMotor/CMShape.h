@@ -21,7 +21,7 @@ namespace CML
 		void SetY(float y);
 		float GetY();
 
-		void SetRotation(int a);
+		void SetRotation(float a);
 		int GetRotation();
 
 		void SetColor(vec4 color);

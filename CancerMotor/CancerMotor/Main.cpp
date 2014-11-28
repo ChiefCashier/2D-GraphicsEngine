@@ -1,22 +1,17 @@
 #include "CMWindow.h"
-#include "glew.h"
 #include "ResourceManager.h"
-#include "glm\glm.hpp"
-#include "CMSprite.h"
-#include <string>
-#include <iostream>
 #include "RenderingContext.h"
 #include "GraphicContext.h"
 #include "CMShape.h"
 #include "CMRectangle.h"
 #include "CMInput.h"
 #include "CMCircle.h"
+
 #include <stdlib.h> 
 #include <time.h>
-#include "CMVector2.h"
-#include "glm\glm.hpp"
-#include "glm\gtc\matrix_transform.hpp"
-#include "glm\gtx\transform.hpp"
+#include <string>
+#include <iostream>
+
 CML::GraphicContext gcontext;
 CML::RenderingContext rContext;
 
@@ -33,14 +28,15 @@ int main()
 
 
 	srand(time(NULL));
-	std::vector<CML::CMCircle*> lista;
+	std::vector<CML::CMRectangle*> lista;
 	
-	for (int i = 0; i < 700; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		CML::CMCircle *a = new CML::CMCircle(rand()%850, rand()%750, 50, 10);
+		CML::CMRectangle *a = new CML::CMRectangle(400, 400, 100, 100);
 		a->SetColor(0.0f, 0.0f, 0.0f, 0.0f);
-		a->SetRotation(0.0f);
-		a->SetSize(1.0f);
+		a->SetSize(2.0f); 
+		a->SetOrigon(-50.0f, -50.0f);
+	
 		if (i % 2 == 0)
 			a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("noppia.png"));
 		else
@@ -53,7 +49,7 @@ int main()
 	float i = 0;
 	int x = 2;
 	int y;
-
+	int d = 0;
 	while (true)
 	{	
 		
@@ -62,11 +58,14 @@ int main()
 		for (int j = 0; j < lista.size(); j++)
 		{
 			gcontext.Draw(lista.at(j));
-				
+
+			d++;
+
 			y = glm::cos(i) * 7;
 
-			lista.at(j)->SetY(y + lista.at(j)->GetY());
-			lista.at(j)->SetX(lista.at(j)->GetX() - x);
+		/*	lista.at(j)->SetY(y + lista.at(j)->GetY());
+			lista.at(j)->SetX(lista.at(j)->GetX() - x);*/
+			lista.at(j)->SetRotation(d);
 			i += 0.1;
 			if (i > 360)
 				i = 0;
