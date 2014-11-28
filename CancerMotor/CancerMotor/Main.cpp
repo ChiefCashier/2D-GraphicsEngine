@@ -10,6 +10,7 @@
 #include "CMShape.h"
 #include "CMRectangle.h"
 #include "CMInput.h"
+#include "CMCircle.h"
 #include <stdlib.h> 
 #include <time.h>
 #include "CMVector2.h"
@@ -17,34 +18,34 @@
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtx\transform.hpp"
 CML::GraphicContext gcontext;
-CML::RenderingContext rendContext;
+CML::RenderingContext rContext;
 
 int main()
 {
-
-	//system("PAUSE");
+	glewInit();
 	CML::CMWindow window(0, L"asd", 800, 800);
 	window.ShowCMWindow();
-	rendContext = CML::RenderingContext(&window);
-	//rendContext.createVertexShader();
-	//rendContext.createFragmentShader();
-	gcontext = CML::GraphicContext();
+	rContext = CML::RenderingContext(&window);
+	gcontext.Initialize(&rContext);
 
 
 	glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
 
-	HWND asd = window.CMWindowHandle();
-	gcontext.Initialize(&rendContext);
+
 	srand(time(NULL));
-	std::vector<CML::CMRectangle*> lista;
+	std::vector<CML::CMCircle*> lista;
 	
 	for (int i = 0; i < 700; i++)
 	{
-		CML::CMRectangle *a = new CML::CMRectangle((rand() % 825 ), (rand() % 750 ), 50, 50);
-		a->SetColor(1.0f, 1.0f, 1.0f, 0.0f);
+		CML::CMCircle *a = new CML::CMCircle(rand()%850, rand()%750, 50, 10);
+		a->SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 		a->SetRotation(0.0f);
 		a->SetSize(1.0f);
-		a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+		if (i % 2 == 0)
+			a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("noppia.png"));
+		else
+			a->SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+
 		lista.push_back(a);
 	}
 
@@ -62,10 +63,8 @@ int main()
 		{
 			gcontext.Draw(lista.at(j));
 				
-			//x += 0.1;
 			y = glm::cos(i) * 7;
-			//int z = (rand() % 2 + 1);
-			//lista.at(j)->SetSize(z * 0.5f);
+
 			lista.at(j)->SetY(y + lista.at(j)->GetY());
 			lista.at(j)->SetX(lista.at(j)->GetX() - x);
 			i += 0.1;
@@ -74,10 +73,6 @@ int main()
 			if (lista.at(j)->GetX() <= -40)
 				lista.at(j)->SetX(800);
 		}
-		//std::cout << CML::CMInput::getMouseX(asd);
-		//std::cout << "   ";
-		//std::cout << CML::CMInput::getMouseY(asd);
-		//std::cout << std::endl;
 
 		gcontext.EndDraw();
 		
@@ -88,7 +83,5 @@ int main()
 	}
 
 
-
-	//delete(asd);
 	return 0;
 }

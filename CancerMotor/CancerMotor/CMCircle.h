@@ -17,8 +17,6 @@ namespace CML
 		void SetRadius(int r);
 		int GetRadius();
 
-		void SetColor(float r, float g, float b, float a);
-
 	private:
 
 		float _radius;

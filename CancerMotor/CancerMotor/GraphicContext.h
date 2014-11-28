@@ -15,12 +15,13 @@ namespace CML
 	
 
 		GraphicContext();
+		GraphicContext(RenderingContext *rcontext);
 		~GraphicContext();
 		void InitializeOpengl();
 		void Initialize(CML::CMWindow *window);
 		void Initialize(RenderingContext *rcontext);
 		void EndDraw();
-		void Draw(CMRectangle *rec);
+		void Draw(CMShape *rec);
 
 	private:
 		std::vector<CMShape*> _drawables;

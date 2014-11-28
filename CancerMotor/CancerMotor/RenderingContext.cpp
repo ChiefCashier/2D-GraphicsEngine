@@ -66,10 +66,7 @@ namespace CML
 		createVertexShader();
 		createFragmentShader();
 
-		//TEMP
-		//createVertexShader("VertexSource.txt");
-		//createFragmentShader("FragmentSource.txt");
-		//linkProgram();
+		
 	}
 
 	void RenderingContext::createVertexShader(char *filename)

@@ -26,7 +26,7 @@ namespace CML
 		_vertices.push_back((GLfloat)0.5f);
 		_vertices.push_back((GLfloat)0.5f);
 
-		for (int j = 0; j < 360; j += _sides)
+		for (int j = 0; j < _sides; j++)
 		{
 			_vertices.push_back(radius * cos((j * PI / 180)));
 			_vertices.push_back(radius * sin((j * PI / 180)));
@@ -74,18 +74,5 @@ namespace CML
 	{
 		return _radius;
 	}
-	void CMCircle::SetColor(float r, float g, float b, float a)
-	{
-		_colorRGBA[0] = r;
-		_colorRGBA[1] = g;
-		_colorRGBA[2] = b;
-		_colorRGBA[3] = a;
 
-		for (int i = 0; i < _sides + 1; i++)
-		{
-	 		_vertices.at(2 + i * 7) = r;
-			_vertices.at(3 + i * 7) = g;
-			_vertices.at(4 + i * 7) = b;
-		}
-	}
 }
