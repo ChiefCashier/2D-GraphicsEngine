@@ -20,7 +20,9 @@
 #include "glm\gtx\transform.hpp"
 #include "CMInput.h"
 
+#include "Pickup.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "Projectile.h"
 
 class Game
@@ -32,5 +34,6 @@ private:
 	CML::GraphicContext gcontext;
 	CML::RenderingContext rContext;
 	std::vector <Projectile*> ProjectileList;
+	std::vector <Enemy*> EnemyList;
 };
 

@@ -3,7 +3,6 @@
 
 Game::Game()
 {
-	glewInit();
 	CML::CMWindow window(0, L"asd", 1000, 1000);
 	window.ShowCMWindow();
 	rContext = CML::RenderingContext(&window);
@@ -42,34 +41,27 @@ Game::Game()
 			ProjectileList.push_back(new Projectile(mx, my, p.GetX(), p.GetY()));
 		}
 
-		//if (CML::CMInput::isMouseKeyPressed(CML::CMInput::Mouse2))
-		//{
-		//	for (int i = 0; i < ProjectileList.size(); i++)
-		//	{
-		//		//std::cout << ProjectileList.size() << std::endl;
-		//		if (ProjectileList[i]->Collision(mx, my))
-		//		{
-		//			std::cout << "osuu" << i << std::endl;
+			if (CML::CMInput::isMouseKeyPressed(CML::CMInput::Mouse2))
+			{
+				EnemyList.push_back(new Enemy(mx, my));
+			}	
 
-		//			it = ProjectileList.begin() + i;
-		//			if (it != ProjectileList.end())
-		//			{
-		//		
-		//				it = ProjectileList.erase(it);
-		//			}
-		//		}
-		//	}
-		//}
+				
+					
+							for (int i = 0; i < ProjectileList.size(); i++)
+							{
+							ProjectileList[i]->MoveProjectiles();
+							gcontext.Draw(ProjectileList[i]->returnPaska());
+							}
+					
 
-
-		if (!ProjectileList.empty())
-		{
-				for (int i = 0; i < ProjectileList.size(); i++)
-				{
-				ProjectileList[i]->MoveProjectiles();
-				gcontext.Draw(ProjectileList[i]->returnPaska());
-				}
-		}
+						
+							for (int j = 0; j < EnemyList.size(); j++)
+							{
+								gcontext.Draw(EnemyList[j]->returnShape());
+								EnemyList[j]->EnemyMove(p.GetX(), p.GetY());
+							}
+						
 
 		gcontext.EndDraw();
 
