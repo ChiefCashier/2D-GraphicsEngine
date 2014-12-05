@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Source Files\Peli">
-      <UniqueIdentifier>{1eb50a66-63b1-41c5-8523-cd4f28228a0f}</UniqueIdentifier>
+      <UniqueIdentifier>{a43261f3-a198-449c-8d15-ce7719fece4e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -30,6 +30,9 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Source Files\Peli</Filter>
     </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Peli</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -39,6 +42,9 @@
       <Filter>Source Files\Peli</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
+      <Filter>Source Files\Peli</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
       <Filter>Source Files\Peli</Filter>
     </ClInclude>
   </ItemGroup>

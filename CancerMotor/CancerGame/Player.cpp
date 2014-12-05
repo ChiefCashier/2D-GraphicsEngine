@@ -1,16 +1,22 @@
 #include "Player.h"
 #include <time.h>
 #include <ctime>
-Player::Player()
+Player::Player() :Entity()
 {
-	
+	/*
 	player = CML::CMRectangle(500, 500, 200, 200);
 	player.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 	player.SetRotation(0.0f);
 	player.SetSize(1.0f);
 	player.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	player.SetOrigon(-100, -100);
-
+	*/
+	_shape = CML::CMRectangle(500, 500, 200, 200);
+	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+	_shape.SetRotation(0.0f);
+	_shape.SetSize(1.0f);
+	_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+	_shape.SetOrigon(100, 100);
 
 
 	cursor = CML::CMCircle(500, 500, 75, 360 / 6);
@@ -28,45 +34,43 @@ Player::~Player()
 void Player::playerInputs(float mx, float my)
 {
 	//player.SetColor((rand() % 100) / 100.0f, (rand() % 100) / 100.0f, (rand() % 100) / 100.0f, 0.0f);
-
+	Update(0.0f);
 	float paskafix[3];
 	for (int i = 0; i < 3; i++)
 		paskafix[i] = (rand() % 100) / 100.0f;
-	std::cout << paskafix[0] << paskafix[1] << paskafix[2] << std::endl;
-	player.SetColor(0.0f,paskafix[1],0.0f, 0.0f);
+	_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Right))
-		player.SetX(player.GetX() + 10);
+		_shape.SetX(_shape.GetX() + 10);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Left))
-		player.SetX(player.GetX() - 10);
+		_shape.SetX(_shape.GetX() - 10);
 
-	if (CML::CMInput::isKeyPressed(CML::CMInput::Up))
-		player.SetY(player.GetY() + 10);
+	if (CML::CMInput::isKeyPressed(CML::CMInput::Up) && HitsGround())
+		Jump();
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Down))
-		player.SetY(player.GetY() - 10);
+		_shape.SetY(_shape.GetY() - 10);
 
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
-		player.SetRotation(player.GetRotation() + 15);
+		_shape.SetRotation(_shape.GetRotation() + 15);
 
 	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
-		player.SetSize(player.GetWidth() + 0.01);
+		_shape.SetSize(_shape.GetWidth() + 0.01);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
-		player.SetSize(player.GetWidth() - 0.01);
+		_shape.SetSize(_shape.GetWidth() - 0.01);
 
-	if (player.GetY() >!5 && !CML::CMInput::isKeyPressed(CML::CMInput::Up))
-	player.SetY(player.GetY() - 5);
+	std::cout << _gravitySpeed<<","<<_shape.GetY()<< std::endl;
 
 	cursor.SetX(mx);
 	cursor.SetY(my);
 
-	float Dx = player.GetX() - mx;
-	float Dy = player.GetY() - my;
+	float Dx = _shape.GetX() - mx;
+	float Dy = _shape.GetY() - my;
 
 	float DLen = sqrt(Dx*Dx + Dy*Dy);
 	Dx /= DLen;
 	Dy /= DLen;
 
-	cursor.SetX(player.GetX() + Dx*-250);
-	cursor.SetY(player.GetY() + Dy*-250);
+	cursor.SetX(_shape.GetX() + Dx*-250);
+	cursor.SetY(_shape.GetY() + Dy*-250);
 
 	//std::cout << mx << " " << my << std::endl;
 	//std::cout << cursor.GetX() << "  " << cursor.GetY() << std::endl;
@@ -75,52 +79,52 @@ void Player::playerInputs(float mx, float my)
 
 float Player::GetX()
 {
-	return player.GetX();
+	return _shape.GetX();
 }
 
 float Player::GetY()
 {
-	return player.GetY();
+	return _shape.GetY();
 }
 
 void Player::SetX(float x)
 {
-	player.SetX(x);
+	_shape.SetX(x);
 }
 
 void Player::SetY(float y)
 {
-	player.SetY(y);
+	_shape.SetY(y);
 }
 
 float Player::GetWidth()
 {
-	return player.GetWidth();
+	return _shape.GetWidth();
 }
 
 float Player::GetHeight()
 {
-	return player.GetHeight();
+	return _shape.GetHeight();
 }
 
 void Player::SetWidth(float x)
 {
-	player.SetWidth(x);
+	_shape.SetWidth(x);
 }
 
 void Player::SetHeight(float y)
 {
-	player.SetHeight(y);
+	_shape.SetHeight(y);
 }
 
 float Player::GetRotation()
 {
-	return player.GetRotation();
+	return _shape.GetRotation();
 }
 
 void Player::SetRotation(float a)
 {
-	return player.SetRotation(a);
+	return _shape.SetRotation(a);
 }
 
 CML::CMShape *Player::returnPaska(Shapes s)
@@ -128,5 +132,5 @@ CML::CMShape *Player::returnPaska(Shapes s)
 	if (s == CURSOR)
 		return &cursor;
 	else
-		return &player;
+		return &_shape;
 }
