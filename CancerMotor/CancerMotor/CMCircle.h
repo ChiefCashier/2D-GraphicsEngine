@@ -17,6 +17,9 @@ namespace CML
 		void SetRadius(int r);
 		int GetRadius();
 
+		void SetTextureRectangle(float x, float y, float widht, float height);
+		CMVector4<float> GetTexturectangle();
+
 	private:
 
 		float _radius;

@@ -99,13 +99,20 @@ namespace CML
 		_textureRectangle.setZ(widht);
 		_textureRectangle.setK(height);
 
-		/*		
-		float temp_x = 1 - ((_image->getWidth - x) / _image->getWidth);
-		float temp_widht = 1 - ((_image->getWidth - widht) / _image->getWidth);
-		float temp_y = 1 - ((_image->getHeight - y) / _image->getHeight);
-		float temp_height = 1 - ((_image->getHeight - height) / _image->getHeight);
-		*/
-
+		
+		float temp_x = 1 - ((_image->getWidth() - x) / _image->getWidth());
+		float temp_widht = 1 - ((_image->getWidth() - widht) / _image->getWidth());
+		float temp_y = 1 - ((_image->getHeight() - y) / _image->getHeight());
+		float temp_height = 1 - ((_image->getHeight() - height) / _image->getHeight());
+		
+		_vertices[5] = temp_x;
+		_vertices[6] = temp_y;
+		_vertices[7 + 5] = temp_x;
+		_vertices[7 + 6] = temp_y + temp_height;
+		_vertices[7 * 2 + 5] = temp_x + temp_widht;
+		_vertices[7 * 2 + 6] = temp_y + temp_height;
+		_vertices[7 * 3 + 5] = temp_x + temp_widht;
+		_vertices[7 * 3 + 6] = temp_y;
 
 
 	}

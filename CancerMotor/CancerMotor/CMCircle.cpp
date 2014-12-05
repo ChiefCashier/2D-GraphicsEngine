@@ -38,18 +38,10 @@ namespace CML
 			_vertices.push_back((GLfloat)0);
 
 			float testi = cos((j * asd * (PI / 180)))/ 2;
-
-			if (testi >= 0)
-				_vertices.push_back(0.5+testi);
-			else
-				_vertices.push_back(0.5+testi);
+			_vertices.push_back(0.5+testi);
 
 			float testi2 = sin((j * asd * (PI / 180)))/ 2;
-
-			if (testi2 >= 0)
-				_vertices.push_back(0.5+testi2);
-			else
-				_vertices.push_back(0.5+testi2);
+			_vertices.push_back(0.5+testi2);
 
 		
 		}
@@ -90,5 +82,33 @@ namespace CML
 	{
 		return _radius;
 	}
+	void CMCircle::SetTextureRectangle(float x, float y, float widht, float height)
+	{
+		_textureRectangle.setX(x);
+		_textureRectangle.setY(y);
+		_textureRectangle.setZ(widht);
+		_textureRectangle.setK(height);
 
+
+		float temp_x = 1 - ((_image->getWidth() - x) / _image->getWidth());
+		float temp_widht = 1 - ((_image->getWidth() - widht) / _image->getWidth());
+		float temp_y = 1 - ((_image->getHeight() - y) / _image->getHeight());
+		float temp_height = 1 - ((_image->getHeight() - height) / _image->getHeight());
+
+		float asd = 360 / _sides;
+
+		for (int i = 1; i < _sides + 1; i++)
+		{
+			float testi = cos((i * asd * (PI / 180))) / 2;
+			_vertices.at(5 + 7 * i) = (0.5 + testi) * temp_widht;
+
+			float testi2 = sin((i * asd * (PI / 180))) / 2;
+			_vertices.at(6 + 7 * i) = (0.5 + testi2) * temp_height;
+		}
+
+	}
+	CMVector4<float> CMCircle::GetTexturectangle()
+	{
+		return _textureRectangle;
+	}
 }
