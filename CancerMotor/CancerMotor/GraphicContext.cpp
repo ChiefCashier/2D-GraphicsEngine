@@ -111,7 +111,7 @@ namespace CML
 
 
 			//then rotate the primitive as it should be
-			if (_drawableShape->GetRotation() != 0)
+			if (_drawableShape->GetRotation() != 0 || _drawableShape->GetOrigon().getX() != 0 || _drawableShape->GetOrigon().getY() != 0)
 			{
 				_projection	= glm::rotate(_projection, (float)_drawableShape->GetRotation(), glm::vec3(0.0f, 0.0f, 1.0f))* glm::translate(glm::vec3(_drawableShape->GetOrigon().getX(), _drawableShape->GetOrigon().getY(), 0.0f));
 			}
