@@ -4,7 +4,9 @@
 #include "CMRectangle.h"
 #include "CMCircle.h"
 #include "CMInput.h"
+#include "Entity.h"
 class Player
+	: public Entity
 {
 public:
 	Player();

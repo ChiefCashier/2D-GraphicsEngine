@@ -45,7 +45,7 @@ namespace CML
 		CMImage* GetImage();
 		void SetImage(char* path);
 		void SetImage(CMImage *image);
-
+		CMVector2<float> GetPosition();
 		
 
 	protected:

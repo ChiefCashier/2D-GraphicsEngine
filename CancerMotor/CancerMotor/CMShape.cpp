@@ -117,4 +117,8 @@ namespace CML
 	{
 		_image = image;
 	}
+	CMVector2<float> CMShape::GetPosition()
+	{
+		return CMVector2<float>(GetX(), GetY());
+	}
 }
