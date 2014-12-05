@@ -54,7 +54,7 @@ namespace CML
 										NULL,						GetModuleHandle(nullptr),	NULL
 										);
 
-
+		ShowCMWindow();
 		if (_windowHandle == nullptr)//if window handle creation did not succeed, then do something about it will ya! 
 		{
 
