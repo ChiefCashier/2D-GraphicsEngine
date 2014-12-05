@@ -1,0 +1,15 @@
+
+attribute vec3 attrColor;
+attribute vec2 attrPosition;
+attribute vec2 attrTexCoord;
+
+varying vec3 varyColor;
+varying vec2 vTexCoord;
+uniform mat4 unifProjection;
+
+void main()
+{
+	varyColor = attrColor;
+	vTexCoord = attrTexCoord;
+	gl_Position = unifProjection * vec4(attrPosition, 0.0f, 1.0f);
+}

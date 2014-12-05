@@ -22,11 +22,11 @@
     <Filter Include="Header Files\Shapes">
       <UniqueIdentifier>{abb8d656-7e0c-4333-bf72-801a3450def0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Peli">
+      <UniqueIdentifier>{a96d6069-c097-4b30-b1b2-82a9b17102db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\ResourceManager</Filter>
     </ClCompile>
@@ -68,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="CMInput.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Header Files\Peli</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Header Files\Peli</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +121,12 @@
     </ClInclude>
     <ClInclude Include="CMInput.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Peli</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Peli</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
