@@ -19,6 +19,9 @@ namespace CML
 		void SetHeight(float h);
 		float GetHeight();
 
+		void SetTextureRectangle(float x, float y, float height, float widht);
+		CMVector4<float> GetTexturectangle();
+
 	private:
 
 		float _width, _height;

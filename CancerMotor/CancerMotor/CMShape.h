@@ -3,6 +3,7 @@
 #include "glew.h"
 #include "CMImage.h"
 #include "CMVector2.h"
+#include "CMVector4.h"
 
 namespace CML
 {
@@ -45,12 +46,16 @@ namespace CML
 		void SetImage(char* path);
 		void SetImage(CMImage *image);
 
+		
+
 	protected:
 
 		float _x, _y;
 
 		CMVector2<float> _size;
 		CMVector2<float> _origon;
+
+		CMVector4<float> _textureRectangle;
 
 		int _rotation;
 		vec4 _colorRGBA;

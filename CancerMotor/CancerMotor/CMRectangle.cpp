@@ -92,4 +92,25 @@ namespace CML
 	{
 		return _height;
 	}
+	void CMRectangle::SetTextureRectangle(float x, float y, float widht, float height)
+	{
+		_textureRectangle.setX(x);
+		_textureRectangle.setY(y);
+		_textureRectangle.setZ(widht);
+		_textureRectangle.setK(height);
+
+		/*		
+		float temp_x = 1 - ((_image->getWidth - x) / _image->getWidth);
+		float temp_widht = 1 - ((_image->getWidth - widht) / _image->getWidth);
+		float temp_y = 1 - ((_image->getHeight - y) / _image->getHeight);
+		float temp_height = 1 - ((_image->getHeight - height) / _image->getHeight);
+		*/
+
+
+
+	}
+	CMVector4<float> CMRectangle::GetTexturectangle()
+	{
+		return _textureRectangle;
+	}
 }

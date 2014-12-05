@@ -117,5 +117,4 @@ namespace CML
 	{
 		_image = image;
 	}
-
 }
