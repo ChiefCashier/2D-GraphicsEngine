@@ -88,11 +88,9 @@
     <ClCompile Include="CMShape.cpp" />
     <ClCompile Include="CMVector2.cpp" />
     <ClCompile Include="CMWindow.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GraphicContext.cpp" />
     <ClCompile Include="CMSprite.cpp" />
     <ClCompile Include="CMRectangle.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="RenderingContext.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
@@ -108,10 +106,8 @@
     <ClInclude Include="CMVector2.h" />
     <ClInclude Include="DebugLogger.h" />
     <ClInclude Include="CMSprite.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="GraphicContext.h" />
     <ClInclude Include="CMRectangle.h" />
-    <ClInclude Include="Player.h" />
     <ClInclude Include="RenderingContext.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
