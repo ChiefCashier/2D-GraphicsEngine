@@ -6,7 +6,7 @@ Player::Player()
 	player.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 	player.SetRotation(0.0f);
 	player.SetSize(1.0f);
-	player.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+	player.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	player.SetOrigon(400, 400);
 }
 

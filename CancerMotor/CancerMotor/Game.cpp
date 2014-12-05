@@ -13,11 +13,11 @@ Game::Game()
 	srand(time(NULL));
 	
 	Player p;
-		CML::CMCircle circle(500, 500, 800, 6);
+		CML::CMCircle circle(500, 250, 200, 6);
 		circle.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 		circle.SetRotation(0.0f);
-		circle.SetSize(1.0f);
-		circle.SetColor(1.0f, 1.0f, 1.0f, 1.0f);
+		circle.SetSize(0.5f);
+		circle.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	while (true)
 	{
 		window.WindowMessageCheck();

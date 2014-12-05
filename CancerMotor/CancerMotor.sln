@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CancerMotor", "CancerMotor\CancerMotor.vcxproj", "{6E1627EC-ED30-412D-9D6A-85ADE45370AF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CancerGame", "CancerGame\CancerGame.vcxproj", "{70767135-9E23-4D81-8610-65981B2092E5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6E1627EC-ED30-412D-9D6A-85ADE45370AF} = {6E1627EC-ED30-412D-9D6A-85ADE45370AF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +27,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal
