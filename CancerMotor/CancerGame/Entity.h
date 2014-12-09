@@ -10,9 +10,9 @@ public:
 protected:
 	CML::CMRectangle _shape;
 	float _gravityAcceleration;
-	float _gravitySpeed;
-	float _gravitySpeedDefault;
+	float _velocitySpeedDefault;
 	float _maxGravitySpeed;
+	float _currentVelocity;
 	bool _flyingUp;
 	bool HitsGround();
 	bool _jumping;

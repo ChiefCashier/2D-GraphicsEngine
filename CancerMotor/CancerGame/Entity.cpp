@@ -3,10 +3,10 @@
 
 Entity::Entity()
 {
-	_gravitySpeed = 0.0f;
-	_gravitySpeedDefault = 20.0f;
+	_velocitySpeedDefault = 50.0f;
 	_gravityAcceleration = 3.0f;
 	_maxGravitySpeed = 40.0f;
+	_currentVelocity = 0.0f;
 	_flyingUp = false;
 }
 
@@ -21,30 +21,20 @@ void Entity::Update(float deltaTime)
 	if (!HitsGround() || _jumping)
 	{
 		float newY = _shape.GetY();
-		if (_flyingUp)
-		{
-			if (_gravitySpeed >= _maxGravitySpeed)
-				_flyingUp = false;
-			else
-			{
-				newY += _gravitySpeed;
-				_gravitySpeed += _gravityAcceleration;
-			}
-		}
-		else //flying down
-		{
-			newY += _gravitySpeed;
-			_gravitySpeed -= _gravityAcceleration;
+
+			newY += _currentVelocity;
+			_currentVelocity-= _gravityAcceleration;
 		std::cout << newY << std::endl;
-		}
+		_shape.SetY(newY);
 
 		if (_shape.GetY()  < 50.0f)
 		{
-			_shape.SetY(50.0f);
+			_shape.SetY(100.0f);
+			_currentVelocity = 0.0f;
 			_jumping = false;
 		}
 		
-		_shape.SetY(newY);
+
 
 	}
 	
@@ -62,5 +52,5 @@ void Entity::Jump()
 {
 	_jumping = true;
 	_flyingUp = true;
-	_gravitySpeed = _gravitySpeedDefault;
+	_currentVelocity = _velocitySpeedDefault;
 }

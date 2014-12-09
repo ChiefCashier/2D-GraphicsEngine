@@ -14,13 +14,18 @@ namespace CML
 		void* pixeles = static_cast<void*>(FreeImage_GetBits(imagen));
 		//rename a
 		FREE_IMAGE_TYPE a = FreeImage_GetImageType(imagen);
-		assert(a == FIT_BITMAP);
+		assert(a == FIT_BITMAP || a == FIT_RGB16);
 		if (a != FIT_BITMAP)
 		{
 			//handle error
 		}
+		if (a == FIT_RGB16)
+		{
+			imagen = FreeImage_ConvertTo32Bits(imagen);
+			a = FreeImage_GetImageType(imagen);
+		}
 		unsigned int bitDepth= FreeImage_GetBPP(imagen);
-		assert(bitDepth == 24 || bitDepth == 32);
+		assert(bitDepth == 24 || bitDepth == 32 || bitDepth == 48);
 		//handle error
 		_pixelData = pixeles;
 
@@ -31,8 +36,19 @@ namespace CML
 		else
 		_ImageFOrmat = GL_RGBA;
 		*/
-		_imageFormat = bitDepth == 24 ? GL_RGB : GL_BGRA;
-		unsigned int aa = GL_RGBA;
+		switch (bitDepth)
+		{
+		case 24:
+			_imageFormat = GL_BGR;
+			break;
+		case 32:
+			_imageFormat = GL_BGRA;
+			break;
+		case 48:
+			_imageFormat = GL_BGR;
+			break;
+		}
+		//_imageFormat = bitDepth == 24 ? GL_RGB : GL_BGRA;
 
 		glGenTextures(1, &_textureId);//generates texture
 		glBindTexture(GL_TEXTURE_2D,_textureId);

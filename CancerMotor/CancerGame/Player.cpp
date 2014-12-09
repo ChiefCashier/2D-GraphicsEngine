@@ -39,14 +39,14 @@ void Player::playerInputs(float mx, float my)
 	for (int i = 0; i < 3; i++)
 		paskafix[i] = (rand() % 100) / 100.0f;
 	_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
-	if (CML::CMInput::isKeyPressed(CML::CMInput::Right))
+	if (CML::CMInput::isKeyPressed(CML::CMInput::D))
 		_shape.SetX(_shape.GetX() + 10);
-	if (CML::CMInput::isKeyPressed(CML::CMInput::Left))
+	if (CML::CMInput::isKeyPressed(CML::CMInput::A))
 		_shape.SetX(_shape.GetX() - 10);
 
-	if (CML::CMInput::isKeyPressed(CML::CMInput::Up) && HitsGround())
+	if (CML::CMInput::isKeyPressed(CML::CMInput::W) && HitsGround())
 		Jump();
-	if (CML::CMInput::isKeyPressed(CML::CMInput::Down))
+	if (CML::CMInput::isKeyPressed(CML::CMInput::S))
 		_shape.SetY(_shape.GetY() - 10);
 
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
@@ -57,7 +57,6 @@ void Player::playerInputs(float mx, float my)
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
 		_shape.SetSize(_shape.GetWidth() - 0.01);
 
-	std::cout << _gravitySpeed<<","<<_shape.GetY()<< std::endl;
 
 	cursor.SetX(mx);
 	cursor.SetY(my);

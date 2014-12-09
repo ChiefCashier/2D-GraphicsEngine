@@ -33,6 +33,9 @@
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Peli</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Peli</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -45,6 +48,9 @@
       <Filter>Source Files\Peli</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
+      <Filter>Source Files\Peli</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>Source Files\Peli</Filter>
     </ClInclude>
   </ItemGroup>
