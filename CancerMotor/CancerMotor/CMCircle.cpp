@@ -12,6 +12,9 @@ namespace CML
 		SetX(_x);
 		SetY(_y);
 
+		_height = radius*2;
+		_width = radius * 2;
+
 		_rotation = 0;
 		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
 
