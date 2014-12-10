@@ -19,8 +19,9 @@ Player::Player() :Entity()
 	_shape.SetOrigon(100, 100);
 
 
-	cursor = CML::CMCircle(500, 500, 75, 360 / 6);
+	cursor = CML::CMRectangle(500, 500, 75, 75);
 	cursor.SetImage(CML::ResourceManager::createResource<CML::CMImage>("ase.png"));
+	cursor.SetOrigon(32.5f, 32.5f);
 	cursor.SetRotation(0.0f);
 	cursor.SetSize(1.0f);
 	cursor.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -68,11 +69,14 @@ void Player::playerInputs(float mx, float my)
 	Dx /= DLen;
 	Dy /= DLen;
 
-	cursor.SetX(_shape.GetX() + Dx*-250);
-	cursor.SetY(_shape.GetY() + Dy*-250);
+	cursor.SetX(_shape.GetX() + Dx*-100);
+	cursor.SetY(_shape.GetY() + Dy*-100);
 	float y = cursor.GetY() - _shape.GetY();
 	float x = cursor.GetX() - _shape.GetX();
 	float angle =  180 / 3.141 * std::atan(y/x);
+
+	if (cursor.GetWidth()> 0)
+		angle *= -1;
 	cursor.SetRotation(angle - 90);
 	//if (angle);
 	//std::cout << mx << " " << my << std::endl;
@@ -136,4 +140,8 @@ CML::CMShape *Player::returnPaska(Shapes s)
 		return &cursor;
 	else
 		return &_shape;
+}
+CML::CMRectangle *Player::GetCursor()
+{
+	return &cursor;
 }

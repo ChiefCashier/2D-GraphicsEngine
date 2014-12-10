@@ -2,17 +2,19 @@
 #include <CMWindow.h>
 #include <CMRectangle.h>
 #include <CMVector2.h>
-
+#include "Entity.h"
 class Enemy
+	:public Entity
 {
 public:
 	Enemy(float x, float y);
-	void EnemyMove(float px, float py);
+	void Update(float playerX);
 
 	Enemy();
 	~Enemy();
 	CML::CMShape *returnShape();
-private:
-	CML::CMRectangle shape;
+	float _jumpDelayMax;
+	float _jumpDelayMin;
+	float _currentTime;
 };
 

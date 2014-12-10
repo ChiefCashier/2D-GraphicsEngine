@@ -15,7 +15,7 @@ public:
 	enum Shapes {PLAYER, CURSOR};
 
 	void playerInputs(float mx, float my);
-
+	CML::CMRectangle *GetCursor();
 	float GetX();
 	float GetY();
 
@@ -35,5 +35,5 @@ public:
 
 private:
 	CML::CMRectangle player;
-	CML::CMShape cursor;
+	CML::CMRectangle cursor;
 };

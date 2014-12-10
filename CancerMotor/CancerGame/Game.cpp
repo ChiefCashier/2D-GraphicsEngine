@@ -19,19 +19,22 @@ Game::Game()
 	{
 		window.WindowMessageCheck();
 		gcontext.Draw(&circle);
-		gcontext.Draw(p.returnPaska(p.CURSOR));
-		gcontext.Draw(p.returnPaska(p.PLAYER));
-		
 
+		gcontext.Draw(p.returnPaska(p.PLAYER));
+		gcontext.Draw(p.returnPaska(p.CURSOR));
 		if (p.GetX() < CML::CMInput::getMouseX(window.CMWindowHandle()))
 		{
-			p.returnPaska(p.CURSOR)->SetSize(1);
+			//p.returnPaska(p.CURSOR)->SetSize(1);
+			p.GetCursor()->SetWidth(75);
+			p.GetCursor()->SetHeight(-75);
 			p.SetWidth(-200);
 		}
 		else
 		{
 			p.SetWidth(200);
-			p.returnPaska(p.CURSOR)->SetSize(-1);
+			p.GetCursor()->SetWidth(-75);
+			p.GetCursor()->SetHeight(-75);
+			//p.returnPaska(p.CURSOR)->SetSize(-1);
 		}
 
 		circle.SetRotation(circle.GetRotation() + 2.5);
@@ -78,7 +81,7 @@ Game::Game()
 							for (int j = 0; j < EnemyList.size(); j++)
 							{
 								gcontext.Draw(EnemyList[j]->returnShape());
-								EnemyList[j]->EnemyMove(p.GetX(), p.GetY());
+								EnemyList[j]->Update(p.GetX());
 							}
 						
 
