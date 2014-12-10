@@ -73,6 +73,7 @@ namespace CML
 	{
 		_y = y;
 	}
+
 	void CMRectangle::SetWidth(float w)
 	{
 		float temp_width = _size.getX() * (w / _width);

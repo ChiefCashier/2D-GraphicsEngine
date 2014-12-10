@@ -5,10 +5,9 @@
 Projectile::Projectile(float mx, float my, float px, float py)
 {
 	bullet = CML::CMRectangle(mx, my, 150, 150);
-	bullet.SetImage(CML::ResourceManager::createResource<CML::CMImage>("highresbullet.png"));
+	bullet.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 	bullet.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	bullet.SetOrigon(75, 75);
-	bullet.SetSize(0.25f);
 
 	float Dx = px - mx;
 	float Dy = py - my;
@@ -31,7 +30,7 @@ void Projectile::MoveProjectiles()
 	bullet.SetY(bullet.GetY() + speed.getY());
 
 	bullet.SetRotation(bullet.GetRotation() + 10);
-	bullet.SetColor((rand() % 100)/100.0f , (rand() % 100)/100.0f, (rand() % 100)/100.0f, 0.0f);
+	//bullet.SetColor((rand() % 100)/100.0f , (rand() % 100)/100.0f, (rand() % 100)/100.0f, 0.0f);
 }
 
 bool Projectile::Collision(float x, float y)
@@ -68,5 +67,5 @@ Projectile::Projectile()
 
 Projectile::~Projectile()
 {
-
+	CML::GraphicContext::RemoveDrawable(&bullet);
 }

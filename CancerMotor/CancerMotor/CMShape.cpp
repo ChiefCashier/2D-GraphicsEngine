@@ -56,6 +56,26 @@ namespace CML
 			_colorRGBA[i] = color[i];
 		}
 	}
+	void CMShape::SetWidth(float w)
+	{
+		float temp_width = _size.getX() * (w / _width);
+		_width = w;
+		_size.setX(temp_width);
+	}
+	float CMShape::GetWidth()
+	{
+		return _width;
+	}
+	void CMShape::SetHeight(float h)
+	{
+		float temp_height = _size.getY() * (h / _width);
+		_height = h;
+		_size.setY(temp_height);
+	}
+	float CMShape::GetHeight()
+	{
+		return _height;
+	}
 	void CMShape::SetColor(float r, float b, float g, float a)
 	{
 		_colorRGBA[0] = r;
