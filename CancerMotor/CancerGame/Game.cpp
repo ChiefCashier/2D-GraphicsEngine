@@ -52,12 +52,25 @@ Game::Game()
 				EnemyList.push_back(new Enemy(mx, my));
 			}	
 
-				
+							
 					
 							for (int i = 0; i < ProjectileList.size(); i++)
 							{
+								
 							ProjectileList[i]->MoveProjectiles();
 							gcontext.Draw(ProjectileList[i]->returnPaska());
+
+								if (ProjectileList.at(i)->returnPaska()->GetX() < 0 || ProjectileList.at(i)->returnPaska()->GetX() > 1000)
+								{
+									ProjectileList.at(i)->returnPaska()->~CMShape();
+									ProjectileList.erase(ProjectileList.begin() + i);
+									continue;
+								}
+								if (ProjectileList.at(i)->returnPaska()->GetY() < 0 || ProjectileList.at(i)->returnPaska()->GetY() > 1000)
+								{
+									ProjectileList.at(i)->returnPaska()->~CMShape();
+									ProjectileList.erase(ProjectileList.begin() + i);
+								}
 							}
 					
 

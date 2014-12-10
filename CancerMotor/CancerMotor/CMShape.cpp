@@ -1,4 +1,5 @@
 #include "CMShape.h"
+
 namespace CML
 {
 	CMShape::CMShape(float x, float y)
@@ -19,6 +20,7 @@ namespace CML
 	}
 	CMShape::~CMShape()
 	{
+		
 	}
 
 	void CMShape::SetX(float x)

@@ -1,4 +1,5 @@
 #include "Projectile.h"
+#include <GraphicContext.h>
 
 
 Projectile::Projectile(float mx, float my, float px, float py)
@@ -67,5 +68,5 @@ Projectile::Projectile()
 
 Projectile::~Projectile()
 {
-	
+
 }

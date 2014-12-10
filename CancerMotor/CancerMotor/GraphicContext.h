@@ -2,7 +2,7 @@
 #include "glew.h"
 #include <list>
 #include "RenderingContext.h"
-#include "CMRectangle.h"
+#include "CMShape.h"
 #include "glm\glm.hpp"
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtx\transform.hpp"
@@ -22,9 +22,11 @@ namespace CML
 		void Initialize(RenderingContext *rcontext);
 		void EndDraw();
 		void Draw(CMShape *rec);
+		static void RemoveDrawable(CMShape* rec);
 
 	private:
-		std::vector<CMShape*> _drawables;
+
+		static std::vector<CMShape*> _drawables;
 		RenderingContext *_rcontext;
 
 		GLint _positionIndex;
