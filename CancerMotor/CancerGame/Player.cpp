@@ -20,7 +20,7 @@ Player::Player() :Entity()
 
 
 	cursor = CML::CMCircle(500, 500, 75, 360 / 6);
-	cursor.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+	cursor.SetImage(CML::ResourceManager::createResource<CML::CMImage>("ase.png"));
 	cursor.SetRotation(0.0f);
 	cursor.SetSize(1.0f);
 	cursor.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -70,7 +70,11 @@ void Player::playerInputs(float mx, float my)
 
 	cursor.SetX(_shape.GetX() + Dx*-250);
 	cursor.SetY(_shape.GetY() + Dy*-250);
-
+	float y = cursor.GetY() - _shape.GetY();
+	float x = cursor.GetX() - _shape.GetX();
+	float angle =  180 / 3.141 * std::atan(y/x);
+	cursor.SetRotation(angle - 90);
+	//if (angle);
 	//std::cout << mx << " " << my << std::endl;
 	//std::cout << cursor.GetX() << "  " << cursor.GetY() << std::endl;
 
