@@ -25,13 +25,14 @@ Game::Game()
 
 		if (p.GetX() < CML::CMInput::getMouseX(window.CMWindowHandle()))
 		{
-			p.returnPaska(p.CURSOR)->SetSize(1);
+			p.returnPaska(p.CURSOR)->SetHeight(p.returnPaska(p.CURSOR)->GetHeight());
 			p.SetWidth(-200);
 		}
 		else
 		{
 			p.SetWidth(200);
-			p.returnPaska(p.CURSOR)->SetSize(-1);
+			if(p.returnPaska(p.CURSOR)->GetWidth() < 0)
+				p.returnPaska(p.CURSOR)->SetHeight(-p.returnPaska(p.CURSOR)->GetHeight());
 		}
 
 		circle.SetRotation(circle.GetRotation() + 2.5);

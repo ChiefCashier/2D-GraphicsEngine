@@ -19,6 +19,7 @@ void Enemy::EnemyMove(float px, float py)
 {
 	if (shape.GetY() - shape.GetHeight() / 2 > 0 )
 		shape.SetY(shape.GetY() - 5);
+
 	//shape.SetX(shape.GetY() - px);
 }
 

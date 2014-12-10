@@ -16,7 +16,9 @@ namespace CML
 
 		HGLRC getRenderingContext(){ return renderingContext; };
 		CML::CMWindow *getWindow();
+
 	private:
+
 		CML::CMWindow *_window;
 		HGLRC renderingContext;
 		HDC g_HDC;

@@ -42,6 +42,12 @@ namespace CML
 		std::vector<GLfloat> &GetVertices();
 		std::vector<GLuint> &GetIndices();
 
+		void SetWidth(float w);
+		float GetWidth();
+
+		void SetHeight(float h);
+		float GetHeight();
+
 		CMImage* GetImage();
 		void SetImage(char* path);
 		void SetImage(CMImage *image);
@@ -51,6 +57,7 @@ namespace CML
 	protected:
 
 		float _x, _y;
+		float _width, _height;
 
 		CMVector2<float> _size;
 		CMVector2<float> _origon;
