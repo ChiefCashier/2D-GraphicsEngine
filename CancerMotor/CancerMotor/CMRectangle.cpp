@@ -62,6 +62,7 @@ namespace CML
 
 	CMRectangle::~CMRectangle()
 	{
+		CMShape::~CMShape();
 	}
 	void CMRectangle::SetX(float x)
 	{

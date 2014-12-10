@@ -2,6 +2,7 @@
 #include <assert.h>
 namespace CML
 {
+	std::vector<CMShape*> GraphicContext::_drawables;
 	GraphicContext::GraphicContext()
 	{
 		
@@ -93,10 +94,12 @@ namespace CML
 		for (int i = 0; i < _drawables.size(); i++)
 		{
 			_drawableShape = _drawables.at(i);
-
 			//elegant way of transforming primitives
 
-
+			if (_drawableShape->GetIndices().size() == 0)
+			{
+				continue;
+			}
 			//first projection, as it should be
 			_projection = _defaultProjection;
 
@@ -170,5 +173,19 @@ namespace CML
 			
 			_drawables.push_back(rec);
 		}
+	}
+	void GraphicContext::RemoveDrawable(CMShape* rec)
+	{
+		for (std::vector<CMShape*>::iterator it = _drawables.begin(); it != _drawables.end(); it++)
+		{
+			/* v contains x */
+			if (*it == rec)
+			{
+				std::cout << "hullut paevat" << std::endl;
+				_drawables.erase(it);
+				break;
+			}
+		}
+	
 	}
 }

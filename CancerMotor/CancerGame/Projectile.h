@@ -16,6 +16,7 @@ public:
 	Projectile();
 	~Projectile();
 	CML::CMShape *returnPaska();
+
 private:
 	CML::CMRectangle bullet;
 	CML::CMVector2<float> speed;
