@@ -74,26 +74,7 @@ namespace CML
 		_y = y;
 	}
 
-	void CMRectangle::SetWidth(float w)
-	{
-		float temp_width = _size.getX() * (w / _width);
-		_width = w;
-		_size.setX(temp_width);
-	}
-	float CMRectangle::GetWidth()
-	{
-		return _width;
-	}
-	void CMRectangle::SetHeight(float h)
-	{
-		float temp_height = _size.getY() * (h / _height);
-		_height = h;
-		_size.setY(temp_height);
-	}
-	float CMRectangle::GetHeight()
-	{
-		return _height;
-	}
+
 	void CMRectangle::SetTextureRectangle(float x, float y, float widht, float height)
 	{
 		_textureRectangle.setX(x);

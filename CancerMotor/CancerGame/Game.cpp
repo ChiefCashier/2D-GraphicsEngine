@@ -47,7 +47,8 @@ Game::Game()
 
 		if (CML::CMInput::isMouseKeyPressed(CML::CMInput::Mouse1))
 		{
-			ProjectileList.push_back(new Projectile(mx, my, p.GetX(), p.GetY()));
+			for (int i = 0; i < 10; i++)
+			ProjectileList.push_back(new Projectile(mx+ rand() % 20, my + rand() % 20, p.GetX(), p.GetY()));
 		}
 
 			if (CML::CMInput::isMouseKeyPressed(CML::CMInput::Mouse2))

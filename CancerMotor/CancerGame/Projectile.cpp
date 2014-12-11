@@ -5,9 +5,10 @@
 Projectile::Projectile(float mx, float my, float px, float py)
 {
 	bullet = CML::CMRectangle(mx, my, 150, 150);
-	bullet.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+	bullet.SetImage(CML::ResourceManager::createResource<CML::CMImage>("highresbullet.png"));
 	bullet.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	bullet.SetOrigon(75, 75);
+	bullet.SetSize(0.05f);
 
 	float Dx = px - mx;
 	float Dy = py - my;

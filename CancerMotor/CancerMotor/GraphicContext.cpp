@@ -98,6 +98,8 @@ namespace CML
 
 			if (_drawableShape->GetIndices().size() == 0)
 			{
+				RemoveDrawable(_drawableShape);
+				i--;
 				continue;
 			}
 			//first projection, as it should be
