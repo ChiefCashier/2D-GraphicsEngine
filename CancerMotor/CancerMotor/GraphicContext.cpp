@@ -50,19 +50,24 @@ namespace CML
 		_projectionLocation = glGetUniformLocation(_rcontext->getProgramIndex(), "unifProjection");
 		assert(_projectionLocation >= 0);
 
+		_viewLocation = glGetUniformLocation(_rcontext->getProgramIndex(), "view");
+		assert(_viewLocation >= 0);
+
 		_alphaChannel = glGetUniformLocation(_rcontext->getProgramIndex(), "alphaChannel");
 		assert(_alphaChannel >= 0);
 
 		glUseProgram(_rcontext->getProgramIndex());
-
-
+		
+		_cameraX = 0.0f;
+		_cameraY = 0.0f;
+		_view = glm::translate( glm::vec3(_cameraX, _cameraY, 0.0f));
 		_defaultProjection = glm::ortho(0.0f,	static_cast<float>(_rcontext->getWindow()->_windowWidht),
 												 0.0f,	static_cast<float>(_rcontext->getWindow()->_windowHeight),
 												 -1.0f, 1.0f);
 
 
 		glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
-
+		glUniformMatrix4fv(_viewLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_view));
 		glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 
 		glVertexAttribPointer(_positionIndex, 2, GL_FLOAT, GL_FALSE, 28, reinterpret_cast<GLvoid*>(0));
@@ -93,6 +98,7 @@ namespace CML
 
 		for (int i = 0; i < _drawables.size(); i++)
 		{
+			std::cout << _cameraX << std::endl;
 			_drawableShape = _drawables.at(i);
 			//elegant way of transforming primitives
 
@@ -105,7 +111,7 @@ namespace CML
 			//first projection, as it should be
 			_projection = _defaultProjection;
 
-
+				_view= glm::translate(glm::vec3(_cameraX, _cameraY, 0.0f));
 			//then translate the primitive where it should be 
 			_projection = glm::translate(_projection, glm::vec3(_drawableShape->GetX(), _drawableShape->GetY(), 0.0f));
 
@@ -123,6 +129,7 @@ namespace CML
 
 			//finish with a touch of mint and glUniformMatrix4fv, and voilá!
 			glUniformMatrix4fv(_projectionLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_projection));
+			glUniformMatrix4fv(_viewLocation, 1, GL_FALSE, reinterpret_cast<const float*>(&_view));
 			//you got yourself a handy way of dumping your workload to the GPU!
 
 			glUniform3f(_colorIndex, _drawableShape->GetColorR(), _drawableShape->GetColorG(), _drawableShape->GetColorB());
@@ -143,10 +150,10 @@ namespace CML
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 			
-
+		
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
-
-			glBindTexture(GL_TEXTURE_2D, _drawableShape->GetImage()->getTextureId());
+			
+			glBindTexture(GL_TEXTURE_2D, _drawableShape->_hasImage ?_drawableShape->GetImage()->getTextureId() : 0);
 
 			glDrawElements(GL_TRIANGLES, _drawableShape->GetIndices().size(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 
@@ -189,5 +196,21 @@ namespace CML
 			}
 		}
 	
+	}
+	void GraphicContext::SetCameraX(float x)
+	{
+		_cameraX = x;
+	}
+	void GraphicContext::SetCameraY(float y)
+	{
+		_cameraY = y;
+	}
+	float GraphicContext::GetCameraX()
+	{
+		return _cameraX;
+	}
+	float GraphicContext::GetCameraY()
+	{
+		return _cameraY;
 	}
 }

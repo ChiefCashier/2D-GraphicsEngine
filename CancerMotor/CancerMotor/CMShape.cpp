@@ -9,6 +9,7 @@ namespace CML
 		_rotation = 0;
 		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
 		_size.setShitBooleanPaskafixJustForJPCozHeLovesThis(1.0f, 1.0f);
+		_hasImage = false;
 	}
 	CMShape::CMShape()
 	{
@@ -17,6 +18,7 @@ namespace CML
 		_rotation = 0;
 		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
 		_size.setShitBooleanPaskafixJustForJPCozHeLovesThis(1.0f, 1.0f);
+		_hasImage = false;
 	}
 	CMShape::~CMShape()
 	{
@@ -137,10 +139,12 @@ namespace CML
 	void CMShape::SetImage(char* path)
 	{
 		_image = new CMImage(path);
+		_hasImage = true;
 	}
 	void CMShape::SetImage(CMImage *image)
 	{
 		_image = image;
+		_hasImage = true;
 	}
 	CMVector2<float> CMShape::GetPosition()
 	{

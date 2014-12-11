@@ -52,7 +52,7 @@ namespace CML
 		void SetImage(char* path);
 		void SetImage(CMImage *image);
 		CMVector2<float> GetPosition();
-		
+		bool _hasImage;
 
 	protected:
 
