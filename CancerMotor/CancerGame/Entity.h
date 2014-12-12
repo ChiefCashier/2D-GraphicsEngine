@@ -7,6 +7,8 @@ public:
 	Entity();
 	~Entity();
 	void Update(float deltaTime);
+	bool _jumping;
+	void Jump();
 protected:
 	CML::CMRectangle _shape;
 	float _gravityAcceleration;
@@ -15,7 +17,6 @@ protected:
 	float _currentVelocity;
 	bool _flyingUp;
 	bool HitsGround();
-	bool _jumping;
-	void Jump();
+
 };
 

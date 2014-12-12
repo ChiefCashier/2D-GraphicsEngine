@@ -24,10 +24,13 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Projectile.h"
+#include "Menu.h"
 
 class Game
 {
 public:
+	enum GameState { MainMenu, Play };
+
 	Game();
 	~Game();
 private:

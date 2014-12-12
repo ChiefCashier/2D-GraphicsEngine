@@ -1,12 +1,11 @@
 #include "Projectile.h"
 #include <GraphicContext.h>
 
-
 Projectile::Projectile(float mx, float my, float px, float py)
 {
-	bullet = CML::CMRectangle(mx, my, 150, 150);
+	bullet = CML::CMRectangle(mx, my, 50, 50);
 	bullet.SetImage(CML::ResourceManager::createResource<CML::CMImage>("highresbullet.png"));
-	bullet.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+	bullet.SetColor(1.0f, 0.0f, 0.0f, 0.0f);
 	bullet.SetOrigon(75, 75);
 	bullet.SetSize(CML::CMVector2<float>(0.05f, 0.05f));
 
@@ -20,8 +19,8 @@ Projectile::Projectile(float mx, float my, float px, float py)
 	bullet.SetX(px + Dx*-150);
 	bullet.SetY(py + Dy*-150);
 
-	speed.setX(((Dx)*-5));
-	speed.setY(((Dy)*-5));
+	speed.setX(((Dx)*-20));
+	speed.setY(((Dy)*-20));
 
 }
 

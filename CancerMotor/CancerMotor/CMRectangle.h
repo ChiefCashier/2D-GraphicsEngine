@@ -13,7 +13,7 @@ namespace CML
 		void SetX(float x);
 		void SetY(float y);
 
-		void SetTextureRectangle(float x, float y, float height, float widht);
+		void SetTextureRectangle(float x, float y, float width, float height);
 		CMVector4<float> GetTexturectangle();
 
 	private:
