@@ -13,7 +13,7 @@ public:
 	Enemy();
 	~Enemy();
 	CML::CMShape *returnShape();
-	float _jumpDelayMax;
+	float _jumpDelayMax;											
 	float _jumpDelayMin;
 	float _currentTime;
 };

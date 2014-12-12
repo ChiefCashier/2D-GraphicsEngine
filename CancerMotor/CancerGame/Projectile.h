@@ -8,8 +8,6 @@ class Projectile
 public:
 	Projectile(float mx, float my, float px, float py);
 	void MoveProjectiles();
-	void doThings();
-	bool Collision(float x, float y);
 
 	CML::CMVector2<float> GetSpeed();
 	

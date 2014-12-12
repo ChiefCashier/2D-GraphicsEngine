@@ -18,7 +18,12 @@ namespace CML
 		void setY(T t){y = t;};
 		void setShitBooleanPaskafixJustForJPCozHeLovesThis(T t, T tt){ x = t; y = tt; };
 	
-
+		static float Distance(CMVector2<T> vector1, CMVector2<T> vector2)
+		{
+			T a = std::pow(vector2.x - vector1.x,2); 
+			T b = std::pow(vector2.y - vector1.y,2) ;
+			return std::sqrt(a + b);
+		}
 		CMVector2(){};
 		
 		CMVector2(T X, T Y)

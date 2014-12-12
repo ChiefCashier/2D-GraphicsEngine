@@ -12,7 +12,7 @@ Player::Player() :Entity()
 	player.SetOrigon(-100, -100);
 	*/
 	_shape = CML::CMRectangle(500, 500, 200, 200);
-	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("pappa.png"));
 	_shape.SetRotation(0.0f);
 	_shape.SetSize(CML::CMVector2<float>(1.0f,1.0f));
 	_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -24,7 +24,7 @@ Player::Player() :Entity()
 	cursor.SetOrigon(32.5f, 32.5f);
 	cursor.SetRotation(0.0f);
 	cursor.SetSize(CML::CMVector2<float>(1.0f,1.0f));
-	cursor.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+	cursor.SetColor(0.0f, 0.5f, 0.0f, 0.0f);
 	srand(time(NULL));
 	_pickupSizeIncreaseAmount = 1.0f; //how much pickup will change size
 	_isOnPickupEffect = false;
@@ -36,6 +36,7 @@ void Player::doPickupEffect()
 	_pickupTargetSize.setY(_shape.GetSize().getY() + _pickupSizeIncreaseAmount);
 	_isOnPickupEffect = true;
 }
+
 Player::~Player()
 {
 }
@@ -55,15 +56,26 @@ void Player::playerInputs(float mx, float my)
 	if (CML::CMInput::isKeyPressed(CML::CMInput::A))
 		_shape.SetX(_shape.GetX() - 10);
 
+
+
 	if (CML::CMInput::isKeyPressed(CML::CMInput::W) && HitsGround())
+	{
 		Jump();
+	}
+
+	if (_jumping && _shape.GetRotation() < 360)
+		_shape.SetRotation(_shape.GetRotation() + 10);
+	else if (HitsGround())
+		_shape.SetRotation(0);
+
+
 	if (CML::CMInput::isKeyPressed(CML::CMInput::S))
 		_shape.SetY(_shape.GetY() - 10);
 
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
 		_shape.SetRotation(_shape.GetRotation() + 15);
 
-	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
+	/*if (CML::CMInput::isKeyPressed(CML::CMInput::N))
 		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() + 0.01));
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
 		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() - 0.01));

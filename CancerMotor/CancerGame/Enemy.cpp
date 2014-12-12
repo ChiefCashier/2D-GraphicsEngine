@@ -34,12 +34,12 @@ void Enemy::Update(float playerX)
 	if (playerX < _shape.GetX())
 	{
 		_shape.SetX(_shape.GetX() - 1);
-		_shape.SetWidth(width);
+		_shape.SetTextureRectangle(0.0f, 0.0f, -static_cast<float>(_shape.GetImage()->getWidth()), _shape.GetImage()->getHeight());
 	}
 	else if (playerX > _shape.GetX())
 	{
 		_shape.SetX(_shape.GetX() + 1);
-		_shape.SetWidth(-width);
+		_shape.SetTextureRectangle(0.0f, 0.0f, static_cast<float>(_shape.GetImage()->getWidth()), _shape.GetImage()->getHeight());
 	}
 	
 	//shape.SetX(shape.GetY() - px);
