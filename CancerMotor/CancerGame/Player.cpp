@@ -3,18 +3,10 @@
 #include <ctime>
 Player::Player() :Entity()
 {
-	/*
-	player = CML::CMRectangle(500, 500, 200, 200);
-	player.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
-	player.SetRotation(0.0f);
-	player.SetSize(1.0f);
-	player.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
-	player.SetOrigon(-100, -100);
-	*/
 	_shape = CML::CMRectangle(500, 500, 200, 200);
-	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
+	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("pappa.png"));
 	_shape.SetRotation(0.0f);
-	_shape.SetSize(1.0f);
+	//_shape.SetSize(1.0f);
 	_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	_shape.SetOrigon(100, 100);
 
@@ -23,8 +15,8 @@ Player::Player() :Entity()
 	cursor.SetImage(CML::ResourceManager::createResource<CML::CMImage>("ase.png"));
 	cursor.SetOrigon(32.5f, 32.5f);
 	cursor.SetRotation(0.0f);
-	cursor.SetSize(1.0f);
-	cursor.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+	//cursor.SetSize(1.0f);
+	cursor.SetColor(0.0f, 0.5f, 0.0f, 0.0f);
 	srand(time(NULL));
 }
 
@@ -39,24 +31,35 @@ void Player::playerInputs(float mx, float my)
 	float paskafix[3];
 	for (int i = 0; i < 3; i++)
 		paskafix[i] = (rand() % 100) / 100.0f;
-	_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
+	//_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::D))
 		_shape.SetX(_shape.GetX() + 10);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::A))
 		_shape.SetX(_shape.GetX() - 10);
 
+
+
 	if (CML::CMInput::isKeyPressed(CML::CMInput::W) && HitsGround())
+	{
 		Jump();
+	}
+
+	if (_jumping && _shape.GetRotation() < 360)
+		_shape.SetRotation(_shape.GetRotation() + 10);
+	else if (HitsGround())
+		_shape.SetRotation(0);
+
+
 	if (CML::CMInput::isKeyPressed(CML::CMInput::S))
 		_shape.SetY(_shape.GetY() - 10);
 
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
 		_shape.SetRotation(_shape.GetRotation() + 15);
 
-	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
+	/*if (CML::CMInput::isKeyPressed(CML::CMInput::N))
 		_shape.SetSize(_shape.GetWidth() + 0.01);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
-		_shape.SetSize(_shape.GetWidth() - 0.01);
+		_shape.SetSize(_shape.GetWidth() - 0.01);*/
 
 
 	cursor.SetX(mx);
