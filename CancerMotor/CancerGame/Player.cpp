@@ -14,7 +14,7 @@ Player::Player() :Entity()
 	_shape = CML::CMRectangle(500, 500, 200, 200);
 	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 	_shape.SetRotation(0.0f);
-	_shape.SetSize(1.0f);
+	_shape.SetSize(CML::CMVector2<float>(1.0f, 1.0f));
 	_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	_shape.SetOrigon(100, 100);
 
@@ -23,7 +23,7 @@ Player::Player() :Entity()
 	cursor.SetImage(CML::ResourceManager::createResource<CML::CMImage>("ase.png"));
 	cursor.SetOrigon(32.5f, 32.5f);
 	cursor.SetRotation(0.0f);
-	cursor.SetSize(1.0f);
+	cursor.SetSize(CML::CMVector2<float>(1.0f, 1.0f));
 	cursor.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	srand(time(NULL));
 }
@@ -53,10 +53,6 @@ void Player::playerInputs(float mx, float my)
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
 		_shape.SetRotation(_shape.GetRotation() + 15);
 
-	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
-		_shape.SetSize(_shape.GetWidth() + 0.01);
-	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
-		_shape.SetSize(_shape.GetWidth() - 0.01);
 
 
 	cursor.SetX(mx);

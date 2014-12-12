@@ -19,7 +19,7 @@
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtx\transform.hpp"
 #include "CMInput.h"
-
+#include <Collision.h>
 #include "Pickup.h"
 #include "Player.h"
 #include "Enemy.h"
