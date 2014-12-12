@@ -32,8 +32,13 @@ public:
 	float GetRotation();
 
 	CML::CMShape *returnPaska(Shapes s);
-
+	void doPickupEffect();
 private:
 	CML::CMRectangle player;
 	CML::CMRectangle cursor;
+
+	float _pickupSizeIncreaseAmount; //how much size is increased overall
+	CML::CMVector2<float> _pickupTargetSize; // what is target size (when on effect current size + _pickupSizeIncreaseAmount)
+	bool _isOnPickupEffect; //is Size being increased?
+	float _pickupFrameIncreaseAmount; // how much size is being increased per frame (if its smaller than _pickupSizeIncreaseAmount)
 };

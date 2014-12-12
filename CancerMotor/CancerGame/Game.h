@@ -20,11 +20,10 @@
 #include "glm\gtx\transform.hpp"
 #include "CMInput.h"
 
-#include "Pickup.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Projectile.h"
-
+#include "Pickup.h"
 class Game
 {
 public:

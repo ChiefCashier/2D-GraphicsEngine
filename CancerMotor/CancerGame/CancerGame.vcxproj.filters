@@ -36,6 +36,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Peli</Filter>
     </ClCompile>
+    <ClCompile Include="Pickup.cpp">
+      <Filter>Source Files\Peli</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -51,6 +54,9 @@
       <Filter>Source Files\Peli</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
+      <Filter>Source Files\Peli</Filter>
+    </ClInclude>
+    <ClInclude Include="Pickup.h">
       <Filter>Source Files\Peli</Filter>
     </ClInclude>
   </ItemGroup>

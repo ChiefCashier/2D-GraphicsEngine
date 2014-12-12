@@ -10,6 +10,7 @@ Enemy::Enemy(float x, float y) : Entity()
 	_shape.SetOrigon(75, 75);
 	_jumpDelayMax = 4.0f;
 	_jumpDelayMin = 1.0f;
+	_currentTime = _currentTime = (rand() % (int)_jumpDelayMax) + _jumpDelayMin;
 }
 
 CML::CMShape *Enemy::returnShape()

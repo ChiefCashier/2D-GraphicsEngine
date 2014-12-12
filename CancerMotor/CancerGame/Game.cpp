@@ -15,28 +15,45 @@ Game::Game()
 		CML::CMCircle circle(500, 500, 800, 360 / 6);
 		circle.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 		std::vector<Projectile*>::iterator it;
+		Pickup *pickup = new Pickup(500.0f,500.0f);
 	while (true)
 	{
 		window.WindowMessageCheck();
 		gcontext.Draw(&circle);
+		if (pickup != nullptr)
+		{
+			if (p.GetX() < pickup->getShape()->GetX())
+			{
+				gcontext.RemoveDrawable(pickup->getShape());
+				p.doPickupEffect();
+				delete pickup;
+				pickup = nullptr;
 
+			}
+		}
 		gcontext.Draw(p.returnPaska(p.PLAYER));
 		gcontext.Draw(p.returnPaska(p.CURSOR));
+		if (pickup != nullptr)
+		gcontext.Draw(pickup->getShape());
 		if (p.GetX() < CML::CMInput::getMouseX(window.CMWindowHandle()))
 		{
 			//p.returnPaska(p.CURSOR)->SetSize(1);
+			p.getShape()->SetTextureRectangle(0.0f, 0.0f, p.getShape()->GetImage()->getWidth(), p.getShape()->GetImage()->getHeight());
 			p.GetCursor()->SetWidth(75);
 			p.GetCursor()->SetHeight(-75);
-			p.SetWidth(-200);
+			//p.SetWidth(-200);
 		}
 		else
 		{
-			p.SetWidth(200);
+			p.getShape()->SetTextureRectangle(0.0f, 0.0f, -static_cast<float>(p.getShape()->GetImage()->getWidth()), p.getShape()->GetImage()->getHeight());
+
+			//p.SetWidth(200);
 			p.GetCursor()->SetWidth(-75);
 			p.GetCursor()->SetHeight(-75);
 			//p.returnPaska(p.CURSOR)->SetSize(-1);
 		}
-
+		if (pickup != nullptr)
+		pickup->Update(0.0f);
 		circle.SetRotation(circle.GetRotation() + 2.5);
 
 		mx = CML::CMInput::getMouseX(window.CMWindowHandle());

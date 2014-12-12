@@ -108,11 +108,9 @@ namespace CML
 	{
 		_width *= (s.getX() / _size.getX());
 		_size.setX(s.getX());
-		SetOrigon((GetOrigon().getX() * s.getX()), (GetOrigon().getY() * s.getY()));
 		_height *= (s.getY() / _size.getY());
 		_size.setY(s.getY());
 	}
-
 	CMVector2<float> CMShape::GetSize()
 	{
 		return _size;

@@ -14,7 +14,7 @@ Player::Player() :Entity()
 	_shape = CML::CMRectangle(500, 500, 200, 200);
 	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("sample.png"));
 	_shape.SetRotation(0.0f);
-	_shape.SetSize(1.0f);
+	_shape.SetSize(CML::CMVector2<float>(1.0f,1.0f));
 	_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	_shape.SetOrigon(100, 100);
 
@@ -23,11 +23,19 @@ Player::Player() :Entity()
 	cursor.SetImage(CML::ResourceManager::createResource<CML::CMImage>("ase.png"));
 	cursor.SetOrigon(32.5f, 32.5f);
 	cursor.SetRotation(0.0f);
-	cursor.SetSize(1.0f);
+	cursor.SetSize(CML::CMVector2<float>(1.0f,1.0f));
 	cursor.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	srand(time(NULL));
+	_pickupSizeIncreaseAmount = 1.0f; //how much pickup will change size
+	_isOnPickupEffect = false;
+	_pickupFrameIncreaseAmount = 0.01f; //how much pickup will change size each frame when its smaller than _pickupSizeIncreaseAmount
 }
-
+void Player::doPickupEffect()
+{
+	_pickupTargetSize.setX(_shape.GetSize().getX() + _pickupSizeIncreaseAmount);
+	_pickupTargetSize.setY(_shape.GetSize().getY() + _pickupSizeIncreaseAmount);
+	_isOnPickupEffect = true;
+}
 Player::~Player()
 {
 }
@@ -35,10 +43,12 @@ Player::~Player()
 void Player::playerInputs(float mx, float my)
 {
 	//player.SetColor((rand() % 100) / 100.0f, (rand() % 100) / 100.0f, (rand() % 100) / 100.0f, 0.0f);
+	std::cout << _shape.GetSize().getX() << std::endl;
 	Update(0.0f);
 	float paskafix[3];
 	for (int i = 0; i < 3; i++)
 		paskafix[i] = (rand() % 100) / 100.0f;
+	if (_isOnPickupEffect)
 	_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::D))
 		_shape.SetX(_shape.GetX() + 10);
@@ -54,9 +64,9 @@ void Player::playerInputs(float mx, float my)
 		_shape.SetRotation(_shape.GetRotation() + 15);
 
 	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
-		_shape.SetSize(_shape.GetWidth() + 0.01);
+		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() + 0.01));
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
-		_shape.SetSize(_shape.GetWidth() - 0.01);
+		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() - 0.01));
 
 
 	cursor.SetX(mx);
@@ -78,6 +88,16 @@ void Player::playerInputs(float mx, float my)
 	if (cursor.GetWidth()> 0)
 		angle *= -1;
 	cursor.SetRotation(angle - 90);
+	if (_isOnPickupEffect)
+	{
+		CML::CMVector2<float>newSize = CML::CMVector2<float>(_shape.GetSize().getX() + _pickupFrameIncreaseAmount, _shape.GetSize().getY() + _pickupFrameIncreaseAmount);
+		_shape.SetSize(newSize);
+		if (_shape.GetSize().getX() >= _pickupTargetSize.getX() && _shape.GetSize().getY() >= _pickupTargetSize.getY())
+		{
+			_isOnPickupEffect = false;
+
+		}
+	}
 	//if (angle);
 	//std::cout << mx << " " << my << std::endl;
 	//std::cout << cursor.GetX() << "  " << cursor.GetY() << std::endl;

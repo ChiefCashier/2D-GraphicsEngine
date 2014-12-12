@@ -7,6 +7,7 @@ public:
 	Entity();
 	~Entity();
 	void Update(float deltaTime);
+	CML::CMRectangle *getShape();
 protected:
 	CML::CMRectangle _shape;
 	float _gravityAcceleration;
