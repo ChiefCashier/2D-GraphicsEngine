@@ -1,0 +1,26 @@
+#pragma once
+#include <CMRectangle.h>
+
+class Entity
+{
+public:
+	Entity();
+	~Entity();
+	void Update(float deltaTime);
+<<<<<<< HEAD
+	CML::CMRectangle *getShape();
+=======
+	bool _jumping;
+	void Jump();
+>>>>>>> 8cee2d38df5ff70a7c684d36633322148542fa63
+protected:
+	CML::CMRectangle _shape;
+	float _gravityAcceleration;
+	float _velocitySpeedDefault;
+	float _maxGravitySpeed;
+	float _currentVelocity;
+	bool _flyingUp;
+	bool HitsGround();
+
+};
+

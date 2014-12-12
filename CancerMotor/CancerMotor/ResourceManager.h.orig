@@ -1,0 +1,25 @@
+#pragma once
+#include <map>
+<<<<<<< HEAD
+#include "Resource.h"
+#include "CMImage.h"
+=======
+#include <string>
+>>>>>>> cefd9e9c49ff8826a42cd6a7a331c1d896eb553e
+namespace CML{
+	class ResourceManager
+	{
+	public:
+		static char* LoadFile(char* filename);
+		static char* LoadImage(char* filename);
+<<<<<<< HEAD
+		static CMImage createImage(char* filename);
+	private:
+		static std::map<std::string, Resource*> _resources;
+=======
+	private:
+		std::map<std::string, int*> _resources;
+>>>>>>> cefd9e9c49ff8826a42cd6a7a331c1d896eb553e
+	};
+
+}

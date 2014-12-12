@@ -10,6 +10,7 @@ namespace CML
 	public:
 		CMImage():Resource(""){};
 		CMImage(char* name);
+		CMImage(char* name, int startX, int startY, int width, int height);
 		~CMImage();
 		size_t getWidth();
 		size_t getHeight();
