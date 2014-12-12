@@ -75,7 +75,7 @@ void Player::playerInputs(float mx, float my)
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
 		_shape.SetRotation(_shape.GetRotation() + 15);
 
-	/*if (CML::CMInput::isKeyPressed(CML::CMInput::N))
+	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
 		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() + 0.01));
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
 		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() - 0.01));

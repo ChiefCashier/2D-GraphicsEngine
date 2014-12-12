@@ -19,7 +19,7 @@
 #include "glm\gtc\matrix_transform.hpp"
 #include "glm\gtx\transform.hpp"
 #include "CMInput.h"
-
+#include <Collision.h>
 #include "Player.h"
 #include "Enemy.h"
 #include "Projectile.h"
@@ -27,6 +27,8 @@
 class Game
 {
 public:
+	enum GameState { MainMenu, Play };
+
 	Game();
 	~Game();
 private:

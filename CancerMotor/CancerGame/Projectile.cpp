@@ -31,7 +31,23 @@ void Projectile::MoveProjectiles()
 	bullet.SetY(bullet.GetY() + speed.getY());
 
 	//bullet.SetRotation(bullet.GetRotation() + 10);
-	//bullet.SetColor((rand() % 100)/100.0f , (rand() % 100)/100.0f, (rand() % 100)/100.0f, 0.0f);
+	bullet.SetColor((rand() % 100)/100.0f , (rand() % 100)/100.0f, (rand() % 100)/100.0f, 0.0f);
+}
+
+bool Projectile::Collision(float x, float y)
+{
+	if (bullet.GetX() < x + 75
+		&& bullet.GetX() > x - 75
+		&& bullet.GetY() < y + 75
+		&& bullet.GetY() > y - 90)
+		return true;
+	else
+		return false;
+}
+
+void Projectile::doThings()
+{
+
 }
 
 
