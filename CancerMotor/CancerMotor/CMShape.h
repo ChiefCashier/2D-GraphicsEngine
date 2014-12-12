@@ -33,7 +33,7 @@ namespace CML
 		float GetColorB();
 		float GetColorA();
 
-		void SetSize(float s);
+		void SetSize(CMVector2<float>);
 		CMVector2<float> GetSize();
 
 		void SetOrigon(float x, float y);

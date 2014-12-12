@@ -12,7 +12,7 @@ namespace CML
 		_rotation = 0.0f;
 		_origon.setShitBooleanPaskafixJustForJPCozHeLovesThis(0.0f, 0.0f);
 
-		SetSize(1);
+		SetSize(CML::CMVector2<float>(1.0f, 1.0f));
 
 		_vertices.push_back((GLfloat)0);
 		_vertices.push_back((GLfloat)0);
