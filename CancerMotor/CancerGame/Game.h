@@ -24,6 +24,7 @@
 #include "Enemy.h"
 #include "Projectile.h"
 #include "Pickup.h"
+#include "Menu.h"
 class Game
 {
 public:

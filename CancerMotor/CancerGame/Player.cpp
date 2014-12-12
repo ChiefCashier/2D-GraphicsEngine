@@ -64,7 +64,7 @@ void Player::playerInputs(float mx, float my)
 	}
 
 	if (_jumping && _shape.GetRotation() < 360)
-		_shape.SetRotation(_shape.GetRotation() + 10);
+		_shape.SetRotation(_shape.GetRotation() - 10);
 	else if (HitsGround())
 		_shape.SetRotation(0);
 

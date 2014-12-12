@@ -47,8 +47,8 @@ Game::Game()
 		srand(time(NULL));
 		float mx, my;
 		Player p;
-		CML::CMRectangle background(0, 0, 1000, 1000);
-		background.SetImage(CML::ResourceManager::createResource<CML::CMImage>("background.jpg"));
+		CML::CMRectangle background2(0, 0, 1000, 1000);
+		background2.SetImage(CML::ResourceManager::createResource<CML::CMImage>("background.jpg"));
 
 		CML::CMRectangle tempbackground(-1000, 0, 1000, 1000);
 		tempbackground.SetImage(CML::ResourceManager::createResource<CML::CMImage>("background.jpg"));
@@ -58,7 +58,8 @@ Game::Game()
 		while (true)
 		{
 			window.WindowMessageCheck();
-			gcontext.Draw(&background);
+			gcontext.Draw(&background2);
+			gcontext.Draw(&tempbackground);
 		if (pickup != nullptr)
 		{
 			if (p.GetX() < pickup->getShape()->GetX())
@@ -95,19 +96,19 @@ Game::Game()
 		pickup->Update(0.0f);
 			// Scrolling background
 
-			background.SetX(background.GetX() + 10);
+			background2.SetX(background2.GetX() + 10);
 			tempbackground.SetX(tempbackground.GetX() + 10);
-
-			if (background.GetX() > window._windowWidht)
+			
+			if (background2.GetX() > window._windowWidht)
 			{
-				background.SetX(tempbackground.GetX() - background.GetWidth());
+				background2.SetX(tempbackground.GetX() - background2.GetWidth());
 			}
 
 			if (tempbackground.GetX() > window._windowWidht)
 			{
-				tempbackground.SetX(background.GetX() - tempbackground.GetWidth());
+				tempbackground.SetX(background2.GetX() - tempbackground.GetWidth());
 			}
-
+			
 
 			mx = CML::CMInput::getMouseX(window.CMWindowHandle());
 			my = abs((CML::CMInput::getMouseY(window.CMWindowHandle()) - (window._windowHeight)));
@@ -146,13 +147,14 @@ Game::Game()
 				{
 					ProjectileList.at(i)->returnPaska()->~CMShape();
 					ProjectileList.erase(ProjectileList.begin() + i);
+					continue;
 				}
 
 
 				for (int k = 0; k < EnemyList.size(); k++)
 				{
 
-
+					//if (EnemyList.size() == 0|| Projectik)
 					bool asd = CML::Collision::CollisionRectangle((EnemyList[k]->returnShape()), ProjectileList[i]->returnPaska());
 					if (asd == true)
 					{
