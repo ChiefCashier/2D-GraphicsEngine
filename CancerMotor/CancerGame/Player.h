@@ -12,8 +12,6 @@ public:
 	Player();
 	~Player();
 
-	enum Shapes {PLAYER, CURSOR};
-
 	void playerInputs(float mx, float my);
 	CML::CMRectangle *GetCursor();
 	float GetX();
@@ -31,7 +29,7 @@ public:
 	void SetRotation(float a);
 	float GetRotation();
 
-	CML::CMShape *returnPaska(Shapes s);
+	CML::CMShape *returnShape();
 	void doPickupEffect();
 private:
 	CML::CMRectangle player;

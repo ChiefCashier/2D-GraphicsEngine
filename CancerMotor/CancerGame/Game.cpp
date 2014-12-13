@@ -9,6 +9,7 @@ Game::Game()
 	gcontext.Initialize(&rContext);
 	glClearColor(0.2f, 0.4f, 0.8f, 1.0f);
 
+
 	GameState gameState = MainMenu;
 
 	if (gameState == MainMenu)
@@ -26,7 +27,6 @@ Game::Game()
 		{
 			window.WindowMessageCheck();
 			gcontext.Draw(&background);
-
 			gcontext.Draw(m.returnShape());
 
 			gcontext.EndDraw();
@@ -44,6 +44,14 @@ Game::Game()
 
 	if (gameState == Play)
 	{
+		float _jumpDelayMax = 1.0f;
+		float _jumpDelayMin = 0.5f;
+		float _currentTime = _currentTime = (rand() % (int)_jumpDelayMax) + _jumpDelayMin;
+		//////////////////////////////////////////////////////////////////////////////////
+		float _drugSpawnDelayMax = 10.0f;
+		float _drugSpawnDelayMin = 5.0f;
+		float _drugSpawnTimer = _drugSpawnTimer = (rand() % (int)_drugSpawnDelayMax) + _drugSpawnDelayMin;
+
 		srand(time(NULL));
 		float mx, my;
 		Player p;
@@ -54,27 +62,15 @@ Game::Game()
 		tempbackground.SetImage(CML::ResourceManager::createResource<CML::CMImage>("background.jpg"));
 
 		std::vector<Projectile*>::iterator it;
-		Pickup *pickup = new Pickup(500.0f,500.0f);
+
 		while (true)
 		{
 			window.WindowMessageCheck();
 			gcontext.Draw(&background2);
 			gcontext.Draw(&tempbackground);
-		if (pickup != nullptr)
-		{
-			if (p.GetX() < pickup->getShape()->GetX())
-			{
-				gcontext.RemoveDrawable(pickup->getShape());
-				p.doPickupEffect();
-				delete pickup;
-				pickup = nullptr;
-
-			}
-		}
-			gcontext.Draw(p.returnPaska(p.PLAYER));
-			gcontext.Draw(p.returnPaska(p.CURSOR));
-		if (pickup != nullptr)
-		gcontext.Draw(pickup->getShape());
+			gcontext.Draw(p.returnShape());
+			gcontext.Draw(p.GetCursor());
+		
 			if (p.GetX() < CML::CMInput::getMouseX(window.CMWindowHandle()))
 			{
 			//p.returnPaska(p.CURSOR)->SetSize(1);
@@ -92,8 +88,7 @@ Game::Game()
 				p.GetCursor()->SetHeight(-75);
 			//p.returnPaska(p.CURSOR)->SetSize(-1);
 			}
-		if (pickup != nullptr)
-		pickup->Update(0.0f);
+	
 			// Scrolling background
 
 			background2.SetX(background2.GetX() + 10);
@@ -109,7 +104,6 @@ Game::Game()
 				tempbackground.SetX(background2.GetX() - tempbackground.GetWidth());
 			}
 			
-
 			mx = CML::CMInput::getMouseX(window.CMWindowHandle());
 			my = abs((CML::CMInput::getMouseY(window.CMWindowHandle()) - (window._windowHeight)));
 
@@ -121,31 +115,79 @@ Game::Game()
 				for (int i = 0; i < 1; i++)
 					ProjectileList.push_back(new Projectile(mx + rand() % 20, my + rand() % 20, p.GetX(), p.GetY()));
 			}
+			
+			// Enemy spawn timer
 
-			if (CML::CMInput::isMouseKeyPressed(CML::CMInput::Mouse2))
+			int u = rand() % 1000;
+			if (_currentTime <= 0)
 			{
-				EnemyList.push_back(new Enemy(mx, my));
+				float sideSpawn = 0; 
+				if (u > 500)
+					sideSpawn = 0 - rand()%200;
+				else
+					sideSpawn = window._windowWidht + rand()%200;
+				EnemyList.push_back(new Enemy(sideSpawn, rand() % 300 ));
+				_currentTime = (rand() % (int)_jumpDelayMax) + _jumpDelayMin;
+			}
+			else
+			{
+				_currentTime -= 0.016;
 			}
 
+			// Drug spawn timer
+
+			if (_drugSpawnTimer <= 0)
+			{
+		
+			PickupList.push_back(new Pickup(rand() % window._windowWidht, window._windowHeight + rand() % 100));
+			_drugSpawnTimer = (rand() % (int)_drugSpawnDelayMax + _drugSpawnDelayMin);
+			}
+			else
+			{
+				_drugSpawnTimer -= 0.016;
+			}
+
+			// Pickup/drugs
+			for (int g = 0; g < PickupList.size(); g++)
+			{
+				bool asdd = CML::Collision::CollisionRectangle((PickupList[g]->getShape()), p.getShape());
+				if (asdd == true)
+				{
+					gcontext.RemoveDrawable(PickupList[g]->getShape());
+					p.doPickupEffect();
+
+					//PickupList.at(g)->getShape()->~CMShape();
+					PickupList.erase(PickupList.begin() + g);
+					continue;
+				}
+				if (PickupList.size() != 0)
+				{
+					gcontext.Draw(PickupList[g]->getShape());
+					PickupList[g]->Update(0.0f);
+				}
+			}
 
 
 			for (int i = 0; i < ProjectileList.size(); i++)
 			{
-
 				std::cout << ProjectileList[i]->GetSpeed().getY() << std::endl;
-
-				ProjectileList[i]->MoveProjectiles();
-				gcontext.Draw(ProjectileList[i]->returnPaska());
-
-				if (ProjectileList.at(i)->returnPaska()->GetX() < 0 || ProjectileList.at(i)->returnPaska()->GetX() > 1000)
+				// If size has changed, shoot bigger bullits.
+				if (p.getShape()->GetSize().getX() > 1)
 				{
-					ProjectileList.at(i)->returnPaska()->~CMShape();
+					ProjectileList[i]->returnShape()->SetSize(CML::CMVector2<float>(1.1f, 1.1f));
+				}
+				ProjectileList[i]->MoveProjectiles();
+				gcontext.Draw(ProjectileList[i]->returnShape());
+
+				if (ProjectileList.at(i)->returnShape()->GetX() < 0 || ProjectileList.at(i)->returnShape()->GetX() > 1000)
+				{
+					ProjectileList.at(i)->returnShape()->~CMShape();
 					ProjectileList.erase(ProjectileList.begin() + i);
 					continue;
 				}
-				if (ProjectileList.at(i)->returnPaska()->GetY() < 0 || ProjectileList.at(i)->returnPaska()->GetY() > 1000)
+				if (ProjectileList.at(i)->returnShape()->GetY() < 0 || ProjectileList.at(i)->returnShape()->GetY() > 1000)
 				{
-					ProjectileList.at(i)->returnPaska()->~CMShape();
+					ProjectileList.at(i)->returnShape()->~CMShape();
 					ProjectileList.erase(ProjectileList.begin() + i);
 					continue;
 				}
@@ -155,16 +197,16 @@ Game::Game()
 				{
 
 					//if (EnemyList.size() == 0|| Projectik)
-					bool asd = CML::Collision::CollisionRectangle((EnemyList[k]->returnShape()), ProjectileList[i]->returnPaska());
+					bool asd = CML::Collision::CollisionRectangle((EnemyList[k]->returnShape()), ProjectileList[i]->returnShape());
 					if (asd == true)
 					{
-						ProjectileList.at(i)->returnPaska()->~CMShape();
+						ProjectileList.at(i)->returnShape()->~CMShape();
 						ProjectileList.erase(ProjectileList.begin() + i);
 						EnemyList.at(k)->returnShape()->~CMShape();
 						EnemyList.erase(EnemyList.begin() + k);
 						break;
 					}
-					float distance = CML::CMVector2<float>::Distance(CML::CMVector2<float>(ProjectileList[i]->returnPaska()->GetX(), ProjectileList[i]->returnPaska()->GetY()), CML::CMVector2<float>(EnemyList[k]->returnShape()->GetX(), EnemyList[k]->returnShape()->GetY()));
+					float distance = CML::CMVector2<float>::Distance(CML::CMVector2<float>(ProjectileList[i]->returnShape()->GetX(), ProjectileList[i]->returnShape()->GetY()), CML::CMVector2<float>(EnemyList[k]->returnShape()->GetX(), EnemyList[k]->returnShape()->GetY()));
 
 					if (distance < 250.0f
 						&& !EnemyList[k]->_jumping

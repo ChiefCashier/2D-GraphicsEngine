@@ -1,6 +1,7 @@
 #include "Pickup.h"
 #include <ResourceManager.h>
 
+
 Pickup::Pickup(float x, float y) : Entity()
 {
 	_shape = CML::CMRectangle(x, y, 100.0f, 100.0f);
@@ -15,4 +16,5 @@ Pickup::Pickup(float x, float y) : Entity()
 
 Pickup::~Pickup()
 {
+	
 }

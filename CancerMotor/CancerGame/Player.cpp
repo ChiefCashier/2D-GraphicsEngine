@@ -13,7 +13,6 @@ Player::Player() :Entity()
 	*/
 	_shape = CML::CMRectangle(500, 500, 200, 200);
 	_shape.SetImage(CML::ResourceManager::createResource<CML::CMImage>("pappa.png"));
-	_shape.SetRotation(0.0f);
 	_shape.SetSize(CML::CMVector2<float>(1.0f,1.0f));
 	_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
 	_shape.SetOrigon(100, 100);
@@ -26,7 +25,7 @@ Player::Player() :Entity()
 	cursor.SetSize(CML::CMVector2<float>(1.0f,1.0f));
 	cursor.SetColor(0.0f, 0.5f, 0.0f, 0.0f);
 	srand(time(NULL));
-	_pickupSizeIncreaseAmount = 1.0f; //how much pickup will change size
+	_pickupSizeIncreaseAmount = 0.25f; //how much pickup will change size
 	_isOnPickupEffect = false;
 	_pickupFrameIncreaseAmount = 0.01f; //how much pickup will change size each frame when its smaller than _pickupSizeIncreaseAmount
 }
@@ -50,7 +49,10 @@ void Player::playerInputs(float mx, float my)
 	for (int i = 0; i < 3; i++)
 		paskafix[i] = (rand() % 100) / 100.0f;
 	if (_isOnPickupEffect)
-	_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
+		_shape.SetColor(0.0f, paskafix[1], 0.0f, 0.0f);
+	else
+		_shape.SetColor(0.0f, 0.0f, 0.0f, 0.0f);
+
 	if (CML::CMInput::isKeyPressed(CML::CMInput::D))
 		_shape.SetX(_shape.GetX() + 10);
 	if (CML::CMInput::isKeyPressed(CML::CMInput::A))
@@ -75,10 +77,12 @@ void Player::playerInputs(float mx, float my)
 	if (CML::CMInput::isKeyPressed(CML::CMInput::Space))
 		_shape.SetRotation(_shape.GetRotation() + 15);
 
-	if (CML::CMInput::isKeyPressed(CML::CMInput::N))
+	// meh, broken
+
+	/*if (CML::CMInput::isKeyPressed(CML::CMInput::N))
 		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() + 0.01));
 	if (CML::CMInput::isKeyPressed(CML::CMInput::M))
-		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() - 0.01));
+		_shape.SetSize(CML::CMVector2<float>(_shape.GetWidth() + 0.01, _shape.GetWidth() - 0.01));*/
 
 
 	cursor.SetX(mx);
@@ -166,11 +170,8 @@ void Player::SetRotation(float a)
 	return _shape.SetRotation(a);
 }
 
-CML::CMShape *Player::returnPaska(Shapes s)
+CML::CMShape *Player::returnShape()
 {
-	if (s == CURSOR)
-		return &cursor;
-	else
 		return &_shape;
 }
 CML::CMRectangle *Player::GetCursor()

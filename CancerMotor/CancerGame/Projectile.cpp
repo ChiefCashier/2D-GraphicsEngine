@@ -41,7 +41,7 @@ CML::CMVector2<float> Projectile::GetSpeed()
 }
 
 
-CML::CMShape *Projectile::returnPaska()
+CML::CMShape *Projectile::returnShape()
 {
 	return &bullet;
 }

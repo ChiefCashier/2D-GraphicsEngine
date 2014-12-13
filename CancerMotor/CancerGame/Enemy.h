@@ -16,5 +16,6 @@ public:
 	float _jumpDelayMax;											
 	float _jumpDelayMin;
 	float _currentTime;
+	float _randomSpeed;
 };
 

@@ -13,7 +13,7 @@ public:
 	
 	Projectile();
 	~Projectile();
-	CML::CMShape *returnPaska();
+	CML::CMShape *returnShape();
 
 private:
 	CML::CMRectangle bullet;

@@ -37,5 +37,6 @@ private:
 	CML::RenderingContext rContext;
 	std::vector <Projectile*> ProjectileList;
 	std::vector <Enemy*> EnemyList;
+	std::vector <Pickup*> PickupList;
 };
 
